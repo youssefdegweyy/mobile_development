@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
+<<<<<<< HEAD
 import './categories_screen.dart';
 
 void main() => runApp(MyApp());
+=======
+import 'item.dart';
+
+void main() {
+  runApp(MyApp());
+}
+>>>>>>> 32301be293cfee0bc54d0b0edfb650f09b202359
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
       title: 'DeliMeals',
       theme: ThemeData(
         primarySwatch: Colors.pink,
@@ -28,6 +37,22 @@ class MyApp extends StatelessWidget {
             )),
       ),
       home: CategoriesScreen(),
+=======
+      title: 'MyCart',
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text('MyCart'),
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              MyItem(),
+            ],
+          ),
+        ),
+      ),
+>>>>>>> 32301be293cfee0bc54d0b0edfb650f09b202359
     );
   }
 }
