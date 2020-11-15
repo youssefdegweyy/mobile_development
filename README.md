@@ -1,6 +1,6 @@
-# mobile_development
+# my_cart
 
-Mobile Development Project
+A new Flutter project.
 
 ## Getting Started
 

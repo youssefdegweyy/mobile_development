@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
-<<<<<<< HEAD
-import './categories_screen.dart';
+import './screens/tabs_screen.dart';
+import 'screens/item_detail_screen.dart';
+import 'screens/category_items_screen.dart';
+import './screens/categories_screen.dart';
+import './screens/filters_screen.dart';
+import './screens/profile_screen.dart';
+import './screens/login_screen.dart';
+import './screens/signup_as_buyer_screen.dart';
+import './screens/signup_screen.dart';
 
 void main() => runApp(MyApp());
-=======
-import 'item.dart';
-
-void main() {
-  runApp(MyApp());
-}
->>>>>>> 32301be293cfee0bc54d0b0edfb650f09b202359
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
       title: 'DeliMeals',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        accentColor: Colors.amber,
-        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        primarySwatch: Colors.orange,
+        accentColor: Colors.black,
+        canvasColor: Color.fromRGBO(255, 255, 255, 1),
         fontFamily: 'Raleway',
         textTheme: ThemeData.light().textTheme.copyWith(
             body1: TextStyle(
@@ -36,23 +35,32 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
             )),
       ),
-      home: CategoriesScreen(),
-=======
-      title: 'MyCart',
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text('MyCart'),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              MyItem(),
-            ],
-          ),
-        ),
-      ),
->>>>>>> 32301be293cfee0bc54d0b0edfb650f09b202359
+      // home: CategoriesScreen(),
+      initialRoute: '/', // default is '/'
+      routes: {
+        '/': (ctx) => TabsScreen(),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        MealDetailScreenState.routeName: (ctx) => MealDetailScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(),
+        ProfileScreen.routeName: (ctx) => ProfileScreen(),
+        LoginFormState.routeName: (ctx) => LoginForm(),
+        SignupFormBuyerState.routeName: (ctx) => SignupFormBuyer(),
+        SignupFormSellerState.routeName: (ctx) => SignupFormSeller(),
+      },
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        // if (settings.name == '/meal-detail') {
+        //   return ...;
+        // } else if (settings.name == '/something-else') {
+        //   return ...;
+        // }
+        // return MaterialPageRoute(builder: (ctx) => CategoriesScreen(),);
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (ctx) => CategoriesScreen(),
+        );
+      },
     );
   }
 }
