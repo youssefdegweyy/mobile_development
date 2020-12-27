@@ -10,6 +10,7 @@ import './screens/login_screen.dart';
 import './screens/signup_as_buyer_screen.dart';
 import './screens/signup_screen.dart';
 import './screens/admin_panel.dart';
+import './screens/admin.view.users.dart';
 
 void main() => runApp(MyApp());
 
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         SignupFormBuyerState.routeName: (ctx) => SignupFormBuyer(),
         SignupFormSellerState.routeName: (ctx) => SignupFormSeller(),
         AdminPanel.routeName: (ctx) => AdminPanel(),
+        AdminViewUsers.routeName: (ctx) => AdminViewUsers(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);

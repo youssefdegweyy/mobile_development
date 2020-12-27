@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/admin.view.users.dart';
 
 import '../screens/filters_screen.dart';
 import '../screens/profile_screen.dart';
@@ -96,6 +97,13 @@ class MainDrawer extends StatelessWidget {
             Icons.admin_panel_settings,
             () {
               Navigator.of(context).pushNamed(AdminPanel.routeName);
+            },
+          ),
+          buildListTitle(
+            'Admin Users',
+            Icons.admin_panel_settings_sharp,
+            () {
+              Navigator.of(context).pushNamed(AdminViewUsers.routeName);
             },
           ),
         ],
