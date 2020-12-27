@@ -12,8 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var number = 1;
-
+  var number = 2;
   @override
   void initState() {
     super.initState();

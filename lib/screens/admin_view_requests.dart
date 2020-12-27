@@ -5,6 +5,9 @@ class AdminViewRequests extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Item Requests"),
+      ),
       backgroundColor: Colors.orange,
       body: Center(
         child: SafeArea(

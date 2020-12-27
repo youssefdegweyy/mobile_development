@@ -6,6 +6,9 @@ class AdminPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Admin Panel"),
+      ),
       backgroundColor: Colors.orange,
       body: SafeArea(
         child: Center(

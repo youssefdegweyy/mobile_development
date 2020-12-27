@@ -7,6 +7,9 @@ class AdminViewUsers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange,
+      appBar: AppBar(
+        title: Text("User Data"),
+      ),
       body: Center(
         child: SafeArea(
           child: ListView(
