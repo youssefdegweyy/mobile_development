@@ -54,7 +54,6 @@ class MyApp extends StatelessWidget {
         AdminPanel.routeName: (ctx) => AdminPanel(),
         AdminViewUsers.routeName: (ctx) => AdminViewUsers(),
         AdminViewRequests.routeName: (ctx) => AdminViewRequests(),
-        MyHomePage.routeName: (ctx) => MyHomePage(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);

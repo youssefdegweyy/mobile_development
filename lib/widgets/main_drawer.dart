@@ -115,13 +115,6 @@ class MainDrawer extends StatelessWidget {
               Navigator.of(context).pushNamed(AdminViewRequests.routeName);
             },
           ),
-          buildListTitle(
-            'Pref Requests',
-            Icons.access_alarm,
-            () {
-              Navigator.of(context).pushNamed(MyHomePage.routeName);
-            },
-          ),
         ],
       ),
     );

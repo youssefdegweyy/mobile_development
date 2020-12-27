@@ -3,81 +3,68 @@ import 'package:flutter_complete_guide/screens/admin_panel.dart';
 import 'package:flutter_complete_guide/screens/admin_view_requests.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyHomePage extends StatefulWidget {
-  static const routeName = '/admin-pref-requests';
+class PrefManager {
+  var username;
+  var email;
+  var password;
+  var phonenumber;
+  var permission;
 
-  MyHomePage({Key key}) : super(key: key);
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  var number = 2;
-  @override
-  void initState() {
-    super.initState();
-    getIntFromLocalMemory('COUNTER_NUMBER').then((value) {
-      if (number == 1) {
-        Navigator.pushNamed(context, AdminPanel.routeName);
-      } else if (number == 2) {
-        Navigator.pushNamed(context, '/');
-      } else if (number == 3) {
-        Navigator.pushNamed(context, AdminViewRequests.routeName);
-      }
-    });
+  PrefManager() {
+    loadDataFromLocalMemory();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Save data locally'),
-        ),
-        body: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    number--;
-                  });
-                  saveIntInLocalMemory('COUNTER_NUMBER', number);
-                },
-                child: Text('-'),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(21.0),
-                child: Text(number.toString()),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    number++;
-                  });
-                  saveIntInLocalMemory('COUNTER_NUMBER', number);
-                },
-                child: Text('+'),
-              )
-            ],
-          ),
-        ));
-  }
-
-  /*
-  * It saves the int value to the local memory.
-  * */
-  Future<int> getIntFromLocalMemory(String key) async {
+  Future<void> loadDataFromLocalMemory() async {
     var pref = await SharedPreferences.getInstance();
-    var number = pref.getInt(key) ?? 0;
-    return number;
+    username = pref.getString("username") ?? "Guest";
+    email = pref.getString("email") ?? "";
+    password = pref.getString("password") ?? "";
+    phonenumber = pref.getString("phonenumber") ?? "";
+    permission = pref.getInt("prmission") ?? 0;
   }
 
-  /*
-  * It returns the saved the int value from the memory.
-  * */
-  Future<void> saveIntInLocalMemory(String key, int value) async {
+  Future<void> saveDataToLocalMemory(String key, int value) async {
     var pref = await SharedPreferences.getInstance();
-    pref.setInt(key, value);
+    pref.setString("username", username);
+    pref.setString("email", email);
+    pref.setString("password", password);
+    pref.setString("phonenumber", phonenumber);
+    pref.setInt("permission", permission);
+  }
+
+  String getUsername() {
+    return username;
+  }
+
+  String getEmail() {
+    return email;
+  }
+
+  String getPhoneNumber() {
+    return phonenumber;
+  }
+
+  int getPermission() {
+    return permission;
+  }
+
+  bool setUserName(String username) {
+    this.username = username;
+  }
+
+  bool setEmail(String email) {
+    this.email = email;
+  }
+
+  bool setPhoneNumber(String phonenumber) {
+    this.phonenumber = phonenumber;
+  }
+
+  bool setPermission(int permission) {
+    this.permission = permission;
+  }
+
+  bool setPassword(String password) {
+    this.password = password;
   }
 }
