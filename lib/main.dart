@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import './screens/tabs_screen.dart';
 import 'screens/item_detail_screen.dart';
 import 'screens/category_items_screen.dart';
