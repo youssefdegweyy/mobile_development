@@ -59,20 +59,18 @@ class SignupFormBuyerState extends State<SignupFormBuyer> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
-                                    validator: (value) {
-                                      if (value.isEmpty) {
-                                        return 'Please enter your username';
-                                      }
-                                      if(value.contains(" "))
-                                      {
-                                        return 'Username cannot contain spaces';
-                                      }
-                                      if(value.length < 6)
-                                      {
-                                        return 'Minimum length for username is 6 characters';
-                                      }
-                                      return null;
-                                    },
+                                      validator: (value) {
+                                        if (value.isEmpty) {
+                                          return 'Please enter your username';
+                                        }
+                                        if (value.contains(" ")) {
+                                          return 'Username cannot contain spaces';
+                                        }
+                                        if (value.length < 6) {
+                                          return 'Minimum length for username is 6 characters';
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                           enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -110,15 +108,15 @@ class SignupFormBuyerState extends State<SignupFormBuyer> {
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
                                       validator: (value) {
-                                      if (value.isEmpty) {
-                                        return 'Please enter your password';
-                                      }
-                                      if(!value.contains("@")||!value.contains("."))
-                                      {
-                                        return 'Please enter email in the correct format';
-                                      }
-                                      return null;
-                                    },
+                                        if (value.isEmpty) {
+                                          return 'Please enter your password';
+                                        }
+                                        if (!value.contains("@") ||
+                                            !value.contains(".")) {
+                                          return 'Please enter email in the correct format';
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                           enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -154,16 +152,15 @@ class SignupFormBuyerState extends State<SignupFormBuyer> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
-                                    validator: (value) {
-                                      if (value.isEmpty) {
-                                        return 'Please enter your mobile number';
-                                      }
-                                      if(value.length < 11)
-                                      {
-                                        return 'Please enter 11 numbers';
-                                      }
-                                      return null;
-                                    },
+                                      validator: (value) {
+                                        if (value.isEmpty) {
+                                          return 'Please enter your mobile number';
+                                        }
+                                        if (value.length < 11) {
+                                          return 'Please enter 11 numbers';
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                           enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -247,7 +244,8 @@ class SignupFormBuyerState extends State<SignupFormBuyer> {
                                       style: TextStyle(
                                           fontSize: 20.0, color: Colors.white)),
                                   onPressed: () {
-                                    if (_formKeysignupB.currentState.validate()) {}
+                                    if (_formKeysignupB.currentState
+                                        .validate()) {}
                                   },
                                 ),
                               ),

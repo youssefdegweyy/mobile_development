@@ -60,7 +60,7 @@ class LoginFormState extends State<LoginForm> {
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
                                       validator: (value) {
-                                        if(value.isEmpty) {
+                                        if (value.isEmpty) {
                                           return 'Please enter your email';
                                         }
                                         return null;

@@ -5,6 +5,7 @@ import '../screens/profile_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/signup_as_buyer_screen.dart';
 import '../screens/signup_screen.dart';
+import '../screens/admin_panel.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTitle(String title, IconData icon, Function tapHandler) {
@@ -49,8 +50,8 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTitle(
-            'Meals',
-            Icons.restaurant,
+            'Categories',
+            Icons.shop,
             () {
               Navigator.of(context).pushNamed('/');
             },
@@ -88,6 +89,13 @@ class MainDrawer extends StatelessWidget {
             Icons.money,
             () {
               Navigator.of(context).pushNamed(SignupFormSellerState.routeName);
+            },
+          ),
+          buildListTitle(
+            'Admin Panel',
+            Icons.admin_panel_settings,
+            () {
+              Navigator.of(context).pushNamed(AdminPanel.routeName);
             },
           ),
         ],
