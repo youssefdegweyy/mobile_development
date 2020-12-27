@@ -23,15 +23,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-class hamada extends StatefulWidget {
-  @override
-  _hamadaState createState() => _hamadaState();
-}
-
-class _hamadaState extends State<hamada> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}

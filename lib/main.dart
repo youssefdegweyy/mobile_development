@@ -12,6 +12,8 @@ import './screens/signup_screen.dart';
 import './screens/admin_panel.dart';
 import './screens/admin_view_users.dart';
 import './screens/admin_view_requests.dart';
+import './perference_manager/perference_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -52,6 +54,7 @@ class MyApp extends StatelessWidget {
         AdminPanel.routeName: (ctx) => AdminPanel(),
         AdminViewUsers.routeName: (ctx) => AdminViewUsers(),
         AdminViewRequests.routeName: (ctx) => AdminViewRequests(),
+        MyHomePage.routeName: (ctx) => MyHomePage(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);
@@ -68,5 +71,19 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<int> getIntFromLocalMemory(String key) async {
+    var pref = await SharedPreferences.getInstance();
+    var number = pref.getInt(key) ?? 0;
+    return number;
+  }
+
+  /*
+  * It returns the saved the int value from the memory.
+  * */
+  Future<void> saveIntInLocalMemory(String key, int value) async {
+    var pref = await SharedPreferences.getInstance();
+    pref.setInt(key, value);
   }
 }

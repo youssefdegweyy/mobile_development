@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/screens/admin_view_requests.dart';
-import 'package:flutter_complete_guide/screens/admin_view_users.dart';
+import 'package:flutter_complete_guide/perference_manager/perference_manager.dart';
 
 import '../screens/filters_screen.dart';
 import '../screens/profile_screen.dart';
@@ -8,6 +7,8 @@ import '../screens/login_screen.dart';
 import '../screens/signup_as_buyer_screen.dart';
 import '../screens/signup_screen.dart';
 import '../screens/admin_panel.dart';
+import '../screens/admin_view_requests.dart';
+import '../screens/admin_view_users.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTitle(String title, IconData icon, Function tapHandler) {
@@ -112,6 +113,13 @@ class MainDrawer extends StatelessWidget {
             Icons.admin_panel_settings_sharp,
             () {
               Navigator.of(context).pushNamed(AdminViewRequests.routeName);
+            },
+          ),
+          buildListTitle(
+            'Pref Requests',
+            Icons.access_alarm,
+            () {
+              Navigator.of(context).pushNamed(MyHomePage.routeName);
             },
           ),
         ],
