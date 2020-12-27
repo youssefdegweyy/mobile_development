@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/screens/admin.view.users.dart';
+import 'package:flutter_complete_guide/screens/admin_view_requests.dart';
+import 'package:flutter_complete_guide/screens/admin_view_users.dart';
 
 import '../screens/filters_screen.dart';
 import '../screens/profile_screen.dart';
@@ -104,6 +105,13 @@ class MainDrawer extends StatelessWidget {
             Icons.admin_panel_settings_sharp,
             () {
               Navigator.of(context).pushNamed(AdminViewUsers.routeName);
+            },
+          ),
+          buildListTitle(
+            'Admin Requests',
+            Icons.admin_panel_settings_sharp,
+            () {
+              Navigator.of(context).pushNamed(AdminViewRequests.routeName);
             },
           ),
         ],
