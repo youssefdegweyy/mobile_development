@@ -11,8 +11,18 @@ class AdminViewUsers extends StatelessWidget {
         child: SafeArea(
           child: ListView(
             children: [
+              SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: Text(
+                  "All Users",
+                  style: TextStyle(color: Colors.black, fontSize: 29),
+                ),
+              ),
+              SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
                 child: Table(
                   border: TableBorder.all(width: 2),
                   columnWidths: {
@@ -23,40 +33,49 @@ class AdminViewUsers extends StatelessWidget {
                   children: [
                     TableRow(children: [
                       Center(
-                        child: Text(
-                          "Image",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Image",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       Center(
-                        child: Text(
-                          "Description",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Description",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       Center(
-                        child: Text(
-                          "Price",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Price",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ]),
                     TableRow(children: [
                       Padding(
-                        padding: const EdgeInsets.all(6.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Image.asset("images/Logo.png"),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(6.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "This is a short description of the zeby",
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(6.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text("20 USD"),
                       ),
                     ]),

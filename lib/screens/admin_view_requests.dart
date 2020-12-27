@@ -10,6 +10,14 @@ class AdminViewRequests extends StatelessWidget {
         child: SafeArea(
             child: ListView(
           children: [
+            SizedBox(height: 20),
+            Center(
+              child: Text(
+                "Item Requests",
+                style: TextStyle(color: Colors.black, fontSize: 29),
+              ),
+            ),
+            SizedBox(height: 20),
             Container(
               margin: EdgeInsets.all(10),
               child: Table(
