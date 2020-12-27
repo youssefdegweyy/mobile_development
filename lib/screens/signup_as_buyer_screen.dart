@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/tabs_screen.dart';
+import '../services/auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignupFormBuyer extends StatefulWidget {
   @override
@@ -10,6 +14,12 @@ class SignupFormBuyer extends StatefulWidget {
 class SignupFormBuyerState extends State<SignupFormBuyer> {
   final _formKeysignupB = GlobalKey<FormState>();
   static const routeName = '/signup-buyer';
+
+  var authHandler = new Auth();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -107,9 +117,10 @@ class SignupFormBuyerState extends State<SignupFormBuyer> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
+                                      controller: emailController,
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return 'Please enter your password';
+                                          return 'Please enter your email';
                                         }
                                         if (!value.contains("@") ||
                                             !value.contains(".")) {
@@ -196,6 +207,7 @@ class SignupFormBuyerState extends State<SignupFormBuyer> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
+                                    controller: passwordController,
                                     validator: (value) {
                                       if (value.isEmpty) {
                                         return 'Please enter your password';
@@ -245,7 +257,34 @@ class SignupFormBuyerState extends State<SignupFormBuyer> {
                                           fontSize: 20.0, color: Colors.white)),
                                   onPressed: () {
                                     if (_formKeysignupB.currentState
-                                        .validate()) {}
+                                        .validate()) {
+                                      authHandler
+                                          .handleSignUp(emailController.text,
+                                              passwordController.text)
+                                          .then((FirebaseUser user) {
+                                        Navigator.push(context,
+                                            new MaterialPageRoute(
+                                          builder: (context) {
+                                            return new TabsScreen();
+                                          },
+                                        ));
+                                      }).catchError((e) {
+                                        print(e);
+                                        if (e.toString().contains(
+                                            "ERROR_EMAIL_ALREADY_IN_USE")) {
+                                          Fluttertoast.showToast(
+                                            msg: "This email already exists",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                          );
+                                        } else {
+                                          Fluttertoast.showToast(
+                                            msg:
+                                                "Please check your internet connection",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                          );
+                                        }
+                                      });
+                                    }
                                   },
                                 ),
                               ),

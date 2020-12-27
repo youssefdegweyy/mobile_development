@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:74655748734:android:e6aef52ffbaa458ca03e2f",
         "android_client_info": {
-          "package_name": "com.mycart.app"
+          "package_name": "com.example.my_cart"
         }
       },
       "oauth_client": [

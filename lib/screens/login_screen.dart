@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/tabs_screen.dart';
+import '../services/auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -10,6 +14,18 @@ class LoginForm extends StatefulWidget {
 class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   static const routeName = '/login-screen';
+  var authHandler = new Auth();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +75,7 @@ class LoginFormState extends State<LoginForm> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
+                                      controller: emailController,
                                       validator: (value) {
                                         if (value.isEmpty) {
                                           return 'Please enter your email';
@@ -99,6 +116,7 @@ class LoginFormState extends State<LoginForm> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(9.0)),
                                   child: TextFormField(
+                                    controller: passwordController,
                                     validator: (value) {
                                       if (value.isEmpty) {
                                         return 'Please enter your password';
@@ -145,7 +163,37 @@ class LoginFormState extends State<LoginForm> {
                                       style: TextStyle(
                                           fontSize: 20.0, color: Colors.white)),
                                   onPressed: () {
-                                    if (_formKey.currentState.validate()) {}
+                                    if (_formKey.currentState.validate()) {
+                                      authHandler
+                                          .handleSignInEmail(
+                                              emailController.text,
+                                              passwordController.text)
+                                          .then((FirebaseUser user) {
+                                        Navigator.push(context,
+                                            new MaterialPageRoute(
+                                          builder: (context) {
+                                            return new TabsScreen();
+                                          },
+                                        ));
+                                      }).catchError((e) {
+                                        print(e);
+                                        if (e.toString().contains(
+                                                "ERROR_USER_NOT_FOUND") ||
+                                            e.toString().contains(
+                                                "ERROR_WRONG_PASSWORD")) {
+                                          Fluttertoast.showToast(
+                                            msg: "Invalid email or password",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                          );
+                                        } else {
+                                          Fluttertoast.showToast(
+                                            msg:
+                                                "Please check your internet connection",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                          );
+                                        }
+                                      });
+                                    }
                                     //checking if the email and password are correct
                                   },
                                 ),
