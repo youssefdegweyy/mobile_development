@@ -12,50 +12,53 @@ class AdminPanel extends StatelessWidget {
           child: ListView(
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(
-                    height: 30,
+                    height: 180,
                   ),
                   const Text(
                     "Admin Panel",
-                    style: TextStyle(fontSize: 25, color: Colors.black),
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
                   ),
                   SizedBox(height: 30),
-                  const SizedBox(
+                  SizedBox(
                     width: 200,
-                    child: const RaisedButton(
-                      onPressed: null,
+                    height: 40,
+                    child: RaisedButton(
+                      onPressed: () {},
+                      color: Colors.black,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(19)),
                       child: Text('View All Users',
-                          style: TextStyle(fontSize: 20)),
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                     ),
                   ),
                   SizedBox(height: 20),
-                  const SizedBox(
+                  SizedBox(
                     width: 200,
-                    child: const RaisedButton(
-                      onPressed: null,
+                    height: 40,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(19)),
+                      onPressed: () {},
+                      color: Colors.black,
                       child: Text('View All Items',
-                          style: TextStyle(fontSize: 20)),
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                     ),
                   ),
                   SizedBox(height: 20),
-                  const SizedBox(
+                  SizedBox(
                     width: 200,
-                    child: const RaisedButton(
-                      onPressed: null,
-                      child: Text('Disabled Button',
-                          style: TextStyle(fontSize: 20)),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  const SizedBox(
-                    width: 200,
-                    child: const RaisedButton(
-                      onPressed: null,
-                      child: Text('Disabled Button',
-                          style: TextStyle(fontSize: 20)),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(19)),
+                      onPressed: () {},
+                      color: Colors.black,
+                      child: Text('View Requests',
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                     ),
                   ),
                 ],
