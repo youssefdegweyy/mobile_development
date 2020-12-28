@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/perference_manager/perference_manager.dart';
 import 'package:flutter_complete_guide/screens/tabs_screen.dart';
 import '../services/auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -163,6 +164,8 @@ class LoginFormState extends State<LoginForm> {
                                       style: TextStyle(
                                           fontSize: 20.0, color: Colors.white)),
                                   onPressed: () {
+                                    var email = emailController.text;
+                                    var password = passwordController.text;
                                     if (_formKey.currentState.validate()) {
                                       authHandler
                                           .handleSignInEmail(
@@ -172,6 +175,13 @@ class LoginFormState extends State<LoginForm> {
                                         Navigator.push(context,
                                             new MaterialPageRoute(
                                           builder: (context) {
+                                            PrefManager myPrefManager =
+                                                new PrefManager();
+                                            myPrefManager.setEmail(email);
+                                            myPrefManager.setPassword(password);
+                                            myPrefManager.setPermission(3);
+                                            myPrefManager
+                                                .saveDataToLocalMemory();
                                             return new TabsScreen();
                                           },
                                         ));

@@ -4,11 +4,11 @@ import 'package:flutter_complete_guide/screens/admin_view_requests.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefManager {
-  var username;
-  var email;
-  var password;
-  var phonenumber;
-  var permission;
+  var username = "Guest";
+  var email = "";
+  var password = "";
+  var phonenumber = "";
+  var permission = 0;
 
   PrefManager() {
     loadDataFromLocalMemory();
@@ -23,7 +23,7 @@ class PrefManager {
     permission = pref.getInt("prmission") ?? 0;
   }
 
-  Future<void> saveDataToLocalMemory(String key, int value) async {
+  Future<void> saveDataToLocalMemory() async {
     var pref = await SharedPreferences.getInstance();
     pref.setString("username", username);
     pref.setString("email", email);
