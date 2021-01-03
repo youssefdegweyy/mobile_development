@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/screens/tabs_screen.dart';
 import '../services/auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SignupFormSeller extends StatefulWidget {
+  static const routeName = '/signup-seller';
+
   @override
   SignupFormSellerState createState() {
     return SignupFormSellerState();
@@ -339,6 +342,43 @@ class SignupFormSellerState extends State<SignupFormSeller> {
                                   },
                                 ),
                               ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 60.0,
+                              child: GestureDetector(
+                                  child: RichText(
+                                text: TextSpan(
+                                    text: "Already have an account? ",
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.white,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                          text: "Login",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              decoration:
+                                                  TextDecoration.underline),
+                                          recognizer: new TapGestureRecognizer()
+                                            ..onTap = () {
+                                              Navigator.push(context,
+                                                  new MaterialPageRoute(
+                                                builder: (context) {
+                                                  return new SignupFormSeller();
+                                                },
+                                              ));
+                                            }),
+                                    ]),
+                              )),
                             ),
                           ),
                         ],

@@ -82,6 +82,8 @@ class MyApp extends StatelessWidget {
           FiltersScreen.routeName: (ctx) => FiltersScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           AdminPanel.routeName: (ctx) => AdminPanel(),
+          SignupFormSeller.routeName: (ctx) => SignupFormSeller(),
+          LoginFormState.routeName: (ctx) => LoginForm(),
           AdminViewUsers.routeName: (ctx) => AdminViewUsers(),
           AdminViewRequests.routeName: (ctx) => AdminViewRequests(),
         },

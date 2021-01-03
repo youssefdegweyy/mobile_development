@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/perference_manager/perference_manager.dart';
 import 'package:flutter_complete_guide/screens/tabs_screen.dart';
 import '../services/auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'signup_screen.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -13,8 +16,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
   static const routeName = '/login-screen';
+  final _formKey = GlobalKey<FormState>();
   var authHandler = new Auth();
 
   final emailController = TextEditingController();
@@ -230,12 +233,20 @@ class LoginFormState extends State<LoginForm> {
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: "Signup",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            decoration:
-                                                TextDecoration.underline),
-                                      ),
+                                          text: "Signup",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              decoration:
+                                                  TextDecoration.underline),
+                                          recognizer: new TapGestureRecognizer()
+                                            ..onTap = () {
+                                              Navigator.push(context,
+                                                  new MaterialPageRoute(
+                                                builder: (context) {
+                                                  return new SignupFormSeller();
+                                                },
+                                              ));
+                                            }),
                                     ]),
                               )),
                             ),
