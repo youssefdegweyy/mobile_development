@@ -1,93 +1,67 @@
+import 'package:mycart/screens/contactus_screen.dart';
+import 'package:mycart/screens/offers_screen.dart';
+import 'package:mycart/screens/checkout.dart';
+import 'package:mycart/screens/my_cart.dart';
+import 'package:mycart/screens/drawer_screen.dart';
+import 'package:mycart/screens/forgot_password.dart';
+import 'package:mycart/screens/get_started.dart';
+import 'package:mycart/screens/main_menu.dart';
+import 'package:mycart/screens/order_placed.dart';
+import 'package:mycart/screens/profile.dart';
+import 'package:mycart/screens/sign_in.dart';
+import 'package:mycart/screens/sign_up.dart';
 import 'package:flutter/material.dart';
+import './screens/splash_screen.dart';
 
-import './screens/tabs_screen.dart';
-import 'screens/item_detail_screen.dart';
-import 'screens/category_items_screen.dart';
-import './screens/categories_screen.dart';
-import './screens/filters_screen.dart';
-import './screens/profile_screen.dart';
-import './screens/login_screen.dart';
-import './screens/signup_as_buyer_screen.dart';
-import './screens/signup_screen.dart';
-import './screens/admin_panel.dart';
-import './screens/admin_view_users.dart';
-import './screens/admin_view_requests.dart';
-import './perference_manager/perference_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  PrefManager myPrefManager = new PrefManager();
-
   @override
   Widget build(BuildContext context) {
-    print("PREFMGR: " + myPrefManager.getPermission().toString());
-    if (myPrefManager.getPermission() == 0) {
-      return MaterialApp(
-        title: 'MyCart',
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-          accentColor: Color.fromRGBO(255, 255, 255, 1),
-          canvasColor: Color.fromRGBO(255, 255, 255, 1),
-          fontFamily: 'Raleway',
-          textTheme: ThemeData.light().textTheme.copyWith(
-              bodyText1: TextStyle(
-                color: Color.fromRGBO(20, 51, 51, 1),
-              ),
-              bodyText2: TextStyle(
-                color: Color.fromRGBO(20, 51, 51, 1),
-              ),
-              headline6: TextStyle(
-                fontSize: 20,
-                fontFamily: 'RobotoCondensed',
-                fontWeight: FontWeight.bold,
-              )),
+    return MaterialApp(
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child,
+        );
+      },
+      title: 'my Cart',
+      theme: ThemeData(
+        // Define the default brightness and colors.
+        primaryColor: Colors.white,
+        accentColor: Color(0xFF00af87),
+
+        // Define the default font family.
+        fontFamily: 'Montserrat',
+
+        // Define the default TextTheme. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        buttonTheme: ButtonThemeData(buttonColor: Colors.white),
+        textTheme: TextTheme(
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
         ),
-        // home: CategoriesScreen(),
-        initialRoute: LoginFormState.routeName, // default is '/'
-        routes: {
-          LoginFormState.routeName: (ctx) => LoginForm(),
-          SignupFormBuyerState.routeName: (ctx) => SignupFormBuyer(),
-          SignupFormSellerState.routeName: (ctx) => SignupFormSeller(),
-        },
-      );
-    } else {
-      return MaterialApp(
-        title: 'MyCart',
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-          accentColor: Color.fromRGBO(255, 255, 255, 1),
-          canvasColor: Color.fromRGBO(255, 255, 255, 1),
-          fontFamily: 'Raleway',
-          textTheme: ThemeData.light().textTheme.copyWith(
-              bodyText1: TextStyle(
-                color: Color.fromRGBO(20, 51, 51, 1),
-              ),
-              bodyText2: TextStyle(
-                color: Color.fromRGBO(20, 51, 51, 1),
-              ),
-              headline6: TextStyle(
-                fontSize: 20,
-                fontFamily: 'RobotoCondensed',
-                fontWeight: FontWeight.bold,
-              )),
-        ),
-        // home: CategoriesScreen(),
-        initialRoute: '/', // default is '/'
-        routes: {
-          '/': (ctx) => TabsScreen(),
-          CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
-          MealDetailScreenState.routeName: (ctx) => MealDetailScreen(),
-          FiltersScreen.routeName: (ctx) => FiltersScreen(),
-          ProfileScreen.routeName: (ctx) => ProfileScreen(),
-          AdminPanel.routeName: (ctx) => AdminPanel(),
-          SignupFormSeller.routeName: (ctx) => SignupFormSeller(),
-          LoginFormState.routeName: (ctx) => LoginForm(),
-          AdminViewUsers.routeName: (ctx) => AdminViewUsers(),
-          AdminViewRequests.routeName: (ctx) => AdminViewRequests(),
-        },
-      );
-    }
+      ),
+      //home: SplashScreen(),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (ctx) => SplashScreen(),
+        GetStartedScreen.routeName: (ctx) => GetStartedScreen(),
+        SignInScreen.routeName: (ctx) => SignInScreen(),
+        SignUpScreen.routeName: (ctx) => SignUpScreen(),
+        ForgotPasswordScreen.routeName: (ctx) => ForgotPasswordScreen(),
+        MainMenuScreen.routeName: (ctx) => MainMenuScreen(),
+        OffersScreen.routeName: (ctx) => OffersScreen(),
+        ProfileScreen.routeName: (ctx) => ProfileScreen(),
+        MyCartScreen.routeName: (ctx) => MyCartScreen(),
+        OrderPlacedScreen.routeName: (ctx) => OrderPlacedScreen(),
+        DrawerScreen.routeName: (ctx) => DrawerScreen(),
+        CheckoutScreen.routeName: (ctx) => CheckoutScreen(),
+        ContactUsScreen.routeName: (ctx) => ContactUsScreen(),
+      },
+    );
   }
 }

@@ -1,14 +1,9 @@
+import 'package:mycart/screens/contactus_screen.dart';
+import 'package:mycart/screens/main_menu.dart';
+import 'package:mycart/screens/offers_screen.dart';
+import 'package:mycart/screens/sign_in.dart';
+import 'package:mycart/services/data_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/perference_manager/perference_manager.dart';
-
-import '../screens/filters_screen.dart';
-import '../screens/profile_screen.dart';
-import '../screens/login_screen.dart';
-import '../screens/signup_as_buyer_screen.dart';
-import '../screens/signup_screen.dart';
-import '../screens/admin_panel.dart';
-import '../screens/admin_view_requests.dart';
-import '../screens/admin_view_users.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -16,19 +11,18 @@ class MainDrawer extends StatefulWidget {
 }
 
 class _MainDrawerState extends State<MainDrawer> {
-  PrefManager myPrefManager = new PrefManager();
   Widget buildListTitle(String title, IconData icon, Function tapHandler) {
     return ListTile(
       leading: Icon(
         icon,
-        size: 26,
+        size: 25,
       ),
       title: Text(
         title,
         style: TextStyle(
-          fontFamily: 'RobotoCondensed',
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
+          //fontFamily: 'RobotoCondensed',
+          fontSize: 18,
+          //fontWeight: FontWeight.bold,
         ),
       ),
       onTap: tapHandler,
@@ -37,212 +31,91 @@ class _MainDrawerState extends State<MainDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    if (myPrefManager.getPermission() == 1) {
-      return Drawer(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              height: 120,
-              width: double.infinity,
-              padding: EdgeInsets.all(20),
-              alignment: Alignment.centerLeft,
-              color: Theme.of(context).accentColor,
-              child: Text(
-                'MyCart',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  color: Theme.of(context).primaryColor,
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          Container(
+            height: 120,
+            width: double.infinity,
+            alignment: Alignment.centerLeft,
+            child: Stack(
+              children: [
+                Container(
+                  constraints: BoxConstraints.expand(),
+                  decoration: new BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Color(0xFF00d466),
+                        Color(0xFF00af87),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            buildListTitle(
-              'Categories',
-              Icons.shop,
-              () {
-                Navigator.of(context).pushNamed('/');
-              },
-            ),
-            buildListTitle(
-              'Profile',
-              Icons.person,
-              () {
-                Navigator.of(context).pushNamed(ProfileScreen.routeName);
-              },
-            ),
-            buildListTitle(
-              'Settings',
-              Icons.settings,
-              () {
-                Navigator.of(context).pushNamed(FiltersScreen.routeName);
-              },
-            ),
-            buildListTitle(
-              'Admin Panel',
-              Icons.admin_panel_settings,
-              () {
-                Navigator.of(context).pushNamed(AdminPanel.routeName);
-              },
-            ),
-            buildListTitle(
-              'Admin Users',
-              Icons.admin_panel_settings_sharp,
-              () {
-                Navigator.of(context).pushNamed(AdminViewUsers.routeName);
-              },
-            ),
-            buildListTitle(
-              'Admin Requests',
-              Icons.admin_panel_settings_sharp,
-              () {
-                Navigator.of(context).pushNamed(AdminViewRequests.routeName);
-              },
-            ),
-          ],
-        ),
-      );
-    } else if (myPrefManager.getPermission() == 2) {
-      return Drawer(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              height: 120,
-              width: double.infinity,
-              padding: EdgeInsets.all(20),
-              alignment: Alignment.centerLeft,
-              color: Theme.of(context).accentColor,
-              child: Text(
-                'MyCart',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  color: Theme.of(context).primaryColor,
+                Container(
+                  constraints: BoxConstraints.expand(),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/main/back.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            buildListTitle(
-              'Categories',
-              Icons.shop,
-              () {
-                Navigator.of(context).pushNamed('/');
-              },
-            ),
-            buildListTitle(
-              'Profile',
-              Icons.person,
-              () {
-                Navigator.of(context).pushNamed(ProfileScreen.routeName);
-              },
-            ),
-            buildListTitle(
-              'Settings',
-              Icons.settings,
-              () {
-                Navigator.of(context).pushNamed(FiltersScreen.routeName);
-              },
-            ),
-          ],
-        ),
-      );
-    } else if (myPrefManager.getPermission() == 3) {
-      return Drawer(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              height: 120,
-              width: double.infinity,
-              padding: EdgeInsets.all(20),
-              alignment: Alignment.centerLeft,
-              color: Theme.of(context).accentColor,
-              child: Text(
-                'MyCart',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  color: Theme.of(context).primaryColor,
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.all(25.0),
+                  child: Image.asset(
+                    "assets/images/main/logo.png",
+                    width: 300,
+                  ),
                 ),
-              ),
+              ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            buildListTitle(
-              'Categories',
-              Icons.shop,
-              () {
-                Navigator.of(context).pushNamed('/');
-              },
-            ),
-            buildListTitle(
-              'Profile',
-              Icons.person,
-              () {
-                Navigator.of(context).pushNamed(ProfileScreen.routeName);
-              },
-            ),
-            buildListTitle(
-              'Settings',
-              Icons.settings,
-              () {
-                Navigator.of(context).pushNamed(FiltersScreen.routeName);
-              },
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Drawer(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              height: 120,
-              width: double.infinity,
-              padding: EdgeInsets.all(20),
-              alignment: Alignment.centerLeft,
-              color: Theme.of(context).accentColor,
-              child: Text(
-                'MyCart',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            buildListTitle(
-              'Login',
-              Icons.login,
-              () {
-                Navigator.of(context).pushNamed(LoginFormState.routeName);
-              },
-            ),
-            buildListTitle(
-              'Signup',
-              Icons.app_registration,
-              () {
-                Navigator.of(context).pushNamed(SignupFormBuyerState.routeName);
-              },
-            ),
-            buildListTitle(
-              'Sell with us',
-              Icons.money,
-              () {
-                Navigator.of(context)
-                    .pushNamed(SignupFormSellerState.routeName);
-              },
-            ),
-          ],
-        ),
-      );
-    }
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          buildListTitle(
+            'Offers',
+            Icons.offline_bolt,
+            () {
+              Navigator.of(context).pop();
+              Navigator.pushNamed(context, OffersScreen.routeName);
+            },
+          ),
+          /*buildListTitle(
+            'Calorie Calculator',
+            Icons.calculate,
+            () {
+              Navigator.of(context).pop();
+              //Navigator.pushNamed(context, CalorieCalculatorScreen.routeName);
+            },
+          ),*/
+          /*buildListTitle(
+            'Settings',
+            Icons.settings,
+            () {
+              Navigator.of(context).pop();
+              //Navigator.pushNamed(context, SettingsScreen.routeName);
+            },
+          ),*/
+          buildListTitle(
+            'Contact Us',
+            Icons.contact_phone,
+            () {
+              Navigator.of(context).pop();
+              Navigator.pushNamed(context, ContactUsScreen.routeName);
+            },
+          ),
+          buildListTitle(
+            'Logout',
+            Icons.exit_to_app,
+            () {
+              DataManager.mPrefManager.logOut();
+              Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
