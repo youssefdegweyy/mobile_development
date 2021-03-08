@@ -1,5 +1,6 @@
 import 'package:mycart/screens/admin/add_category.dart';
 import 'package:mycart/screens/admin/add_location.dart';
+import 'package:mycart/screens/admin/add_main_menu_item.dart';
 import 'package:mycart/screens/admin/add_sub_menu_item.dart';
 import 'package:mycart/screens/drawer_screen.dart';
 import 'package:mycart/screens/forgot_password.dart';
@@ -197,7 +198,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     await _auth.signIn(_email, _password);
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      AddSubItem.routeName,
+                                      AddMainItem.routeName,
                                     );
                                   } catch (e) {
                                     Scaffold.of(context).showSnackBar(
