@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/offers_screen.dart';
 import 'package:mycart/screens/checkout.dart';
@@ -13,7 +14,9 @@ import 'package:mycart/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import './screens/splash_screen.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
   runApp(MyApp());
 }
 

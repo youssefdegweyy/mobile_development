@@ -4,6 +4,9 @@ import 'package:mycart/screens/sign_up.dart';
 import 'package:mycart/controllers/user.dart';
 import 'package:mycart/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mycart/services/auth.dart';
+
+import 'sign_up.dart';
 
 class SignInScreen extends StatefulWidget {
   static const routeName = '/sign-in';
@@ -16,6 +19,8 @@ class SignInScreen extends StatefulWidget {
 
 class SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
+  String _email, _password;
+  final _auth = Auth();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -77,6 +82,9 @@ class SignInScreenState extends State<SignInScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: TextFormField(
+                      onSaved: (value) {
+                        _email = value;
+                      },
                       controller: emailController,
                       decoration: new InputDecoration(
                         contentPadding: EdgeInsets.all(20),
@@ -105,6 +113,9 @@ class SignInScreenState extends State<SignInScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: TextFormField(
+                      onSaved: (value) {
+                        _password = value;
+                      },
                       controller: passwordController,
                       decoration: new InputDecoration(
                         contentPadding: EdgeInsets.all(20),
@@ -146,49 +157,64 @@ class SignInScreenState extends State<SignInScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 15),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      padding: const EdgeInsets.all(0.0),
-                      child: Ink(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF00d466),
-                              Color(0xFF00af87),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        ),
-                        child: Container(
-                          constraints: const BoxConstraints(
-                              minWidth: 88.0, minHeight: 55),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Log In',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          var email = emailController.text;
+                    child: Builder(
+                        builder: (context) => RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0)),
+                              padding: const EdgeInsets.all(0.0),
+                              child: Ink(
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: <Color>[
+                                      Color(0xFF00d466),
+                                      Color(0xFF00af87),
+                                    ],
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                ),
+                                child: Container(
+                                  constraints: const BoxConstraints(
+                                      minWidth: 88.0, minHeight: 55),
+                                  alignment: Alignment.center,
+                                  child: const Text(
+                                    'Log In',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState.validate()) {
+                                  _formKey.currentState.save();
+                                  try {
+                                    await _auth.signIn(_email, _password);
+                                    Navigator.pushReplacementNamed(
+                                context,
+                                SignUpScreen.routeName,
+                              );
+                                  } catch (e) {
+                                    Scaffold.of(context).showSnackBar(
+                                        SnackBar(content: Text(e.message)));
+                                  }
+
+                                  /*var email = emailController.text;
                           var password = passwordController.text;
-                          User.login(email, password).then((response) {
+                          User.login(email, password).then((response)
+                           {
                             if (response) {
                               Navigator.pushReplacementNamed(
                                 context,
                                 SplashScreen.routeName,
                               );
                             } else {}
-                          });
-                        }
-                      },
-                    ),
+                          });*/
+                                }
+                              },
+                            )),
                   ),
                   /*new Container( ////////////////////////////// REMOVED TILL ACCEPTANCE ON GOOGLE PLAY
                     padding: const EdgeInsets.only(top: 21.0, bottom: 5.0),
