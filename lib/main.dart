@@ -30,6 +30,14 @@ class MyApp extends StatelessWidget {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   void iniNotifications() {
+    AwesomeNotifications().initialize('resource://drawable/logo', [
+      NotificationChannel(
+          channelKey: 'basic_channel',
+          channelName: 'My Cart',
+          channelDescription: 'My Cart Notifications',
+          defaultColor: Color(0xFF00af87),
+          ledColor: Colors.green)
+    ]);
     _firebaseMessaging.configure(
         onMessage: (Map<String, dynamic> message) async {
       showBasicNotification(
@@ -44,14 +52,6 @@ class MyApp extends StatelessWidget {
   }
 
   Future<void> showBasicNotification(String title, String body) async {
-    AwesomeNotifications().initialize('resource://drawable/logo', [
-      NotificationChannel(
-          channelKey: 'basic_channel',
-          channelName: 'Basic notifications',
-          channelDescription: 'Notification channel for basic tests',
-          defaultColor: Color(0xFF9D50DD),
-          ledColor: Colors.white)
-    ]);
     await AwesomeNotifications().createNotification(
         content: NotificationContent(
       id: 1,
