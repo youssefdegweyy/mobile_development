@@ -21,7 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  #firebase_auth: ^1.0.0
+  firebase_auth: ^0.20.1
   flutter:
     sdk: flutter
 
@@ -35,7 +35,7 @@ dependencies:
   flutter_spinkit: "^4.1.2"
   auto_size_text: ^2.1.0
   confirm_dialog: ^0.1.1
-  intl: ^0.17.0
+  intl: ^0.16.1
 
 flutter_icons:
   android: true
