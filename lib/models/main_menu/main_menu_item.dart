@@ -58,4 +58,5 @@ class MainMenuItemClass {
   bool getIsActive() {
     return isActive;
   }
+  
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:mycart/controllers/user.dart';
 import 'package:mycart/screens/sign_in.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,10 @@ class SignUpScreenState extends State<SignUpScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: TextFormField(
+                      inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp("[ A-Za-z]")),
+                        ],
                       controller: nameController,
                       decoration: new InputDecoration(
                         contentPadding: EdgeInsets.all(20),
@@ -126,6 +131,8 @@ class SignUpScreenState extends State<SignUpScreen> {
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please enter your phone number';
+                        } else if (value.length != 11) {
+                          return 'Please enter 11 number';
                         }
                         return null;
                       },
