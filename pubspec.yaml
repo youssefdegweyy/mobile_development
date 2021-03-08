@@ -63,6 +63,7 @@ flutter:
     - assets/images/main/logo.png
     - assets/images/main/logo_c.png
     - assets/images/ic_launcher.png
+    - assets/images/cat.png
     - assets/images/other_icons/cart_sm.png
     - assets/images/other_icons/cart_lg.png
     - assets/images/other_icons/bike_lg.png

@@ -1,3 +1,4 @@
+import 'package:mycart/screens/admin/add_category.dart';
 import 'package:mycart/screens/drawer_screen.dart';
 import 'package:mycart/screens/forgot_password.dart';
 import 'package:mycart/screens/sign_up.dart';
@@ -194,7 +195,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     await _auth.signIn(_email, _password);
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      SignUpScreen.routeName,
+                                      AddCategory.routeName,
                                     );
                                   } catch (e) {
                                     Scaffold.of(context).showSnackBar(
