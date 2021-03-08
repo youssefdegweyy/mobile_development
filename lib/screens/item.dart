@@ -286,7 +286,9 @@ class ItemScreenState extends State<ItemScreen> {
                               ),
                             ),
                             onPressed: () {
-                              CartManager.addItem(widget.mItem, iniValue);
+                              if (iniValue > 0) {
+                                CartManager.addItem(widget.mItem, iniValue);
+                              }
                               Navigator.of(context).pop();
                             },
                           ),
