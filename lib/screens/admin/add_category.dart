@@ -86,7 +86,7 @@ class _AddCategoryState extends State<AddCategory> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your street name';
+                            return 'Please enter your Category name';
                           }
                           return null;
                         },

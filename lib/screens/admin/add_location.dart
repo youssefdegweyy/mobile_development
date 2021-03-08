@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddLocation extends StatefulWidget {
   static const routeName = '/addLoc';
@@ -94,6 +95,7 @@ class _AddLocationState extends State<AddLocation> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -113,6 +115,9 @@ class _AddLocationState extends State<AddLocation> {
                           if (value.isEmpty) {
                             return 'Please enter your street name';
                           }
+                          if (int.tryParse(value) <= 0) {
+                            return 'Please enter a Time bigger than Zero, In Minutes';
+                          }
                           return null;
                         },
                       ),
@@ -120,6 +125,7 @@ class _AddLocationState extends State<AddLocation> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -137,7 +143,10 @@ class _AddLocationState extends State<AddLocation> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your street name';
+                            return 'Please enter a valid Transportation Fee';
+                          }
+                          if (int.tryParse(value) <= 0) {
+                            return 'Please enter a price bigger than Zero';
                           }
                           return null;
                         },

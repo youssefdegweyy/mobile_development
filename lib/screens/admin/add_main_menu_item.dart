@@ -9,6 +9,7 @@ class AddMainItem extends StatefulWidget {
 
 class _AddMainItemState extends State<AddMainItem> {
   final _formKey = GlobalKey<FormState>();
+  bool checkBoxValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +69,7 @@ class _AddMainItemState extends State<AddMainItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -85,7 +87,10 @@ class _AddMainItemState extends State<AddMainItem> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your street name';
+                            return 'Please enter a Valid ID';
+                          }
+                          if (int.tryParse(value) <= 0) {
+                            return 'Please enter an ID Bigger than Zero';
                           }
                           return null;
                         },
@@ -94,6 +99,7 @@ class _AddMainItemState extends State<AddMainItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -111,7 +117,7 @@ class _AddMainItemState extends State<AddMainItem> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your street name';
+                            return 'Please enter A Valid Category ID';
                           }
                           return null;
                         },
@@ -137,7 +143,7 @@ class _AddMainItemState extends State<AddMainItem> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your street name';
+                            return 'Please enter A Valid Item Name';
                           }
                           return null;
                         },
@@ -146,10 +152,15 @@ class _AddMainItemState extends State<AddMainItem> {
                     Padding(
                         padding: EdgeInsets.only(top: 15),
                         child: CheckboxListTile(
-                          title: Text("Is Availaible"),
+                          title: Text("Is Available"),
                           secondary: Icon(Icons.event_available_outlined),
                           controlAffinity: ListTileControlAffinity.platform,
-                          value: false,
+                          value: checkBoxValue,
+                          onChanged: (bool value) {
+                            setState(() {
+                              checkBoxValue = value;
+                            });
+                          },
                         )),
                     Padding(
                       padding: EdgeInsets.only(top: 15),
@@ -173,7 +184,7 @@ class _AddMainItemState extends State<AddMainItem> {
                                   minWidth: 88.0, minHeight: 55),
                               alignment: Alignment.center,
                               child: Text(
-                                'Add Category',
+                                'Add Main Item',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
