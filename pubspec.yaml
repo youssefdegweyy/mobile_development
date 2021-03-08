@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.16.1
   firebase_messaging: ^7.0.3
   awesome_notifications: ^0.0.5+4
+  firebase_database: ^4.4.0
 
 
 
