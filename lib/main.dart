@@ -19,6 +19,7 @@ import 'package:mycart/screens/profile.dart';
 import 'package:mycart/screens/sign_in.dart';
 import 'package:mycart/screens/sign_up.dart';
 import 'package:flutter/material.dart';
+import 'package:mycart/screens/wishlist.dart';
 import './screens/splash_screen.dart';
 
 void main() async {
@@ -112,6 +113,7 @@ class MyApp extends StatelessWidget {
         AddSubItem.routeName: (ctx) => AddSubItem(),
         AddMainItem.routeName: (ctx) => AddMainItem(),
         SendNotification.routeName: (ctx) => SendNotification(),
+        Wishlist.routeName: (ctx) => Wishlist(),
       },
     );
   }

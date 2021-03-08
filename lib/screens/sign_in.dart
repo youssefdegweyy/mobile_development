@@ -9,6 +9,7 @@ import 'package:mycart/screens/sign_up.dart';
 import 'package:mycart/controllers/user.dart';
 import 'package:mycart/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mycart/screens/wishlist.dart';
 import 'package:mycart/services/auth.dart';
 
 import 'sign_up.dart';
@@ -199,7 +200,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     await _auth.signIn(_email, _password);
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      SendNotification.routeName,
+                                      Wishlist.routeName,
                                     );
                                   } catch (e) {
                                     Scaffold.of(context).showSnackBar(
