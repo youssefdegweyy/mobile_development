@@ -17,7 +17,6 @@ Widget mainMenuCategories(BuildContext mContext) {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey[800],
                 ),
               ),
             ),

@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
           headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
         ),
       ),
+      darkTheme: (ThemeData(brightness: Brightness.dark)),
       //home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
