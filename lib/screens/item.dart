@@ -64,7 +64,6 @@ class ItemScreenState extends State<ItemScreen> {
         ),
       ),
       body: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 65,
           automaticallyImplyLeading: false,

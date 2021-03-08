@@ -45,7 +45,6 @@ class _RecentOrdersItemsWidgetState extends State<RecentOrdersItemsWidget> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              color: Colors.white,
               elevation: 15,
               child: InkWell(
                 borderRadius: BorderRadius.circular(20.0),

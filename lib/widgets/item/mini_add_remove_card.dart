@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 Widget miniAddRemoveCard(
     double size, int iniValue, Function addCallBack, Function removeCallBack) {
@@ -9,7 +10,12 @@ Widget miniAddRemoveCard(
         Container(
           width: 50 * size,
           decoration: BoxDecoration(
-            color: iniValue > 0 ? Colors.red[50] : Colors.grey[100],
+            color: iniValue > 0
+                ? Colors.red[200]
+                : SchedulerBinding.instance.window.platformBrightness ==
+                        Brightness.dark
+                    ? Color(0xFF444444)
+                    : Color(0xFFf0f0f0),
             borderRadius: BorderRadius.circular(20 * size),
           ),
           child: InkWell(
@@ -35,7 +41,10 @@ Widget miniAddRemoveCard(
         Container(
           width: 50 * size,
           decoration: BoxDecoration(
-            color: Colors.green[50],
+            color: SchedulerBinding.instance.window.platformBrightness ==
+                    Brightness.dark
+                ? Color(0xFF444444)
+                : Color(0xFFf0f0f0),
             borderRadius: BorderRadius.circular(20 * size),
           ),
           child: InkWell(

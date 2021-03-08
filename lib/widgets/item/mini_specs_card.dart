@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 Widget miniSpecsCard(String title, int value) {
   return Padding(
@@ -6,7 +7,10 @@ Widget miniSpecsCard(String title, int value) {
     child: Container(
       width: 82,
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: SchedulerBinding.instance.window.platformBrightness ==
+                Brightness.dark
+            ? Color(0xFF444444)
+            : Color(0xFFf0f0f0),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(

@@ -26,6 +26,7 @@ class DataManager {
   static List lastSearchKeywords = new List();
   static List recentOrders = new List();
   static List offersItems = new List();
+  static bool isDarkMode = false;
 
   static Future<void> iniUserAddresses([Function callBackFunction]) async {
     String response = await API.getUserAddresses();

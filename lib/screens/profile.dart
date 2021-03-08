@@ -22,7 +22,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 65,
         automaticallyImplyLeading: false,
@@ -51,7 +50,6 @@ class ProfileScreenState extends State<ProfileScreen> {
               icon: Icon(
                 Icons.settings_outlined,
                 size: 32,
-                color: Colors.grey[800],
               ),
               onPressed: () => Navigator.pushNamed(
                 context,
@@ -64,7 +62,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       body: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 0, left: 30, right: 30, bottom: 22),
+            padding: EdgeInsets.only(top: 22, left: 30, right: 30, bottom: 22),
             child: Column(
               children: [
                 Padding(

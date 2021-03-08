@@ -113,7 +113,10 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xFFF2F2F2),
+                        color: MediaQuery.of(context).platformBrightness ==
+                                Brightness.dark
+                            ? Color(0xFF444444)
+                            : Color(0xFFf0f0f0),
                       ),
                       child: Theme(
                         data: Theme.of(context).copyWith(
@@ -151,7 +154,6 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
-                          fillColor: Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -179,7 +181,6 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
-                          fillColor: Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -206,7 +207,6 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
-                          fillColor: Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -233,7 +233,6 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
-                          fillColor: Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -260,7 +259,6 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
-                          fillColor: Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(

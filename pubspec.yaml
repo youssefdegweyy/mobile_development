@@ -36,7 +36,6 @@ dependencies:
   auto_size_text: ^2.1.0
   confirm_dialog: ^0.1.1
   intl: ^0.16.1
-  firebase_messaging: ^7.0.3
 
 flutter_icons:
   android: true

@@ -59,7 +59,7 @@ class MyOrdersScreenState extends State<MyOrdersScreen> {
           Padding(
             padding: EdgeInsets.only(left: 3, right: 15, top: 5, bottom: 5),
             child: IconButton(
-              icon: Image.asset('assets/images/other_icons/cart_sm.png'),
+              icon: Icon(Icons.shopping_cart_outlined),
               onPressed: () =>
                   Navigator.pushNamed(context, MyCartScreen.routeName),
             ),

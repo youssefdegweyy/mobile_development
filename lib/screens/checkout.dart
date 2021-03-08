@@ -185,7 +185,6 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: Colors.white,
                             elevation: 0,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(15.0),
@@ -316,7 +315,6 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: Colors.white,
                             elevation: 0,
                             child: Column(
                               children: [
@@ -364,7 +362,6 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                           color: Colors.grey,
                         ),
                         filled: true,
-                        fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(

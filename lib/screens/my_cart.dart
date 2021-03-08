@@ -115,7 +115,6 @@ class MyCartScreenState extends State<MyCartScreen> {
                                     color: Colors.grey,
                                   ),
                                   filled: true,
-                                  fillColor: Colors.grey[100],
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: BorderSide(

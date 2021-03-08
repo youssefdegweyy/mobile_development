@@ -122,6 +122,10 @@ class SearchScreenState extends State<SearchScreen> {
       ),
       body: !isLoading
           ? Container(
+              color:
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? Color(0xFF2E2E2E)
+                      : Colors.white,
               child: ListView(
                 children: [
                   Padding(

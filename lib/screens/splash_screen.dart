@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:mycart/screens/drawer_screen.dart';
 import 'package:mycart/screens/get_started.dart';
 import 'package:mycart/screens/sign_in.dart';
