@@ -21,8 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  firebase_auth: ^0.20.1
-  firebase_core : ^0.7.0
+  firebase_auth: ^0.18.3
+  firebase_core : ^0.5.0+1
   flutter:
     sdk: flutter
 
@@ -37,6 +37,10 @@ dependencies:
   auto_size_text: ^2.1.0
   confirm_dialog: ^0.1.1
   intl: ^0.16.1
+  firebase_messaging: ^7.0.3
+  awesome_notifications: ^0.0.5+4
+
+
 
 flutter_icons:
   android: true

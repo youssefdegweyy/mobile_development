@@ -1,4 +1,6 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mycart/screens/admin/add_category.dart';
 import 'package:mycart/screens/admin/add_location.dart';
 import 'package:mycart/screens/admin/add_main_menu_item.dart';
@@ -25,8 +27,43 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  void iniNotifications() {
+    _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+      showBasicNotification(
+          message["notification"]["title"], message["notification"]["body"]);
+    }, onResume: (Map<String, dynamic> message) async {
+      showBasicNotification(
+          message["notification"]["title"], message["notification"]["body"]);
+    }, onLaunch: (Map<String, dynamic> message) async {
+      showBasicNotification(
+          message["notification"]["title"], message["notification"]["body"]);
+    });
+  }
+
+  Future<void> showBasicNotification(String title, String body) async {
+    AwesomeNotifications().initialize('resource://drawable/logo', [
+      NotificationChannel(
+          channelKey: 'basic_channel',
+          channelName: 'Basic notifications',
+          channelDescription: 'Notification channel for basic tests',
+          defaultColor: Color(0xFF9D50DD),
+          ledColor: Colors.white)
+    ]);
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+      id: 1,
+      channelKey: 'basic_channel',
+      title: title,
+      body: body,
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    iniNotifications();
     return MaterialApp(
       builder: (BuildContext context, Widget child) {
         return MediaQuery(
