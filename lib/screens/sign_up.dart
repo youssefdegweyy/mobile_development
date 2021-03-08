@@ -39,7 +39,6 @@ class SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.0),
         child: AppBar(
@@ -72,7 +71,10 @@ class SignUpScreenState extends State<SignUpScreen> {
                     padding: const EdgeInsets.only(
                         left: 30.0, right: 30.0, top: 30, bottom: 10),
                     child: Image.asset(
-                      "assets/images/main/logo_c.png",
+                      MediaQuery.of(context).platformBrightness ==
+                              Brightness.dark
+                          ? "assets/images/main/logo.png"
+                          : "assets/images/main/logo_c.png",
                     ),
                   ),
                   Padding(
@@ -86,7 +88,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                         hintStyle: new TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                         filled: true,
-                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -114,7 +115,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                         hintStyle: new TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                         filled: true,
-                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -145,7 +145,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                         hintStyle: new TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                         filled: true,
-                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -175,7 +174,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                         hintStyle: new TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                         filled: true,
-                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -216,7 +214,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                         hintStyle: new TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                         filled: true,
-                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -288,11 +285,10 @@ class SignUpScreenState extends State<SignUpScreen> {
                                 try {
                                   await _auth.signUp(_email, _password);
                                   Navigator.pushNamed(
-                                    context, SignInScreen.routeName);
+                                      context, SignInScreen.routeName);
                                 } catch (e) {
-                                  Scaffold.of(context).showSnackBar(SnackBar(content: Text(
-                                    e.message
-                                  )));
+                                  Scaffold.of(context).showSnackBar(
+                                      SnackBar(content: Text(e.message)));
                                 }
 
                                 /*var name = nameController.text;
@@ -329,7 +325,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           new Text(
                             "Already have an account? ",
-                            style: TextStyle(color: Colors.black),
                           ),
                           new Text(
                             "Log In",

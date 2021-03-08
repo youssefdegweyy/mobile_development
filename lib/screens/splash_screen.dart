@@ -52,7 +52,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.0),
         child: AppBar(
@@ -84,7 +83,9 @@ class _SplashScreenState extends State<SplashScreen> {
             alignment: Alignment.center,
             margin: EdgeInsets.all(30.0),
             child: Image.asset(
-              "assets/images/main/logo_c.png",
+              MediaQuery.of(context).platformBrightness == Brightness.dark
+                  ? "assets/images/main/logo.png"
+                  : "assets/images/main/logo_c.png",
               width: 300,
             ),
           ),
