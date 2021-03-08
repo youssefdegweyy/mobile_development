@@ -16,7 +16,7 @@ class SignUpScreen extends StatefulWidget {
 class SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final _auth = Auth();
-  String _email, _password;
+  String _name, _phone, _email, _password;
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
@@ -82,10 +82,12 @@ class SignUpScreenState extends State<SignUpScreen> {
                     padding: EdgeInsets.only(top: 30),
                     child: TextFormField(
                       inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(
-                              RegExp("[ A-Za-z]")),
-                        ],
+                        FilteringTextInputFormatter.allow(RegExp("[ A-Za-z]")),
+                      ],
                       controller: nameController,
+                      onSaved: (value) {
+                        _name = value;
+                      },
                       decoration: new InputDecoration(
                         contentPadding: EdgeInsets.all(20),
                         isDense: true,
@@ -113,6 +115,9 @@ class SignUpScreenState extends State<SignUpScreen> {
                     padding: EdgeInsets.only(top: 15),
                     child: TextFormField(
                       controller: phoneController,
+                      onSaved: (value) {
+                        _phone = value;
+                      },
                       decoration: new InputDecoration(
                         contentPadding: EdgeInsets.all(20),
                         isDense: true,
@@ -290,12 +295,17 @@ class SignUpScreenState extends State<SignUpScreen> {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
                                 try {
-                                  await _auth.signUp(_email, _password);
+                                  await _auth.signUp(
+                                      _name, _phone, _email, _password);
+
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(
+                                          "Sign up success, please login")));
                                   Navigator.pushNamed(
                                       context, SignInScreen.routeName);
                                 } catch (e) {
-                                  Scaffold.of(context).showSnackBar(
-                                      SnackBar(content: Text(e.message)));
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(e.message.toString())));
                                 }
 
                                 /*var name = nameController.text;

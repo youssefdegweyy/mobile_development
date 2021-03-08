@@ -4,7 +4,7 @@ import 'package:mycart/services/data_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefManager {
-  var id = 0;
+  String id = "";
   var name = "Guest";
   var phone = "";
   var email = "";
@@ -17,8 +17,8 @@ class PrefManager {
     //loadDataFromLocalMemory();
   }
 
-  Future<bool> setLoggedInData(
-      int id, String name, String phone, String email, String password) async {
+  Future<bool> setLoggedInData(String id, String name, String phone,
+      String email, String password) async {
     if (pref == null) {
       pref = await SharedPreferences.getInstance();
     }
@@ -27,7 +27,7 @@ class PrefManager {
     this.phone = phone;
     this.email = email;
     this.password = password;
-    pref.setInt("id", id);
+    pref.setString("id", id);
     pref.setString("name", name);
     pref.setString("phone", phone);
     pref.setString("email", email);
@@ -41,7 +41,7 @@ class PrefManager {
       pref = await SharedPreferences.getInstance();
     }
     lang = pref.getInt("lang") ?? lang;
-    id = pref.getInt("id") ?? id;
+    id = pref.getString("id") ?? id;
     name = pref.getString("name") ?? name;
     phone = pref.getString("phone") ?? phone;
     email = pref.getString("email") ?? email;
@@ -55,7 +55,7 @@ class PrefManager {
     if (pref == null) {
       pref = await SharedPreferences.getInstance();
     }
-    pref.setInt("id", id);
+    pref.setString("id", id);
     pref.setString("name", name);
     pref.setString("phone", phone);
     pref.setString("email", email);
@@ -64,7 +64,7 @@ class PrefManager {
     print("Saved! - {$id} - {$name} - {$email} - {$selectedAddress}");
   }
 
-  bool setId(int id) {
+  bool setId(String id) {
     this.id = id;
     return true;
   }
@@ -89,7 +89,7 @@ class PrefManager {
     return true;
   }
 
-  int getId() {
+  String getId() {
     return id;
   }
 
@@ -106,7 +106,7 @@ class PrefManager {
   }
 
   bool isLoggedIn() {
-    if (id != 0) {
+    if (id.toString() != "") {
       return true;
     } else {
       return false;
@@ -114,11 +114,11 @@ class PrefManager {
   }
 
   Future<void> logOut() async {
-    this.id = 0;
+    this.id = "";
     if (pref == null) {
       pref = await SharedPreferences.getInstance();
     }
-    pref.setInt("id", 0);
+    pref.setString("id", "");
     pref.setString("name", "Guest");
     pref.setString("phone", "");
     pref.setString("email", "");

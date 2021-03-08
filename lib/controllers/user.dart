@@ -10,7 +10,7 @@ class User {
         if (convert.jsonDecode(response)["is_valid"] == true) {
           if (convert.jsonDecode(response)["is_email_verified"] == true) {
             return DataManager.mPrefManager.setLoggedInData(
-                int.parse(convert.jsonDecode(response)["user_id"]),
+                int.parse(convert.jsonDecode(response)["user_id"]).toString(),
                 convert.jsonDecode(response)["user_name"],
                 convert.jsonDecode(response)["user_phone"],
                 email,
