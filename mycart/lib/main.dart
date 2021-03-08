@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           child: child,
         );
       },
-      title: 'my Cart',
+      title: 'My Cart',
       theme: ThemeData(
         // Define the default brightness and colors.
         primaryColor: Colors.white,
