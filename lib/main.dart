@@ -5,6 +5,7 @@ import 'package:mycart/screens/admin/add_category.dart';
 import 'package:mycart/screens/admin/add_location.dart';
 import 'package:mycart/screens/admin/add_main_menu_item.dart';
 import 'package:mycart/screens/admin/add_sub_menu_item.dart';
+import 'package:mycart/screens/admin/send_notification.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/offers_screen.dart';
 import 'package:mycart/screens/checkout.dart';
@@ -110,6 +111,7 @@ class MyApp extends StatelessWidget {
         AddLocation.routeName: (ctx) => AddLocation(),
         AddSubItem.routeName: (ctx) => AddSubItem(),
         AddMainItem.routeName: (ctx) => AddMainItem(),
+        SendNotification.routeName: (ctx) => SendNotification(),
       },
     );
   }
