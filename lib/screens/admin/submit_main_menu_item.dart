@@ -222,7 +222,7 @@ class _SubmitMainItemState extends State<SubmitMainItem> {
                             if (_formKey.currentState.validate()) {
                               var itemName = itemNameController.text;
                               var itemImageURL = itemImageURLController.text;
-                              DataManager.addMainMenuItem(
+                              DataManager.submitMainMenuItem(
                                 currCateg.id,
                                 itemName,
                                 itemImageURL,
