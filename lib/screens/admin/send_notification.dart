@@ -115,6 +115,10 @@ class _SendNotificationState extends State<SendNotification> {
                           if (value.isEmpty) {
                             return 'Please enter a valid notification Body';
                           }
+                          else if(value.length<10)
+                          {
+                            return 'Please enter more than 10 characters';
+                          }
                           return null;
                         },
                       ),
