@@ -14,7 +14,8 @@ class Auth {
     databaseRef.child(_auth.currentUser.uid).set({
       'name': name.toString(),
       'phone': phone.toString(),
-      'email': email.toString()
+      'email': email.toString(),
+      'type': 'user',
     });
     return authresult;
   }
@@ -36,8 +37,15 @@ class Auth {
             .child("phone")
             .once())
         .value;
-    await DataManager.mPrefManager
-        .setLoggedInData(_auth.currentUser.uid, name, phone, email, password);
+    var type = (await FirebaseDatabase.instance
+            .reference()
+            .child('users')
+            .child(_auth.currentUser.uid)
+            .child("type")
+            .once())
+        .value;
+    await DataManager.mPrefManager.setLoggedInData(
+        _auth.currentUser.uid, name, phone, email, password, type);
     return authresult;
   }
 }
