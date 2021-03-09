@@ -1,10 +1,10 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:mycart/screens/admin/add_category.dart';
-import 'package:mycart/screens/admin/add_location.dart';
-import 'package:mycart/screens/admin/add_main_menu_item.dart';
-import 'package:mycart/screens/admin/add_sub_menu_item.dart';
+import 'package:mycart/screens/admin/submit_category.dart';
+import 'package:mycart/screens/admin/submit_location.dart';
+import 'package:mycart/screens/admin/submit_main_menu_item.dart';
+import 'package:mycart/screens/admin/submit_sub_menu_item.dart';
 import 'package:mycart/screens/admin/send_notification.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/offers_screen.dart';
@@ -112,10 +112,10 @@ class MyApp extends StatelessWidget {
         DrawerScreen.routeName: (ctx) => DrawerScreen(),
         CheckoutScreen.routeName: (ctx) => CheckoutScreen(),
         ContactUsScreen.routeName: (ctx) => ContactUsScreen(),
-        AddCategory.routeName: (ctx) => AddCategory(),
-        AddLocation.routeName: (ctx) => AddLocation(),
-        AddSubItem.routeName: (ctx) => AddSubItem(),
-        AddMainItem.routeName: (ctx) => AddMainItem(),
+        SubmitCategory.routeName: (ctx) => SubmitCategory(),
+        SubmitLocation.routeName: (ctx) => SubmitLocation(),
+        SubmitSubItem.routeName: (ctx) => SubmitSubItem(),
+        SubmitMainItem.routeName: (ctx) => SubmitMainItem(),
         SendNotification.routeName: (ctx) => SendNotification(),
         Wishlist.routeName: (ctx) => Wishlist(),
         AboutUs.routeName: (ctx) => AboutUs(),

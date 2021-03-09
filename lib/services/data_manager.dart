@@ -1,5 +1,5 @@
 import 'package:mycart/models/cart/cart_item.dart';
-import 'package:mycart/screens/admin/add_category.dart';
+import 'package:mycart/screens/admin/submit_category.dart';
 import 'package:mycart/services/cart_manager.dart';
 import 'package:mycart/services/firebase_manager.dart';
 import 'dart:async';
@@ -103,33 +103,34 @@ class DataManager {
     return await FirebaseManager.sendMessage(messageDetails);
   }
 
-  static Future<bool> addCategory(String categoryName) async {
-    return await FirebaseManager.addCategory(categoryName).then((value) async {
+  static Future<bool> submitCategory(String categoryName) async {
+    return await FirebaseManager.submitCategory(categoryName)
+        .then((value) async {
       await DataManager.iniMainMenuCategories();
     });
   }
 
-  static Future<bool> addLocation(
+  static Future<bool> submitLocation(
       String locationName, int locationTime, double locationFees) async {
-    return await FirebaseManager.addLocation(
+    return await FirebaseManager.submitLocation(
             locationName, locationTime, locationFees)
         .then((value) async {
       await DataManager.iniUserAddresses();
     });
   }
 
-  static Future<bool> addMainMenuItem(String categoryId, String itemName,
+  static Future<bool> submitMainMenuItem(String categoryId, String itemName,
       String itemImageURL, int isActive) async {
-    return await FirebaseManager.addMainMenuItem(
+    return await FirebaseManager.submitMainMenuItem(
             categoryId, itemName, itemImageURL, isActive)
         .then((value) async {
       await DataManager.iniMainMenuItems();
     });
   }
 
-  static Future<bool> addSubMenuItem(mainMenuItemId, name, price, discount,
+  static Future<bool> submitSubMenuItem(mainMenuItemId, name, price, discount,
       description, imageURL, checkBox) async {
-    return await FirebaseManager.addSubMenuItem(
+    return await FirebaseManager.submitSubMenuItem(
         mainMenuItemId, name, price, discount, description, imageURL, checkBox);
   }
 }

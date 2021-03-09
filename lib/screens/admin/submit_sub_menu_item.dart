@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:mycart/models/main_menu/main_menu_category.dart';
+import 'package:mycart/models/main_menu/main_menu_item.dart';
 import 'package:mycart/services/data_manager.dart';
 
-class AddMainItem extends StatefulWidget {
-  static const routeName = '/addMainItem';
+class SubmitSubItem extends StatefulWidget {
+  static const routeName = '/submitSubItem';
 
   @override
-  _AddMainItemState createState() => _AddMainItemState();
+  _SubmitSubItemState createState() => _SubmitSubItemState();
 }
 
-class _AddMainItemState extends State<AddMainItem> {
-  MainMenuCategoryClass currCateg = DataManager.mainMenuCategories[0];
-  final itemNameController = TextEditingController();
-  final itemImageURLController = TextEditingController();
+class _SubmitSubItemState extends State<SubmitSubItem> {
+  MainMenuItemClass currItem = DataManager.mainMenuItems[0];
   final _formKey = GlobalKey<FormState>();
+  final nameItemController = TextEditingController();
+  final discountItemController = TextEditingController();
+  final descItemController = TextEditingController();
+  final priceItemController = TextEditingController();
+  final itemImageURLController = TextEditingController();
   bool checkBoxValue = false;
 
   @override
   void dispose() {
-    itemNameController.dispose();
+    nameItemController.dispose();
+    discountItemController.dispose();
+    descItemController.dispose();
+    priceItemController.dispose();
     itemImageURLController.dispose();
     super.dispose();
   }
 
-  void categChanged(MainMenuCategoryClass newCateg) {
+  void itemChanged(MainMenuItemClass newItem) {
     setState(() {
-      currCateg = newCateg;
+      currItem = newItem;
     });
   }
 
@@ -55,7 +61,7 @@ class _AddMainItemState extends State<AddMainItem> {
           automaticallyImplyLeading: false,
           leadingWidth: 65,
           title: Text(
-            "Add Main Item",
+            "Add Item",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: Padding(
@@ -102,12 +108,11 @@ class _AddMainItemState extends State<AddMainItem> {
                         child: Padding(
                           padding: EdgeInsets.only(right: 10),
                           child: DropdownButtonHideUnderline(
-                            child: DropdownButton<MainMenuCategoryClass>(
-                              onChanged: categChanged,
-                              value: currCateg,
-                              items:
-                                  DataManager.mainMenuCategories.map((value) {
-                                return DropdownMenuItem<MainMenuCategoryClass>(
+                            child: DropdownButton<MainMenuItemClass>(
+                              onChanged: itemChanged,
+                              value: currItem,
+                              items: DataManager.mainMenuItems.map((value) {
+                                return DropdownMenuItem<MainMenuItemClass>(
                                   value: value,
                                   child: Text(
                                     value.name,
@@ -123,7 +128,7 @@ class _AddMainItemState extends State<AddMainItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
-                        controller: itemNameController,
+                        controller: nameItemController,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -142,6 +147,95 @@ class _AddMainItemState extends State<AddMainItem> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter a valid name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: TextFormField(
+                        controller: descItemController,
+                        minLines: 7,
+                        maxLines: 7,
+                        decoration: new InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          isDense: true,
+                          hintText: 'Descreption',
+                          hintStyle: new TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a valid description';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: TextFormField(
+                        controller: priceItemController,
+                        keyboardType: TextInputType.number,
+                        decoration: new InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          isDense: true,
+                          hintText: 'Price',
+                          hintStyle: new TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a valid price';
+                          }
+
+                          if (int.tryParse(value) <= 0) {
+                            return 'Please enter a price bigger than zero';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: TextFormField(
+                        controller: discountItemController,
+                        keyboardType: TextInputType.number,
+                        decoration: new InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          isDense: true,
+                          hintText: 'Discount',
+                          hintStyle: new TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a valid discount';
                           }
                           return null;
                         },
@@ -220,14 +314,25 @@ class _AddMainItemState extends State<AddMainItem> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              var itemName = itemNameController.text;
-                              var itemImageURL = itemImageURLController.text;
-                              DataManager.addMainMenuItem(
-                                currCateg.id,
-                                itemName,
-                                itemImageURL,
-                                checkBoxValue ? 1 : 0,
-                              ).then((value) => Navigator.of(context).pop());
+                              var name = nameItemController.text;
+                              var price = priceItemController.text;
+                              var discount = discountItemController;
+                              var description = descItemController;
+                              var itemImageURL = descItemController;
+                              int checkBox = checkBoxValue ? 1 : 0;
+                              DataManager.submitSubMenuItem(
+                                      currItem.id,
+                                      name,
+                                      price,
+                                      discount,
+                                      description,
+                                      itemImageURL,
+                                      checkBox)
+                                  .then((response) {
+                                if (response) {
+                                  Navigator.pop(context);
+                                } else {}
+                              });
                             }
                           }),
                     ),

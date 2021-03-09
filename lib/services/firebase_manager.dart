@@ -322,7 +322,7 @@ class FirebaseManager {
     return true;
   }
 
-  static Future<bool> addCategory(String categoryName) async {
+  static Future<bool> submitCategory(String categoryName) async {
     var dbRef2 = databaseRef.child('data').child('main_menu_categories');
     await dbRef2.push().set({
       'name': categoryName,
@@ -335,7 +335,7 @@ class FirebaseManager {
     return true;
   }
 
-  static Future<bool> addLocation(
+  static Future<bool> submitLocation(
       String locationName, int locationTime, double locationFees) async {
     var dbRef2 = databaseRef.child('data').child('delivery_locations');
     await dbRef2.push().set({
@@ -347,7 +347,7 @@ class FirebaseManager {
     });
   }
 
-  static Future<bool> addMainMenuItem(String categoryId, String itemName,
+  static Future<bool> submitMainMenuItem(String categoryId, String itemName,
       String itemImageURL, int isActive) async {
     var dbRef2 = databaseRef.child('data').child('main_menu_items');
     await dbRef2.push().set({
@@ -364,7 +364,7 @@ class FirebaseManager {
     return true;
   }
 
-  static Future<bool> addSubMenuItem(mainMenuItemId, name, price, discount,
+  static Future<bool> submitSubMenuItem(mainMenuItemId, name, price, discount,
       description, imageURL, checkbox) async {
     var dbRef3 = databaseRef.child('data').child('main_menu_categories');
     await dbRef3.push().set({

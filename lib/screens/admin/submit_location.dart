@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mycart/services/data_manager.dart';
 
-class AddCategory extends StatefulWidget {
-  static const routeName = '/addCat';
+class SubmitLocation extends StatefulWidget {
+  static const routeName = '/submitLocation';
 
   @override
-  _AddCategoryState createState() => _AddCategoryState();
+  _SubmitLocationState createState() => _SubmitLocationState();
 }
 
-class _AddCategoryState extends State<AddCategory> {
+class _SubmitLocationState extends State<SubmitLocation> {
   final _formKey = GlobalKey<FormState>();
 
-  final categoryController = TextEditingController();
+  final locationNameController = TextEditingController();
+  final locationTimeController = TextEditingController();
+  final locationFeesController = TextEditingController();
 
   @override
   void dispose() {
-    categoryController.dispose();
+    locationNameController.dispose();
+    locationTimeController.dispose();
+    locationFeesController.dispose();
     super.dispose();
   }
 
@@ -45,7 +50,7 @@ class _AddCategoryState extends State<AddCategory> {
           automaticallyImplyLeading: false,
           leadingWidth: 65,
           title: Text(
-            "Add Category",
+            "Add Location",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: Padding(
@@ -66,7 +71,7 @@ class _AddCategoryState extends State<AddCategory> {
             ),
             children: [
               Image(
-                image: AssetImage('assets/images/cat.png'),
+                image: AssetImage('assets/images/loc.png'),
               ),
               Form(
                 key: _formKey,
@@ -77,11 +82,11 @@ class _AddCategoryState extends State<AddCategory> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
-                        controller: categoryController,
+                        controller: locationNameController,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
-                          hintText: 'Category Name',
+                          hintText: 'Location Name',
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
@@ -95,7 +100,69 @@ class _AddCategoryState extends State<AddCategory> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your Category name';
+                            return 'Please enter your street name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: TextFormField(
+                        controller: locationTimeController,
+                        keyboardType: TextInputType.number,
+                        decoration: new InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          isDense: true,
+                          hintText: 'Time',
+                          hintStyle: new TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter your street name';
+                          }
+                          if (int.tryParse(value) <= 0) {
+                            return 'Please enter a Time bigger than Zero, In Minutes';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: TextFormField(
+                        controller: locationFeesController,
+                        keyboardType: TextInputType.number,
+                        decoration: new InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          isDense: true,
+                          hintText: 'Fees',
+                          hintStyle: new TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a valid Transportation Fee';
+                          }
+                          if (int.tryParse(value) <= 0) {
+                            return 'Please enter a price bigger than Zero';
                           }
                           return null;
                         },
@@ -123,7 +190,7 @@ class _AddCategoryState extends State<AddCategory> {
                                   minWidth: 88.0, minHeight: 55),
                               alignment: Alignment.center,
                               child: Text(
-                                'Add Category',
+                                'Add Location',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
@@ -134,13 +201,14 @@ class _AddCategoryState extends State<AddCategory> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              var category = categoryController.text;
-                              DataManager.addCategory(category)
-                                  .then((response) {
-                                if (response) {
-                                  Navigator.pop(context);
-                                } else {}
-                              });
+                              var locName = locationNameController.text;
+                              var locTime =
+                                  int.parse(locationTimeController.text);
+                              var locFees =
+                                  double.parse(locationFeesController.text);
+                              DataManager.submitLocation(
+                                      locName, locTime, locFees)
+                                  .then((value) => Navigator.of(context).pop());
                             }
                           }),
                     ),

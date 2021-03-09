@@ -2,10 +2,10 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mycart/screens/about.dart';
-import 'package:mycart/screens/admin/add_category.dart';
-import 'package:mycart/screens/admin/add_location.dart';
-import 'package:mycart/screens/admin/add_main_menu_item.dart';
-import 'package:mycart/screens/admin/add_sub_menu_item.dart';
+import 'package:mycart/screens/admin/submit_category.dart';
+import 'package:mycart/screens/admin/submit_location.dart';
+import 'package:mycart/screens/admin/submit_main_menu_item.dart';
+import 'package:mycart/screens/admin/submit_sub_menu_item.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/main_menu.dart';
 import 'package:mycart/screens/offers_screen.dart';
@@ -90,7 +90,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, AddCategory.routeName);
+                    Navigator.pushNamed(context, SubmitCategory.routeName);
                   },
                 ),
                 buildListTitle(
@@ -98,7 +98,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, AddMainItem.routeName);
+                    Navigator.pushNamed(context, SubmitMainItem.routeName);
                   },
                 ),
                 buildListTitle(
@@ -106,7 +106,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, AddSubItem.routeName);
+                    Navigator.pushNamed(context, SubmitSubItem.routeName);
                   },
                 ),
                 buildListTitle(
@@ -114,7 +114,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, AddLocation.routeName);
+                    Navigator.pushNamed(context, SubmitLocation.routeName);
                   },
                 ),
               ],
