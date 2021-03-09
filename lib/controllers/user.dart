@@ -14,7 +14,8 @@ class User {
                 convert.jsonDecode(response)["user_name"],
                 convert.jsonDecode(response)["user_phone"],
                 email,
-                password);
+                password,
+                "user");
           } else {
             Fluttertoast.showToast(
               msg:
@@ -123,7 +124,7 @@ class User {
         if (convert.jsonDecode(response)["response_title"] ==
             "delete address success") {
           if (DataManager.mPrefManager.getSelectedAddress() == addressId) {
-            DataManager.mPrefManager.setSelectedAddress(0);
+            DataManager.mPrefManager.setSelectedAddress("");
           }
           Fluttertoast.showToast(
             msg: "Address is successfully deleted.",
