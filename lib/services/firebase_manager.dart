@@ -231,55 +231,76 @@ class FirebaseManager {
   static Future<bool> submitAddress(locationId, streetName, buildingNumber,
       floorNumber, apartmentNumber, phoneNumber,
       [String addressId = ""]) async {
-    var dbRef2 = databaseRef.child('data').child('addresses');
-    if (addressId == "") {
-      dbRef2 = dbRef2.push();
-    } else {
-      dbRef2 = dbRef2.child(addressId.toString());
-    }
-    await dbRef2.set({
-      'user_id': DataManager.mPrefManager.getId().toString(),
-      'location_id': locationId.toString(),
-      'street_name': streetName,
-      'building_number': buildingNumber,
-      'floor_number': floorNumber.toString(),
-      'apartment_number': apartmentNumber.toString(),
-      'phone_number': phoneNumber.toString(),
-      'is_active': 1
-    }).then((value) {
-      if (locationId == "") {
-        Fluttertoast.showToast(
-          msg: "Address is successfully added.",
-          toastLength: Toast.LENGTH_LONG,
-        );
+    try {
+      var dbRef2 = databaseRef.child('data').child('addresses');
+      if (addressId == "") {
+        dbRef2 = dbRef2.push();
       } else {
-        Fluttertoast.showToast(
-          msg: "Address is successfully updated.",
-          toastLength: Toast.LENGTH_LONG,
-        );
+        dbRef2 = dbRef2.child(addressId.toString());
       }
-    });
-    return true;
+      await dbRef2.set({
+        'user_id': DataManager.mPrefManager.getId().toString(),
+        'location_id': locationId.toString(),
+        'street_name': streetName,
+        'building_number': buildingNumber,
+        'floor_number': floorNumber.toString(),
+        'apartment_number': apartmentNumber.toString(),
+        'phone_number': phoneNumber.toString(),
+        'is_active': 1
+      }).then((value) {
+        if (locationId == "") {
+          Fluttertoast.showToast(
+            msg: "Address is successfully added.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Address is successfully updated.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
+      });
+      return true;
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.message.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
   }
 
   static Future<bool> deleteAddress(addressId) async {
-    await databaseRef
-        .child('data')
-        .child('addresses')
-        .child(addressId)
-        .child('is_active')
-        .set(0);
-    Fluttertoast.showToast(
-      msg: "Address is successfully deleted.",
-      toastLength: Toast.LENGTH_LONG,
-    );
-    return true;
+    try {
+      await databaseRef
+          .child('data')
+          .child('addresses')
+          .child(addressId)
+          .child('is_active')
+          .set(0);
+      Fluttertoast.showToast(
+        msg: "Address is successfully deleted.",
+        toastLength: Toast.LENGTH_LONG,
+      );
+      return true;
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.message.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
   }
 
   static Future<bool> placeOrder(myOrder) async {
-    var dbRef2 = databaseRef.child('data').child('recent_orders');
-    await dbRef2.push().set(myOrder);
-    return true;
+    try {
+      var dbRef2 = databaseRef.child('data').child('recent_orders');
+      await dbRef2.push().set(myOrder);
+      return true;
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.message.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
   }
 
   static Future<List> getOffersItems() async {
@@ -309,78 +330,113 @@ class FirebaseManager {
   }
 
   static Future<bool> sendMessage(String messageDetails) async {
-    var dbRef2 = databaseRef.child('data').child('messages');
-    await dbRef2.push().set({
-      'user_id': DataManager.mPrefManager.getId().toString(),
-      'message': messageDetails,
-    }).then((value) {
+    try {
+      var dbRef2 = databaseRef.child('data').child('messages');
+      await dbRef2.push().set({
+        'user_id': DataManager.mPrefManager.getId().toString(),
+        'message': messageDetails,
+      }).then((value) {
+        Fluttertoast.showToast(
+          msg: "Message sent, we'll contact you as soon as possible.",
+          toastLength: Toast.LENGTH_LONG,
+        );
+      });
+      return true;
+    } catch (e) {
       Fluttertoast.showToast(
-        msg: "Message sent, we'll contact you as soon as possible.",
+        msg: e.message.toString(),
         toastLength: Toast.LENGTH_LONG,
       );
-    });
-    return true;
+    }
   }
 
   static Future<bool> addCategory(String categoryName) async {
-    var dbRef2 = databaseRef.child('data').child('main_menu_categories');
-    await dbRef2.push().set({
-      'name': categoryName,
-    }).then((value) {
+    try {
+      var dbRef2 = databaseRef.child('data').child('main_menu_categories');
+      await dbRef2.push().set({
+        'name': categoryName,
+      }).then((value) {
+        Fluttertoast.showToast(
+          msg: 'Category added successfully.',
+          toastLength: Toast.LENGTH_LONG,
+        );
+      });
+      return true;
+    } catch (e) {
       Fluttertoast.showToast(
-        msg: 'Category added successfully.',
+        msg: e.message.toString(),
         toastLength: Toast.LENGTH_LONG,
       );
-    });
-    return true;
+    }
   }
 
   static Future<bool> addLocation(
       String locationName, int locationTime, double locationFees) async {
-    var dbRef2 = databaseRef.child('data').child('delivery_locations');
-    await dbRef2.push().set({
-      'name': locationName,
-      'time': locationTime,
-      'fees': locationFees,
-    }).then((value) {
-      Fluttertoast.showToast(msg: 'Location added successfully.');
-    });
+    try {
+      var dbRef2 = databaseRef.child('data').child('delivery_locations');
+      await dbRef2.push().set({
+        'name': locationName,
+        'time': locationTime,
+        'fees': locationFees,
+      }).then((value) {
+        Fluttertoast.showToast(msg: 'Location added successfully.');
+      });
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.messaage.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
   }
 
   static Future<bool> addMainMenuItem(String categoryId, String itemName,
       String itemImageURL, int isActive) async {
-    var dbRef2 = databaseRef.child('data').child('main_menu_items');
-    await dbRef2.push().set({
-      'category_id': categoryId,
-      'name': itemName,
-      'image': itemImageURL,
-      'is_active': isActive
-    }).then((value) {
+    try {
+      var dbRef2 = databaseRef.child('data').child('main_menu_items');
+      await dbRef2.push().set({
+        'category_id': categoryId,
+        'name': itemName,
+        'image': itemImageURL,
+        'is_active': isActive
+      }).then((value) {
+        Fluttertoast.showToast(
+          msg: 'Item added successfully.',
+          toastLength: Toast.LENGTH_LONG,
+        );
+      });
+      return true;
+    } catch (e) {
       Fluttertoast.showToast(
-        msg: 'Item added successfully.',
+        msg: e.message.toString(),
         toastLength: Toast.LENGTH_LONG,
       );
-    });
-    return true;
+    }
   }
 
   static Future<bool> addSubMenuItem(mainMenuItemId, name, price, discount,
       description, imageURL, checkbox) async {
-    var dbRef3 = databaseRef.child('data').child('main_menu_categories');
-    await dbRef3.push().set({
-      'menu_id': mainMenuItemId,
-      'name': name,
-      'price': price,
-      'discount': discount,
-      'description': description,
-      'image': imageURL,
-      'is_active': checkbox,
-    }).then((value) {
+    try {
+      var dbRef3 = databaseRef.child('data').child('main_menu_categories');
+      await dbRef3.push().set({
+        'menu_id': mainMenuItemId,
+        'name': name,
+        'price': price,
+        'discount': discount,
+        'description': description,
+        'image': imageURL,
+        'is_active': checkbox,
+      }).then((value) {
+        Fluttertoast.showToast(
+          msg: 'Item added successfully.',
+          toastLength: Toast.LENGTH_LONG,
+        );
+      });
+      return true;
+    } catch (e) {
       Fluttertoast.showToast(
-        msg: 'Item added successfully.',
+        msg: e.message.toString(),
         toastLength: Toast.LENGTH_LONG,
       );
-    });
-    return true;
+    }
   }
 }
