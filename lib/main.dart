@@ -21,6 +21,7 @@ import 'package:mycart/screens/sign_in.dart';
 import 'package:mycart/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:mycart/screens/wishlist.dart';
+import 'package:mycart/services/data_manager.dart';
 import './screens/splash_screen.dart';
 import 'screens/about.dart';
 
@@ -33,7 +34,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-  void iniNotifications() {
+  void iniNotifications() async {
+    await Firebase.initializeApp();
     AwesomeNotifications().initialize('resource://drawable/logo', [
       NotificationChannel(
           channelKey: 'basic_channel',
@@ -67,7 +69,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    iniNotifications();
+    DataManager.mPrefManager.getIsNotifications(iniNotifications);
     return MaterialApp(
       builder: (BuildContext context, Widget child) {
         return MediaQuery(

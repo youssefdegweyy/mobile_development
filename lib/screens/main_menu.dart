@@ -23,18 +23,15 @@ class MainMenuScreenState extends State<MainMenuScreen> {
     if (DataManager.mPrefManager.getType() == "admin") {
       print("LOGGED IN AS ADMIN");
     }
-    print(DataManager.userAddresses.length.toString());
     for (UserAddressesClass i in DataManager.userAddresses) {
       if (i.id == DataManager.mPrefManager.getSelectedAddress()) {
         currAddress = i;
-        print('found' + DataManager.userAddresses.length.toString());
       }
     }
     super.initState();
   }
 
   void selectedAddressChanged(UserAddressesClass newAddress) {
-    //DataManager.mPrefManager.setSelectedAddress(newAddress.id);
     setState(() {
       currAddress = newAddress;
     });

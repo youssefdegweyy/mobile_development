@@ -13,6 +13,7 @@ class PrefManager {
   var pref;
   String selectedAddress = "";
   String type = '';
+  int isNotifications = 1;
 
   PrefManager() {
     //loadDataFromLocalMemory();
@@ -50,6 +51,7 @@ class PrefManager {
     email = pref.getString("email") ?? email;
     password = pref.getString("password") ?? password;
     selectedAddress = pref.getString("address") ?? selectedAddress;
+    isNotifications = pref.getInt("isNotifications") ?? isNotifications;
     type = pref.getString("type") ?? type;
     print(
         "Loaded - {$id} - {$name} - {$email} - {Lang: $lang} - {Add: $selectedAddress}");
@@ -66,6 +68,7 @@ class PrefManager {
     pref.setString("password", password);
     pref.setString("address", selectedAddress);
     pref.setString("type", type);
+    pref.setInt("isNotifications", isNotifications);
     print("Saved! - {$id} - {$name} - {$email} - {$selectedAddress}");
   }
 
@@ -181,5 +184,25 @@ class PrefManager {
       CartManager.deliveryFees = 0;
       CartManager.deliveryTime = 0;
     }
+  }
+
+  Future<void> setIsNotifications(int isNotifications) async {
+    if (pref == null) {
+      pref = await SharedPreferences.getInstance();
+    }
+    this.isNotifications = isNotifications;
+    pref.setInt("isNotifications", isNotifications);
+    print("Subscribe to notifications is set to " + isNotifications.toString());
+  }
+
+  Future<int> getIsNotifications([Function callBack]) async {
+    if (pref == null) {
+      pref = await SharedPreferences.getInstance();
+    }
+    isNotifications = pref.getInt("isNotifications") ?? isNotifications;
+    if (callBack != null && isNotifications == 1) {
+      callBack();
+    }
+    return isNotifications;
   }
 }

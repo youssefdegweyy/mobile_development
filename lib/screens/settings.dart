@@ -1,6 +1,7 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:mycart/services/data_manager.dart';
 
 class Settings extends StatefulWidget {
   static const routeName = '/settings';
@@ -10,23 +11,30 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool isSwitched = false;
-  var textValue = 'Switch is OFF';
+  bool isSwitched = true;
 
   void toggleSwitch(bool value) {
     if (isSwitched == false) {
+      DataManager.mPrefManager.setIsNotifications(1);
       setState(() {
         isSwitched = true;
-        textValue = 'Switch Button is ON';
       });
-      print('Switch Button is ON');
     } else {
+      DataManager.mPrefManager.setIsNotifications(0);
       setState(() {
         isSwitched = false;
-        textValue = 'Switch Button is OFF';
       });
-      print('Switch Button is OFF');
     }
+  }
+
+  @override
+  void initState() {
+    DataManager.mPrefManager.getIsNotifications().then((value) {
+      setState(() {
+        isSwitched = (value == 1);
+      });
+    });
+    super.initState();
   }
 
   @override
@@ -74,12 +82,7 @@ class _SettingsState extends State<Settings> {
               ),
               Switch(
                 value: isSwitched,
-                onChanged: (value) {
-                  print("VALUE : $value");
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
+                onChanged: toggleSwitch,
               )
             ],
           )),
