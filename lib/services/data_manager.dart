@@ -114,4 +114,11 @@ class DataManager {
       await DataManager.iniUserAddresses();
     });
   }
+
+  static Future<bool> addSubMenuItem(
+      name, price, discount, description, checkBox) async {
+    return await FirebaseManager.addSubMenuItem(name, price, discount, description, checkBox).then((value) async {
+      await DataManager.iniMainMenuCategories();
+    });
+  }
 }

@@ -343,7 +343,21 @@ class FirebaseManager {
       'fees': locationFees,
     }).then((value) {
       Fluttertoast.showToast(
-        msg: 'Location added successfully.',
+        msg: 'Location added successfully.');}
+    );
+    }
+
+  static Future<bool> addSubMenuItem(name, price, discount, description, checkbox) async {
+    var dbRef3 = databaseRef.child('data').child('main_menu_categories');
+    await dbRef3.push().set({
+      'name': name,
+      'price': price,
+      'discount': discount,
+      'description': description,
+      'is_active': checkbox,
+    }).then((value) {
+      Fluttertoast.showToast(
+        msg: 'Item added successfully.',
         toastLength: Toast.LENGTH_LONG,
       );
     });
