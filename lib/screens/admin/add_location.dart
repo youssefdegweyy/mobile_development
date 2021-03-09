@@ -24,7 +24,6 @@ class _AddLocationState extends State<AddLocation> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +56,7 @@ class _AddLocationState extends State<AddLocation> {
           leading: Padding(
             padding: EdgeInsets.only(left: 15, right: 9, top: 9, bottom: 9),
             child: IconButton(
-              icon: Icon(Icons.add_circle_outline),
+              icon: Image.asset('assets/images/other_icons/back_arrow.png'),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
@@ -110,7 +109,7 @@ class _AddLocationState extends State<AddLocation> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
-                        controller: locationTimeController ,
+                        controller: locationTimeController,
                         keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
@@ -203,9 +202,11 @@ class _AddLocationState extends State<AddLocation> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               var locName = locationNameController.text;
-                              var locTime = int.parse(locationTimeController.text);
-                              var locFees = double.parse(locationFeesController.text);
-                              DataManager.addLocation(locName,locTime,locFees)
+                              var locTime =
+                                  int.parse(locationTimeController.text);
+                              var locFees =
+                                  double.parse(locationFeesController.text);
+                              DataManager.addLocation(locName, locTime, locFees)
                                   .then((value) => Navigator.of(context).pop());
                             }
                           }),

@@ -51,7 +51,7 @@ class _AddCategoryState extends State<AddCategory> {
           leading: Padding(
             padding: EdgeInsets.only(left: 15, right: 9, top: 9, bottom: 9),
             child: IconButton(
-              icon: Icon(Icons.add_circle_outline),
+              icon: Image.asset('assets/images/other_icons/back_arrow.png'),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
