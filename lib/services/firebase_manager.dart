@@ -334,4 +334,20 @@ class FirebaseManager {
     });
     return true;
   }
+
+  static Future<bool> addLocation(String locationName, int locationTime, double locationFees) async {
+    var dbRef2 = databaseRef.child('data').child('delivery_locations');
+    await dbRef2.push().set({
+      'name': locationName,
+      'time': locationTime,
+      'fees': locationFees,
+    }).then((value) {
+      Fluttertoast.showToast(
+        msg: 'Location added successfully.',
+        toastLength: Toast.LENGTH_LONG,
+      );
+    });
+    return true;
+  }
+
 }

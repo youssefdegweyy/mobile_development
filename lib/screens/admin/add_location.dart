@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mycart/services/data_manager.dart';
 
 class AddLocation extends StatefulWidget {
   static const routeName = '/addLoc';
@@ -10,6 +11,19 @@ class AddLocation extends StatefulWidget {
 
 class _AddLocationState extends State<AddLocation> {
   final _formKey = GlobalKey<FormState>();
+
+  final locationNameController = TextEditingController();
+  final locationTimeController = TextEditingController();
+  final locationFeesController = TextEditingController();
+
+  @override
+  void dispose() {
+    locationNameController.dispose();
+    locationTimeController.dispose();
+    locationFeesController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +83,7 @@ class _AddLocationState extends State<AddLocation> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: locationNameController,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -95,6 +110,7 @@ class _AddLocationState extends State<AddLocation> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: locationTimeController ,
                         keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
@@ -125,6 +141,7 @@ class _AddLocationState extends State<AddLocation> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: locationFeesController,
                         keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
@@ -184,7 +201,13 @@ class _AddLocationState extends State<AddLocation> {
                             ),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState.validate()) {}
+                            if (_formKey.currentState.validate()) {
+                              var locName = locationNameController.text;
+                              var locTime = int.parse(locationTimeController.text);
+                              var locFees = double.parse(locationFeesController.text);
+                              DataManager.addLocation(locName,locTime,locFees)
+                                  .then((value) => Navigator.of(context).pop());
+                            }
                           }),
                     ),
                   ],

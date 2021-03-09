@@ -108,4 +108,10 @@ class DataManager {
       await DataManager.iniMainMenuCategories();
     });
   }
+
+  static Future<bool> addLocation(String locationName, int locationTime, double locationFees) async {
+    return await FirebaseManager.addLocation(locationName,locationTime,locationFees).then((value) async {
+      await DataManager.iniUserAddresses();
+    });
+  }
 }
