@@ -127,9 +127,9 @@ class DataManager {
     });
   }
 
-  static Future<bool> addSubMenuItem(
-      name, price, discount, description, checkBox) async {
+  static Future<bool> addSubMenuItem(mainMenuItemId, name, price, discount,
+      description, imageURL, checkBox) async {
     return await FirebaseManager.addSubMenuItem(
-        name, price, discount, description, checkBox);
+        mainMenuItemId, name, price, discount, description, imageURL, checkBox);
   }
 }

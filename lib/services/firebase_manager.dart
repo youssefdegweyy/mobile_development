@@ -364,14 +364,16 @@ class FirebaseManager {
     return true;
   }
 
-  static Future<bool> addSubMenuItem(
-      name, price, discount, description, checkbox) async {
+  static Future<bool> addSubMenuItem(mainMenuItemId, name, price, discount,
+      description, imageURL, checkbox) async {
     var dbRef3 = databaseRef.child('data').child('main_menu_categories');
     await dbRef3.push().set({
+      'menu_id': mainMenuItemId,
       'name': name,
       'price': price,
       'discount': discount,
       'description': description,
+      'image': imageURL,
       'is_active': checkbox,
     }).then((value) {
       Fluttertoast.showToast(
