@@ -3,6 +3,7 @@ import 'package:mycart/screens/my_orders.dart';
 import 'package:mycart/screens/profile.dart';
 import 'package:mycart/screens/search.dart';
 import 'package:flutter/material.dart';
+import 'package:mycart/services/data_manager.dart';
 import '../widgets/main_drawer.dart';
 
 class DrawerScreen extends StatefulWidget {
