@@ -8,6 +8,8 @@ class Wishlist extends StatefulWidget {
 }
 
 class _WishlistState extends State<Wishlist> {
+  String dropdownValue = 'One';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +28,34 @@ class _WishlistState extends State<Wishlist> {
       ),
       body: ListView(
         children: [
+          Row(
+            children: [
+              Text("Items Found: 52"),
+              DropdownButton<String>(
+                value: dropdownValue,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String newValue) {
+                  setState(() {
+                    dropdownValue = newValue;
+                  });
+                },
+                items: <String>['One', 'Two', 'Free', 'Four']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
           Padding(
             padding: EdgeInsets.only(top: 22, left: 30, right: 30, bottom: 22),
             child: Column(
