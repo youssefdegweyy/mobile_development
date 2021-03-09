@@ -9,6 +9,7 @@ import 'package:mycart/models/recent_orders/recent_orders_item.dart';
 import 'package:mycart/models/sub_menu/sub_menu_item.dart';
 import 'package:mycart/services/api.dart';
 import 'package:mycart/services/cart_manager.dart';
+import 'package:mycart/services/firebase_manager.dart';
 import 'dart:async';
 import 'package:mycart/services/perference_manager.dart';
 
@@ -16,18 +17,38 @@ class DataManager {
   static PrefManager mPrefManager = new PrefManager();
   static List deliveryLocations = new List();
   static List userAddresses = new List();
-  static String mainMenuBanner = "";
+  static String mainMenuBanner =
+      "http://freshnfit.lxdev.net/api/assets/images/banners/main_banner.png";
   static List mainMenuCategories = new List();
   static List mainMenuItems = new List();
-  static String mainMenuImagePath = "";
   static List subMenuItems = new List();
-  static String subMenuImagePath = "";
   static List searchItems = new List();
   static List lastSearchKeywords = new List();
   static List recentOrders = new List();
   static List offersItems = new List();
   static bool isDarkMode = false;
 
+  static Future<void> iniUserAddresses([Function callBackFunction]) async {
+    DataManager.deliveryLocations =
+        await FirebaseManager.getDeliveryLocations();
+    DataManager.userAddresses = await FirebaseManager.getUserAddresses();
+    if (DataManager.mPrefManager.getSelectedAddress() == "") {
+      if (DataManager.deliveryLocations != null &&
+          DataManager.userAddresses != null &&
+          DataManager.userAddresses.length > 0) {
+        DataManager.mPrefManager
+            .setSelectedAddress(DataManager.userAddresses[0].id.toString());
+      } else {}
+    }
+    if (DataManager.userAddresses != null) {
+      DataManager.mPrefManager.updateDeliveryFeesAndTime();
+    }
+    if (callBackFunction != null) {
+      callBackFunction();
+    }
+  }
+
+/*
   static Future<void> iniUserAddresses([Function callBackFunction]) async {
     String response = await API.getUserAddresses();
     List locationsLoadedItems =
@@ -61,6 +82,7 @@ class DataManager {
         );
       }
     }
+
     if (DataManager.mPrefManager.getSelectedAddress() == 0) {
       if (addressesLoadedItems != null) {
         DataManager.mPrefManager
@@ -70,85 +92,33 @@ class DataManager {
     if (DataManager.userAddresses != null) {
       DataManager.mPrefManager.updateDeliveryFeesAndTime();
     }
+    
     if (callBackFunction != null) {
       callBackFunction();
     }
   }
-
+*/
   static Future<void> iniMainMenuCategories() async {
-    String response = await API.getMainMenuCategories();
-    List loadedItems = convert.jsonDecode(response)["categories"];
-    for (var i in loadedItems) {
-      DataManager.mainMenuCategories.add(
-        MainMenuCategoryClass(
-          i["id"],
-          i['name'],
-        ),
-      );
-    }
+    DataManager.mainMenuCategories =
+        await FirebaseManager.getMainMenuCategories();
   }
 
   static Future<void> iniMainMenuItems() async {
-    String response = await API.getMainMenuItems();
-    List loadedItems = convert.jsonDecode(response)["items"];
-    DataManager.mainMenuBanner = convert.jsonDecode(response)["main_banner"];
-    DataManager.mainMenuImagePath = convert.jsonDecode(response)["images_path"];
-    for (var i in loadedItems) {
-      DataManager.mainMenuItems.add(
-        MainMenuItemClass(
-          i["id"],
-          i["cid"],
-          i['name'],
-          i['image'],
-          int.parse(i['is_active']) == 1,
-        ),
-      );
-    }
+    DataManager.mainMenuItems = await FirebaseManager.getMainMenuItems();
   }
 
   static Future<void> iniSubMenuItems(String id) async {
-    String response = await API.getSubMenuItems(id);
-    List loadedItems = convert.jsonDecode(response)["items"];
-    DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
-    DataManager.subMenuItems.clear();
-    for (var i in loadedItems) {
-      DataManager.subMenuItems.add(
-        SubMenuItemClass(
-          i["id"],
-          i['name'],
-          i['desc'],
-          i['image'],
-          double.parse(i['price']),
-          int.parse(i['disc']),
-          int.parse(i['is_active']) == 1,
-        ),
-      );
-    }
+    DataManager.subMenuItems = await FirebaseManager.getSubMenuItems(id);
   }
 
   static Future<void> iniSearchItems(String searchKey) async {
-    String response = await API.getSearchItems(searchKey);
-    List loadedItems = convert.jsonDecode(response)["items"];
-    DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
-    DataManager.searchItems.clear();
-    if (loadedItems != null) {
-      for (var i in loadedItems) {
-        DataManager.searchItems.add(
-          SubMenuItemClass(
-            i["id"],
-            i['name'],
-            i['desc'],
-            i['image'],
-            double.parse(i['price']),
-            int.parse(i['disc']),
-            int.parse(i['is_active']) == 1,
-          ),
-        );
-      }
-    }
+    DataManager.searchItems = await FirebaseManager.getSearchItems(searchKey);
   }
 
   static Future<void> iniRecentOrders() async {
+    DataManager.recentOrders = await FirebaseManager.getRecentOrders();
+  }
+  /*static Future<void> iniRecentOrders() async {
     DataManager.recentOrders.clear();
     String response = await API.getRecentOrders();
     List loadedItems = convert.jsonDecode(response)["orders"];
@@ -187,6 +157,7 @@ class DataManager {
       );
     }
   }
+  */
 
   static Future<bool> placeOrder() async {
     List<dynamic> myCartItems = new List();
@@ -217,7 +188,7 @@ class DataManager {
   static Future<bool> reOrder(RecentOrdersClass oItem) async {
     String response = await API.getRecentOrderItems(oItem.id);
     List loadedItems = convert.jsonDecode(response)["items"];
-    DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
+    //DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
     CartManager.clean();
     for (var i in loadedItems) {
       CartManager.addItem(
@@ -239,7 +210,7 @@ class DataManager {
   static Future<void> iniOffersItems() async {
     String response = await API.getOffersItems();
     List loadedItems = convert.jsonDecode(response)["items"];
-    DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
+    //DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
     DataManager.offersItems.clear();
     for (var i in loadedItems) {
       DataManager.offersItems.add(
