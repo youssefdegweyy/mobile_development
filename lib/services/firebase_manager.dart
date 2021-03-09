@@ -335,19 +335,37 @@ class FirebaseManager {
     return true;
   }
 
-  static Future<bool> addLocation(String locationName, int locationTime, double locationFees) async {
+  static Future<bool> addLocation(
+      String locationName, int locationTime, double locationFees) async {
     var dbRef2 = databaseRef.child('data').child('delivery_locations');
     await dbRef2.push().set({
       'name': locationName,
       'time': locationTime,
       'fees': locationFees,
     }).then((value) {
-      Fluttertoast.showToast(
-        msg: 'Location added successfully.');}
-    );
-    }
+      Fluttertoast.showToast(msg: 'Location added successfully.');
+    });
+  }
 
-  static Future<bool> addSubMenuItem(name, price, discount, description, checkbox) async {
+  static Future<bool> addMainMenuItem(String categoryId, String itemName,
+      String itemImageURL, int isActive) async {
+    var dbRef2 = databaseRef.child('data').child('main_menu_items');
+    await dbRef2.push().set({
+      'category_id': categoryId,
+      'name': itemName,
+      'image': itemImageURL,
+      'is_active': isActive
+    }).then((value) {
+      Fluttertoast.showToast(
+        msg: 'Item added successfully.',
+        toastLength: Toast.LENGTH_LONG,
+      );
+    });
+    return true;
+  }
+
+  static Future<bool> addSubMenuItem(
+      name, price, discount, description, checkbox) async {
     var dbRef3 = databaseRef.child('data').child('main_menu_categories');
     await dbRef3.push().set({
       'name': name,
@@ -363,5 +381,4 @@ class FirebaseManager {
     });
     return true;
   }
-
 }

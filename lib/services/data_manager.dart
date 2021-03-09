@@ -109,16 +109,27 @@ class DataManager {
     });
   }
 
-  static Future<bool> addLocation(String locationName, int locationTime, double locationFees) async {
-    return await FirebaseManager.addLocation(locationName,locationTime,locationFees).then((value) async {
+  static Future<bool> addLocation(
+      String locationName, int locationTime, double locationFees) async {
+    return await FirebaseManager.addLocation(
+            locationName, locationTime, locationFees)
+        .then((value) async {
       await DataManager.iniUserAddresses();
+    });
+  }
+
+  static Future<bool> addMainMenuItem(String categoryId, String itemName,
+      String itemImageURL, int isActive) async {
+    return await FirebaseManager.addMainMenuItem(
+            categoryId, itemName, itemImageURL, isActive)
+        .then((value) async {
+      await DataManager.iniMainMenuItems();
     });
   }
 
   static Future<bool> addSubMenuItem(
       name, price, discount, description, checkBox) async {
-    return await FirebaseManager.addSubMenuItem(name, price, discount, description, checkBox).then((value) async {
-      await DataManager.iniMainMenuCategories();
-    });
+    return await FirebaseManager.addSubMenuItem(
+        name, price, discount, description, checkBox);
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mycart/models/main_menu/main_menu_category.dart';
+import 'package:mycart/services/data_manager.dart';
 
 class AddMainItem extends StatefulWidget {
   static const routeName = '/addMainItem';
@@ -8,8 +10,24 @@ class AddMainItem extends StatefulWidget {
 }
 
 class _AddMainItemState extends State<AddMainItem> {
+  MainMenuCategoryClass currCateg = DataManager.mainMenuCategories[0];
+  final itemNameController = TextEditingController();
+  final itemImageURLController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool checkBoxValue = false;
+
+  @override
+  void dispose() {
+    itemNameController.dispose();
+    itemImageURLController.dispose();
+    super.dispose();
+  }
+
+  void categChanged(MainMenuCategoryClass newCateg) {
+    setState(() {
+      currCateg = newCateg;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,14 +84,50 @@ class _AddMainItemState extends State<AddMainItem> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Container(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: MediaQuery.of(context).platformBrightness ==
+                                Brightness.dark
+                            ? Color(0xFF444444)
+                            : Color(0xFFf0f0f0),
+                      ),
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                            buttonTheme: ButtonTheme.of(context).copyWith(
+                          alignedDropdown: true,
+                        )),
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 10),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<MainMenuCategoryClass>(
+                              onChanged: categChanged,
+                              value: currCateg,
+                              items:
+                                  DataManager.mainMenuCategories.map((value) {
+                                return DropdownMenuItem<MainMenuCategoryClass>(
+                                  value: value,
+                                  child: Text(
+                                    value.name,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
-                        keyboardType: TextInputType.number,
+                        controller: itemNameController,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
-                          hintText: 'Main Item ID',
+                          hintText: 'Name',
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
@@ -87,10 +141,7 @@ class _AddMainItemState extends State<AddMainItem> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter a Valid ID';
-                          }
-                          if (int.tryParse(value) <= 0) {
-                            return 'Please enter an ID Bigger than Zero';
+                            return 'Please enter a valid name';
                           }
                           return null;
                         },
@@ -99,11 +150,11 @@ class _AddMainItemState extends State<AddMainItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
-                        keyboardType: TextInputType.number,
+                        controller: itemImageURLController,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
-                          hintText: 'Category ID',
+                          hintText: 'Image URL',
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
@@ -117,33 +168,7 @@ class _AddMainItemState extends State<AddMainItem> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter A Valid Category ID';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 15),
-                      child: TextFormField(
-                        decoration: new InputDecoration(
-                          contentPadding: EdgeInsets.all(20),
-                          isDense: true,
-                          hintText: 'Main Item Name',
-                          hintStyle: new TextStyle(
-                              color: Colors.grey, fontWeight: FontWeight.bold),
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter A Valid Item Name';
+                            return 'Please enter a valid Item image url';
                           }
                           return null;
                         },
@@ -184,7 +209,7 @@ class _AddMainItemState extends State<AddMainItem> {
                                   minWidth: 88.0, minHeight: 55),
                               alignment: Alignment.center,
                               child: Text(
-                                'Add Main Item',
+                                'Add Item',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
@@ -194,7 +219,16 @@ class _AddMainItemState extends State<AddMainItem> {
                             ),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState.validate()) {}
+                            if (_formKey.currentState.validate()) {
+                              var itemName = itemNameController.text;
+                              var itemImageURL = itemImageURLController.text;
+                              DataManager.addMainMenuItem(
+                                currCateg.id,
+                                itemName,
+                                itemImageURL,
+                                checkBoxValue ? 1 : 0,
+                              ).then((value) => Navigator.of(context).pop());
+                            }
                           }),
                     ),
                   ],
