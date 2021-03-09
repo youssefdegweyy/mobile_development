@@ -201,24 +201,16 @@ class SignInScreenState extends State<SignInScreen> {
                                     await _auth.signIn(_email, _password);
                                     Navigator.pushReplacementNamed(
                                       context,
+<<<<<<< Updated upstream
                                       AboutUs.routeName,
+=======
+                                      SplashScreen.routeName,
+>>>>>>> Stashed changes
                                     );
                                   } catch (e) {
                                     Scaffold.of(context).showSnackBar(
                                         SnackBar(content: Text(e.message)));
                                   }
-
-                                  /*var email = emailController.text;
-                          var password = passwordController.text;
-                          User.login(email, password).then((response)
-                           {
-                            if (response) {
-                              Navigator.pushReplacementNamed(
-                                context,
-                                SplashScreen.routeName,
-                              );
-                            } else {}
-                          });*/
                                 }
                               },
                             )),
