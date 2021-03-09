@@ -74,14 +74,44 @@ class _MainDrawerState extends State<MainDrawer> {
           SizedBox(
             height: 15,
           ),
-          buildListTitle(
-            'Offers',
-            Icons.offline_bolt,
-            () {
-              Navigator.of(context).pop();
-              Navigator.pushNamed(context, OffersScreen.routeName);
-            },
-          ),
+          if (DataManager.mPrefManager.getType() == "admin")
+            Column(
+              children: [
+                buildListTitle(
+                  'Add Category',
+                  Icons.add_circle_outline,
+                  () {
+                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, OffersScreen.routeName);
+                  },
+                ),
+                buildListTitle(
+                  'Add Main Menu Items',
+                  Icons.add_circle_outline,
+                  () {
+                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, OffersScreen.routeName);
+                  },
+                ),
+                buildListTitle(
+                  'Add Sub Menu Items',
+                  Icons.add_circle_outline,
+                  () {
+                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, OffersScreen.routeName);
+                  },
+                ),
+                buildListTitle(
+                  'Add Delivery Locations',
+                  Icons.add_circle_outline,
+                  () {
+                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, OffersScreen.routeName);
+                  },
+                ),
+              ],
+            ),
+
           /*buildListTitle(
             'Calorie Calculator',
             Icons.calculate,
@@ -98,6 +128,14 @@ class _MainDrawerState extends State<MainDrawer> {
               //Navigator.pushNamed(context, SettingsScreen.routeName);
             },
           ),*/
+          buildListTitle(
+            'Offers',
+            Icons.offline_bolt,
+            () {
+              Navigator.of(context).pop();
+              Navigator.pushNamed(context, OffersScreen.routeName);
+            },
+          ),
           buildListTitle(
             'Contact Us',
             Icons.contact_phone,

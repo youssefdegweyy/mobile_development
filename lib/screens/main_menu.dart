@@ -20,6 +20,9 @@ class MainMenuScreenState extends State<MainMenuScreen> {
 
   @override
   void initState() {
+    if (DataManager.mPrefManager.getType() == "admin") {
+      print("LOGGED IN AS ADMIN");
+    }
     for (UserAddressesClass i in DataManager.userAddresses) {
       if (i.id == DataManager.mPrefManager.getSelectedAddress()) {
         currAddress = i;
@@ -182,10 +185,7 @@ class MainMenuScreenState extends State<MainMenuScreen> {
                 Container(
                   padding: EdgeInsets.only(top: 20),
                   child: FadeInImage(
-                    image: NetworkImage(
-                      DataManager.mainMenuImagePath +
-                          DataManager.mainMenuBanner,
-                    ),
+                    image: NetworkImage(DataManager.mainMenuBanner),
                     placeholder: AssetImage(
                       "assets/images/holders/banner_holder.png",
                     ),

@@ -105,8 +105,7 @@ class ItemScreenState extends State<ItemScreen> {
                           padding: EdgeInsets.all(20),
                           child: FadeInImage(
                             image: NetworkImage(
-                              DataManager.subMenuImagePath +
-                                  widget.mItem.getImagePath(),
+                              widget.mItem.getImagePath(),
                             ),
                             placeholder: AssetImage(
                               "assets/images/holders/item_holder.png",
@@ -240,9 +239,7 @@ class ItemScreenState extends State<ItemScreen> {
                     padding: EdgeInsets.only(bottom: 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        
-                      ],
+                      children: [],
                     ),
                   ),
                   Row(

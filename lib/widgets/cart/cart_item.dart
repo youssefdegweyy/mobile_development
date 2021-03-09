@@ -16,7 +16,7 @@ class CartItem extends StatefulWidget {
   CartItem(CartItemClass cItem, Function reCalculate) {
     this.mItem = cItem.mItem;
     this.title = cItem.mItem.getName();
-    this.picture = DataManager.subMenuImagePath + cItem.mItem.getImagePath();
+    this.picture = cItem.mItem.getImagePath();
     this.price = cItem.totalPrice;
     this.iniValue = cItem.qty;
     this.reCalculate = reCalculate;

@@ -29,9 +29,7 @@ Widget mainMenuItem(BuildContext mContext, MainMenuItemClass mItem) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FadeInImage(
-                image: NetworkImage(
-                  DataManager.mainMenuImagePath + mItem.getImagePath(),
-                ),
+                image: NetworkImage(mItem.getImagePath()),
                 placeholder: AssetImage(
                   "assets/images/holders/main_menu_item_holder.png",
                 ),

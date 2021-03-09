@@ -150,7 +150,7 @@ class API {
     return response.body;
   }
 
-  static Future<String> getRecentOrderItems(int recentOrderId) async {
+  static Future<String> getRecentOrderItems(String recentOrderId) async {
     var response = await http.post(url, body: {
       'type': 'recent_order_items',
       'uid': DataManager.mPrefManager.getId().toString(),

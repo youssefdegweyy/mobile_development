@@ -36,9 +36,7 @@ Widget subMenuItem(BuildContext mContext, SubMenuItemClass mItem) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       FadeInImage(
-                        image: NetworkImage(
-                          DataManager.subMenuImagePath + mItem.getImagePath(),
-                        ),
+                        image: NetworkImage(mItem.getImagePath()),
                         placeholder: AssetImage(
                           "assets/images/holders/sub_menu_item_holder.png",
                         ),

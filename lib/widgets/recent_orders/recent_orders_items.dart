@@ -73,17 +73,17 @@ class _RecentOrdersItemsWidgetState extends State<RecentOrdersItemsWidget> {
                                       color: Color(0xFF00af87),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "#" + oItem.getId().toString(),
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
                                 ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "#" + oItem.getId().toString(),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
                               ),
                               SizedBox(
                                 height: 10,

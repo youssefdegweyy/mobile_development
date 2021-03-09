@@ -38,6 +38,7 @@ class MyOrdersScreenState extends State<MyOrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    !isLoading ?? print(DataManager.recentOrders.length);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 65,
