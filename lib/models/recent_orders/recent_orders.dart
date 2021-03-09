@@ -1,7 +1,7 @@
 import 'package:mycart/models/recent_orders/recent_orders_item.dart';
 
 class RecentOrdersClass {
-  int id = 0;
+  String id = "";
   double subtotal = 0;
   double deliveryFees = 0;
   String promocode = "";
@@ -17,7 +17,7 @@ class RecentOrdersClass {
   int totalOrderItems = 0;
 
   RecentOrdersClass(
-      int iId,
+      String iId,
       double iSubtotal,
       double iDeliveryFees,
       String iPromocode,
@@ -46,7 +46,7 @@ class RecentOrdersClass {
     calculateTotalOrderItems();
   }
 
-  bool setId(int iId) {
+  bool setId(String iId) {
     this.id = iId;
     return true;
   }
@@ -108,7 +108,7 @@ class RecentOrdersClass {
     return true;
   }
 
-  int getId() {
+  String getId() {
     return id;
   }
 
