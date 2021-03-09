@@ -32,16 +32,51 @@ class _AboutState extends State<AboutUs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Google Office Locations'),
-        backgroundColor: Colors.green[700],
+        title: const Text('About Us'),
       ),
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: const LatLng(0, 0),
-          zoom: 2,
-        ),
-        markers: _markers.values.toSet(),
+      body: ListView(
+        children: [
+          SizedBox(height: 25),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              child: Text(
+                  'My Cart is an E-Commerce Application that is multi-platform, we offer all kinds of items and categories for you to choose from.  ',
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+              margin: EdgeInsets.all(20),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              child: Text('Contact Us',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              margin: EdgeInsets.all(20),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              child: Text(
+                  '+01066625846\n+01119523790\n+01114775700\nadmin@mycart.org',
+                  style: TextStyle(fontSize: 15)),
+              margin: EdgeInsets.only(left: 20),
+            ),
+          ),
+          SizedBox(height: 40),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width,
+            child: GoogleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: const LatLng(26.8206, 30.8025),
+                zoom: 5,
+              ),
+              markers: _markers.values.toSet(),
+            ),
+          ),
+        ],
       ),
     );
   }
