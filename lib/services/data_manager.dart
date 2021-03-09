@@ -118,6 +118,14 @@ class DataManager {
   static Future<void> iniRecentOrders() async {
     DataManager.recentOrders = await FirebaseManager.getRecentOrders();
   }
+
+  static Future<bool> submitAddress(locationId, streetName, buildingNumber,
+      floorNumber, apartmentNumber, phoneNumber,
+      [String addressId = ""]) async {
+    return await FirebaseManager.submitAddress(locationId, streetName,
+        buildingNumber, floorNumber, apartmentNumber, phoneNumber, addressId);
+  }
+
   /*static Future<void> iniRecentOrders() async {
     DataManager.recentOrders.clear();
     String response = await API.getRecentOrders();
@@ -172,38 +180,13 @@ class DataManager {
       'order_note': CartManager.orderNote,
       'total_price': CartManager.getTotalPrice(),
       'delivery_address_id': DataManager.mPrefManager.getSelectedAddress(),
+      'status': 0,
+      'time': 0,
+      'user_id': DataManager.mPrefManager.id,
       'items': myCartItems,
     };
-    String jsonOrder = convert.jsonEncode(myOrder).toString();
-    String response = await API.placeOrder(jsonOrder);
-    int result = convert.jsonDecode(response)["is_order_placed"];
-    if (result == 1) {
-      CartManager.clean();
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  static Future<bool> reOrder(RecentOrdersClass oItem) async {
-    String response = await API.getRecentOrderItems(oItem.id);
-    List loadedItems = convert.jsonDecode(response)["items"];
-    //DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
+    await FirebaseManager.placeOrder(myOrder);
     CartManager.clean();
-    for (var i in loadedItems) {
-      CartManager.addItem(
-        SubMenuItemClass(
-          i["id"],
-          i['name'],
-          i['desc'],
-          i['image'],
-          double.parse(i['price']),
-          int.parse(i['disc']),
-          int.parse(i['is_active']) == 1,
-        ),
-        int.parse(i['qty']),
-      );
-    }
     return true;
   }
 

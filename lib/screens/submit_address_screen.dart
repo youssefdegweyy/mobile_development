@@ -318,16 +318,16 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                               var apartmentNumber =
                                   apartmentNumberController.text;
                               var phoneNumber = phoneNumberController.text;
-                              User.submitAddress(
+                              DataManager.submitAddress(
                                 locationId,
                                 streetName,
                                 buildingNumber,
                                 floorNumber,
                                 apartmentNumber,
-                                phoneNumber,                                
+                                phoneNumber,
                                 widget.cUserAddress != null
                                     ? widget.cUserAddress.id
-                                    : 0,
+                                    : "",
                               ).then((response) {
                                 if (response) {
                                   Navigator.pop(context);
