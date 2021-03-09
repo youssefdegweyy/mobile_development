@@ -1,3 +1,4 @@
+import 'package:mycart/screens/about.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/main_menu.dart';
 import 'package:mycart/screens/offers_screen.dart';
@@ -142,6 +143,14 @@ class _MainDrawerState extends State<MainDrawer> {
             () {
               Navigator.of(context).pop();
               Navigator.pushNamed(context, ContactUsScreen.routeName);
+            },
+          ),
+          buildListTitle(
+            'About Us',
+            Icons.info_outline,
+            () {
+              Navigator.of(context).pop();
+              Navigator.pushNamed(context, AboutUs.routeName);
             },
           ),
           buildListTitle(

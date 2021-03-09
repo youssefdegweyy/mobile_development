@@ -96,7 +96,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (ctx) => Wishlist(),
+        '/': (ctx) => SplashScreen(),
         GetStartedScreen.routeName: (ctx) => GetStartedScreen(),
         SignInScreen.routeName: (ctx) => SignInScreen(),
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
