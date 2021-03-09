@@ -16,6 +16,7 @@ import 'package:mycart/screens/get_started.dart';
 import 'package:mycart/screens/main_menu.dart';
 import 'package:mycart/screens/order_placed.dart';
 import 'package:mycart/screens/profile.dart';
+import 'package:mycart/screens/settings.dart';
 import 'package:mycart/screens/sign_in.dart';
 import 'package:mycart/screens/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -116,6 +117,7 @@ class MyApp extends StatelessWidget {
         SendNotification.routeName: (ctx) => SendNotification(),
         Wishlist.routeName: (ctx) => Wishlist(),
         AboutUs.routeName: (ctx) => AboutUs(),
+        Settings.routeName: (ctx) => Settings(),
       },
     );
   }

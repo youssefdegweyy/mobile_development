@@ -1,4 +1,5 @@
 import 'package:mycart/models/addresses/user_addresses.dart';
+import 'package:mycart/screens/settings.dart';
 import 'package:mycart/screens/submit_address_screen.dart';
 import 'package:mycart/services/data_manager.dart';
 import 'package:mycart/widgets/profile/user_addresses/user_addresses.dart';
@@ -53,7 +54,7 @@ class ProfileScreenState extends State<ProfileScreen> {
               ),
               onPressed: () => Navigator.pushNamed(
                 context,
-                ProfileScreen.routeName,
+                Settings.routeName,
               ), // Settings Screen
             ),
           ),
