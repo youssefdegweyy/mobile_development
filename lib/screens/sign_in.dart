@@ -201,11 +201,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     await _auth.signIn(_email, _password);
                                     Navigator.pushReplacementNamed(
                                       context,
-<<<<<<< Updated upstream
-                                      AboutUs.routeName,
-=======
                                       SplashScreen.routeName,
->>>>>>> Stashed changes
                                     );
                                   } catch (e) {
                                     Scaffold.of(context).showSnackBar(
