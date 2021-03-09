@@ -8,7 +8,7 @@ class Wishlist extends StatefulWidget {
 }
 
 class _WishlistState extends State<Wishlist> {
-  String dropdownValue = 'One';
+  String dropdownValue = 'Ascending';
 
   @override
   Widget build(BuildContext context) {
@@ -29,24 +29,24 @@ class _WishlistState extends State<Wishlist> {
       body: ListView(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("Items Found: 52"),
+              Text('Items Found: 52'),
               DropdownButton<String>(
                 value: dropdownValue,
                 icon: Icon(Icons.arrow_downward),
                 iconSize: 24,
                 elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
+                style: TextStyle(color: Color(0xFF00af87)),
                 underline: Container(
                   height: 2,
-                  color: Colors.deepPurpleAccent,
                 ),
                 onChanged: (String newValue) {
                   setState(() {
                     dropdownValue = newValue;
                   });
                 },
-                items: <String>['One', 'Two', 'Free', 'Four']
+                items: <String>['Ascending', 'Descending']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -95,13 +95,19 @@ class _WishlistState extends State<Wishlist> {
                             ),
                           ),
                         ),
+                        Row(
+                          children: [
+                            ElevatedButton(
+                                onPressed: null, child: Text('Add to cart')),
+                          ],
+                        ),
                         Expanded(
                           child: Icon(Icons.favorite),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
