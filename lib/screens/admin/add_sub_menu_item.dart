@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mycart/services/data_manager.dart';
 
 class AddSubItem extends StatefulWidget {
   static const routeName = '/addSubItem';
@@ -9,6 +10,22 @@ class AddSubItem extends StatefulWidget {
 
 class _AddSubItemState extends State<AddSubItem> {
   final _formKey = GlobalKey<FormState>();
+  final nameItemController = TextEditingController();
+  final discountItemController = TextEditingController();
+  final descItemController = TextEditingController();
+  final priceItemController = TextEditingController();
+  final isActiveItemController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameItemController.dispose();
+    discountItemController.dispose();
+    descItemController.dispose();
+    priceItemController.dispose();
+    isActiveItemController.dispose();
+    super.dispose();
+  }
+
   bool checkBoxValue = false;
 
   @override
@@ -69,36 +86,7 @@ class _AddSubItemState extends State<AddSubItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        decoration: new InputDecoration(
-                          contentPadding: EdgeInsets.all(20),
-                          isDense: true,
-                          hintText: 'Item ID',
-                          hintStyle: new TextStyle(
-                              color: Colors.grey, fontWeight: FontWeight.bold),
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
-                            ),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please A Valid ID';
-                          }
-                          if (int.tryParse(value) <= 0) {
-                            return 'Please enter an ID Bigger than Zero';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 15),
-                      child: TextFormField(
+                        controller: nameItemController,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -125,6 +113,7 @@ class _AddSubItemState extends State<AddSubItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: descItemController,
                         minLines: 7,
                         maxLines: 7,
                         decoration: new InputDecoration(
@@ -153,6 +142,7 @@ class _AddSubItemState extends State<AddSubItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: priceItemController,
                         keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
@@ -184,6 +174,7 @@ class _AddSubItemState extends State<AddSubItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: discountItemController,
                         keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
@@ -253,7 +244,20 @@ class _AddSubItemState extends State<AddSubItem> {
                             ),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState.validate()) {}
+                            if (_formKey.currentState.validate()) {
+                              var name = nameItemController.text;
+                              var price = priceItemController.text;
+                              var discount = discountItemController;
+                              var description = descItemController;
+                              int checkBox = checkBoxValue ? 1 : 0;
+                              DataManager.addSubMenuItem(name, price, discount,
+                                      description, checkBox)
+                                  .then((response) {
+                                if (response) {
+                                  Navigator.pop(context);
+                                } else {}
+                              });
+                            }
                           }),
                     ),
                   ],

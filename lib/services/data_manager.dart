@@ -108,4 +108,11 @@ class DataManager {
       await DataManager.iniMainMenuCategories();
     });
   }
+
+  static Future<bool> addSubMenuItem(
+      String name, price, discount, description, checkBox) async {
+    return await FirebaseManager.addCategory(categoryName).then((value) async {
+      await DataManager.iniMainMenuCategories();
+    });
+  }
 }
