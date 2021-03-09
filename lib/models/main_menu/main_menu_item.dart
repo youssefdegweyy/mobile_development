@@ -1,12 +1,11 @@
 class MainMenuItemClass {
-  int id = 0;
-  int categoryId = 0;
+  String id = "";
+  String categoryId = "";
   String name = "";
   String imagePath = "";
   bool isActive = false;
 
-  MainMenuItemClass(int iId, int iCategoryId, String iName, String iImagePath,
-      bool iIsActive) {
+  MainMenuItemClass(String iId, String iCategoryId, String iName, String iImagePath,bool iIsActive) {
     this.id = iId;
     this.categoryId = iCategoryId;
     this.name = iName;
@@ -14,12 +13,12 @@ class MainMenuItemClass {
     this.isActive = iIsActive;
   }
 
-  bool setId(int iId) {
+  bool setId(String iId) {
     this.id = iId;
     return true;
   }
 
-  bool setCategoryId(int iCategoryId) {
+  bool setCategoryId(String iCategoryId) {
     this.categoryId = iCategoryId;
     return true;
   }
@@ -39,11 +38,11 @@ class MainMenuItemClass {
     return true;
   }
 
-  int getId() {
+  String getId() {
     return id;
   }
 
-  int getCategoryId() {
+  String getCategoryId() {
     return categoryId;
   }
 

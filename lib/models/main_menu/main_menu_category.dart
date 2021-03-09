@@ -1,13 +1,13 @@
 class MainMenuCategoryClass {
-  int id = 0;
+  String id = "";
   String name = "";
 
-  MainMenuCategoryClass(int iId, String iName) {
+  MainMenuCategoryClass(String iId, String iName) {
     this.id = iId;
     this.name = iName;
   }
 
-  bool setId(int iId) {
+  bool setId(String iId) {
     this.id = iId;
     return true;
   }
@@ -17,7 +17,7 @@ class MainMenuCategoryClass {
     return true;
   }
 
-  int getId() {
+  String getId() {
     return id;
   }
 

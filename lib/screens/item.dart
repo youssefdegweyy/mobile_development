@@ -241,10 +241,7 @@ class ItemScreenState extends State<ItemScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        miniSpecsCard("Calories", widget.mItem.getCalories()),
-                        miniSpecsCard("Carbs", widget.mItem.getCarbs()),
-                        miniSpecsCard("Protien", widget.mItem.getProtiens()),
-                        miniSpecsCard("Fats", widget.mItem.getFats()),
+                        
                       ],
                     ),
                   ),

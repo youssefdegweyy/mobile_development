@@ -3,7 +3,7 @@ import 'package:mycart/services/data_manager.dart';
 import 'package:mycart/widgets/main_menu/main_menu_item.dart';
 import 'package:flutter/material.dart';
 
-Widget mainMenuItems(BuildContext mContext, int categoryId) {
+Widget mainMenuItems(BuildContext mContext, String categoryId) {
   List categoryItems = new List();
   for (MainMenuItemClass i in DataManager.mainMenuItems) {
     if (i.categoryId == categoryId) {

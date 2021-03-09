@@ -38,7 +38,7 @@ class DataManager {
     for (var i in locationsLoadedItems) {
       DataManager.deliveryLocations.add(
         DeliveryLocationsClass(
-          int.parse(i["id"]),
+          i["id"],
           i['location_name'],
           double.parse(i['delivery_fees']),
           int.parse(i["delivery_time"]),
@@ -49,15 +49,14 @@ class DataManager {
       for (var i in addressesLoadedItems) {
         DataManager.userAddresses.add(
           UserAddressesClass(
-            int.parse(i["id"]),
-            int.parse(i["user_id"]),
-            int.parse(i["location_id"]),
+            i["id"],
+            i["user_id"],
+            i["location_id"],
             i['street_name'],
             i['building_number'],
             int.parse(i['floor_number']),
             int.parse(i['apartment_number']),
             i['phone_number'],
-            int.parse(i['is_phone_verified']),
           ),
         );
       }
@@ -82,7 +81,7 @@ class DataManager {
     for (var i in loadedItems) {
       DataManager.mainMenuCategories.add(
         MainMenuCategoryClass(
-          int.parse(i["id"]),
+          i["id"],
           i['name'],
         ),
       );
@@ -97,8 +96,8 @@ class DataManager {
     for (var i in loadedItems) {
       DataManager.mainMenuItems.add(
         MainMenuItemClass(
-          int.parse(i["id"]),
-          int.parse(i["cid"]),
+          i["id"],
+          i["cid"],
           i['name'],
           i['image'],
           int.parse(i['is_active']) == 1,
@@ -107,7 +106,7 @@ class DataManager {
     }
   }
 
-  static Future<void> iniSubMenuItems(int id) async {
+  static Future<void> iniSubMenuItems(String id) async {
     String response = await API.getSubMenuItems(id);
     List loadedItems = convert.jsonDecode(response)["items"];
     DataManager.subMenuImagePath = convert.jsonDecode(response)["images_path"];
@@ -115,16 +114,12 @@ class DataManager {
     for (var i in loadedItems) {
       DataManager.subMenuItems.add(
         SubMenuItemClass(
-          int.parse(i["id"]),
+          i["id"],
           i['name'],
           i['desc'],
           i['image'],
           double.parse(i['price']),
           int.parse(i['disc']),
-          int.parse(i['cal']),
-          int.parse(i['carb']),
-          int.parse(i['prot']),
-          int.parse(i['fat']),
           int.parse(i['is_active']) == 1,
         ),
       );
@@ -140,16 +135,12 @@ class DataManager {
       for (var i in loadedItems) {
         DataManager.searchItems.add(
           SubMenuItemClass(
-            int.parse(i["id"]),
+            i["id"],
             i['name'],
             i['desc'],
             i['image'],
             double.parse(i['price']),
             int.parse(i['disc']),
-            int.parse(i['cal']),
-            int.parse(i['carb']),
-            int.parse(i['prot']),
-            int.parse(i['fat']),
             int.parse(i['is_active']) == 1,
           ),
         );
@@ -168,9 +159,9 @@ class DataManager {
       for (var y in recentOrderItems) {
         recentOrderItemsList.add(
           RecentOrdersItemClass(
-            int.parse(y['id']),
-            int.parse(y['order_id']),
-            int.parse(y['item_id']),
+            y['id'],
+            y['order_id'],
+            y['item_id'],
             y['item_name'],
             int.parse(y['qty']),
             double.parse(y['item_price']),
@@ -185,7 +176,7 @@ class DataManager {
           i['promocode'],
           double.parse(i['discount']),
           double.parse(i['total_price']),
-          int.parse(i['delivery_address_id']),
+          i['delivery_address_id'],
           i['delivery_address_details'],
           i['delivery_address_phone_number'],
           i['order_note'],
@@ -231,16 +222,12 @@ class DataManager {
     for (var i in loadedItems) {
       CartManager.addItem(
         SubMenuItemClass(
-          int.parse(i["id"]),
+          i["id"],
           i['name'],
           i['desc'],
           i['image'],
           double.parse(i['price']),
           int.parse(i['disc']),
-          int.parse(i['cal']),
-          int.parse(i['carb']),
-          int.parse(i['prot']),
-          int.parse(i['fat']),
           int.parse(i['is_active']) == 1,
         ),
         int.parse(i['qty']),
@@ -257,16 +244,12 @@ class DataManager {
     for (var i in loadedItems) {
       DataManager.offersItems.add(
         SubMenuItemClass(
-          int.parse(i["id"]),
+          i["id"],
           i['name'],
           i['desc'],
           i['image'],
           double.parse(i['price']),
           int.parse(i['disc']),
-          int.parse(i['cal']),
-          int.parse(i['carb']),
-          int.parse(i['prot']),
-          int.parse(i['fat']),
           int.parse(i['is_active']) == 1,
         ),
       );

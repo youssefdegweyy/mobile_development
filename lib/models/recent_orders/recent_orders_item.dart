@@ -1,12 +1,12 @@
 class RecentOrdersItemClass {
-  int id = 0;
-  int orderId = 0;
-  int itemId = 0;
+  String id = "";
+  String orderId = "";
+  String itemId = "";
   String itemName = "";
   int qty = 0;
   double itemPrice = 0;
 
-  RecentOrdersItemClass(int iId, int iOrderId, int iItemId, String iItemName,
+  RecentOrdersItemClass(String iId, String iOrderId, String iItemId, String iItemName,
       int iQTY, double iItemPrice) {
     this.id = iId;
     this.orderId = iOrderId;
@@ -16,17 +16,17 @@ class RecentOrdersItemClass {
     this.itemPrice = iItemPrice;
   }
 
-  bool setId(int iId) {
+  bool setId(String iId) {
     this.id = iId;
     return true;
   }
 
-  bool setOrderId(int iOrderId) {
+  bool setOrderId(String iOrderId) {
     this.orderId = iOrderId;
     return true;
   }
 
-  bool setItemId(int iItemId) {
+  bool setItemId(String iItemId) {
     this.itemId = iItemId;
     return true;
   }
@@ -46,15 +46,15 @@ class RecentOrdersItemClass {
     return true;
   }
 
-  int getId() {
+  String getId() {
     return id;
   }
 
-  int getOrderId() {
+  String getOrderId() {
     return orderId;
   }
 
-  int getItemId() {
+  String getItemId() {
     return itemId;
   }
 

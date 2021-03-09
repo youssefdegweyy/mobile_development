@@ -8,10 +8,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class SubMenuScreen extends StatefulWidget {
   static const appBarTitle = 'Menu';
   static const routeName = '/sub-menu';
-  int mItemId;
+  String mItemId;
   String mItemName;
 
-  SubMenuScreen(int mItemId, String mItemName) {
+  SubMenuScreen(String mItemId, String mItemName) {
     this.mItemId = mItemId;
     this.mItemName = mItemName;
     print(mItemId.toString() + " " + mItemName);

@@ -1,5 +1,5 @@
 class DeliveryLocationsClass {
-  int id;
+  String id;
   String name;
   double deliveryFees;
   int deliveryTime;

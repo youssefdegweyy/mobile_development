@@ -101,7 +101,7 @@ class API {
     return response.body;
   }
 
-  static Future<String> getSubMenuItems(int id) async {
+  static Future<String> getSubMenuItems(String id) async {
     var response = await http
         .post(url, body: {'type': 'sub_menu_items', 'mid': id.toString()});
     print('Response status: ${response.statusCode}');

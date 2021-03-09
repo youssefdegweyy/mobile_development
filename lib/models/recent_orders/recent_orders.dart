@@ -7,7 +7,7 @@ class RecentOrdersClass {
   String promocode = "";
   double discount = 0;
   double totalPrice = 0;
-  int deliveryAddressId = 0;
+  String deliveryAddressId = "";
   String deliveryAddressDetails = "";
   String deliveryAddressPhoneNumber = "";
   String orderNote = "";
@@ -23,7 +23,7 @@ class RecentOrdersClass {
       String iPromocode,
       double iDiscount,
       double iTotalPrice,
-      int iDeliveryAddressId,
+      String iDeliveryAddressId,
       String iDeliveryAddressDetails,
       String iDeliveryAddressPhoneNumber,
       String iOrderNote,
@@ -76,7 +76,7 @@ class RecentOrdersClass {
     return true;
   }
 
-  bool setDeliveryAddressId(int iDeliveryAddressId) {
+  bool setDeliveryAddressId(String iDeliveryAddressId) {
     this.deliveryAddressId = iDeliveryAddressId;
     return true;
   }
@@ -132,7 +132,7 @@ class RecentOrdersClass {
     return totalPrice;
   }
 
-  int getDeliveryAddressId() {
+  String getDeliveryAddressId() {
     return deliveryAddressId;
   }
 

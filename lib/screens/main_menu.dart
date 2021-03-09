@@ -29,7 +29,7 @@ class MainMenuScreenState extends State<MainMenuScreen> {
   }
 
   void selectedAddressChanged(UserAddressesClass newAddress) {
-    DataManager.mPrefManager.setSelectedAddress(newAddress.id);
+    //DataManager.mPrefManager.setSelectedAddress(newAddress.id);
     setState(() {
       currAddress = newAddress;
     });

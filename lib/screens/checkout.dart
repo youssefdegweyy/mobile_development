@@ -29,7 +29,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
   int selectedRadioId = 1;
 
   void selectedAddressChanged(UserAddressesClass newAddress) {
-    DataManager.mPrefManager.setSelectedAddress(newAddress.id);
+    //DataManager.mPrefManager.setSelectedAddress(newAddress.id);
     setState(() {
       currAddress = newAddress;
     });

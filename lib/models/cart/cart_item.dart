@@ -1,7 +1,7 @@
 import 'package:mycart/models/sub_menu/sub_menu_item.dart';
 
 class CartItemClass {
-  int id = 0;
+  String id = "";
   SubMenuItemClass mItem;
   int qty = 0;
   double totalPrice = 0;
@@ -25,7 +25,7 @@ class CartItemClass {
     return true;
   }
 
-  int getId() {
+  String getId() {
     return this.getId();
   }
 

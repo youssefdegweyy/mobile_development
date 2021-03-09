@@ -1,27 +1,19 @@
 class SubMenuItemClass {
-  int id = 0;
+  String id = "";
   String name = "";
   String description = "";
   String imagePath = "";
   double price = 0;
   int discount = 0;
-  int calories = 0;
-  int carbs = 0;
-  int protiens = 0;
-  int fats = 0;
   bool isActive = false;
 
   SubMenuItemClass(
-    int iId,
+    String iId,
     String iName,
     String iDescription,
     String iImagePath,
     double iPrice,
     int iDiscount,
-    int iCalories,
-    int iCarbs,
-    int iProtiens,
-    int iFats,
     bool iIsActive,
   ) {
     this.id = iId;
@@ -30,14 +22,10 @@ class SubMenuItemClass {
     this.imagePath = iImagePath;
     this.price = iPrice;
     this.discount = iDiscount;
-    this.calories = iCalories;
-    this.carbs = iCarbs;
-    this.protiens = iProtiens;
-    this.fats = iFats;
     this.isActive = iIsActive;
   }
 
-  bool setId(int iId) {
+  bool setId(String iId) {
     this.id = iId;
     return true;
   }
@@ -67,32 +55,12 @@ class SubMenuItemClass {
     return true;
   }
 
-  bool setCalories(int iCalories) {
-    this.calories = iCalories;
-    return true;
-  }
-
-  bool setCarbs(int iCarbs) {
-    this.carbs = iCarbs;
-    return true;
-  }
-
-  bool setProtiens(int iProtiens) {
-    this.protiens = iProtiens;
-    return true;
-  }
-
-  bool setFats(int iFats) {
-    this.fats = iFats;
-    return true;
-  }
-
   bool setIsActive(bool iIsActive) {
     this.isActive = iIsActive;
     return true;
   }
 
-  int getId() {
+  String getId() {
     return id;
   }
 
@@ -114,22 +82,6 @@ class SubMenuItemClass {
 
   int getDiscount() {
     return discount;
-  }
-
-  int getCalories() {
-    return calories;
-  }
-
-  int getCarbs() {
-    return carbs;
-  }
-
-  int getProtiens() {
-    return protiens;
-  }
-
-  int getFats() {
-    return fats;
   }
 
   bool getIsActive() {

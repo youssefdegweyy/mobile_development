@@ -324,10 +324,7 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                                 buildingNumber,
                                 floorNumber,
                                 apartmentNumber,
-                                phoneNumber,
-                                widget.cUserAddress != null
-                                    ? widget.cUserAddress.isPhoneVerified
-                                    : 0,
+                                phoneNumber,                                
                                 widget.cUserAddress != null
                                     ? widget.cUserAddress.id
                                     : 0,
