@@ -1,18 +1,8 @@
-import 'package:mycart/screens/admin/add_category.dart';
-import 'package:mycart/screens/admin/add_location.dart';
-import 'package:mycart/screens/admin/add_main_menu_item.dart';
-import 'package:mycart/screens/admin/add_sub_menu_item.dart';
-import 'package:mycart/screens/admin/send_notification.dart';
-import 'package:mycart/screens/drawer_screen.dart';
-import 'package:mycart/screens/forgot_password.dart';
 import 'package:mycart/screens/sign_up.dart';
-import 'package:mycart/controllers/user.dart';
 import 'package:mycart/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:mycart/screens/wishlist.dart';
 import 'package:mycart/services/auth.dart';
 
-import 'about.dart';
 import 'sign_up.dart';
 
 class SignInScreen extends StatefulWidget {

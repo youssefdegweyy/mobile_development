@@ -1,9 +1,5 @@
-import 'package:mycart/screens/drawer_screen.dart';
-import 'package:mycart/screens/forgot_password.dart';
-import 'package:mycart/screens/sign_up.dart';
-import 'package:mycart/controllers/user.dart';
-import 'package:mycart/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mycart/services/data_manager.dart';
 
 class ContactUsScreen extends StatefulWidget {
   static const routeName = '/contact-us';
@@ -145,7 +141,7 @@ class ContactUsScreenState extends State<ContactUsScreen> {
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             var message = messageController.text;
-                            User.sendMessage(message).then((response) {
+                            DataManager.sendMessage(message).then((response) {
                               if (response) {
                                 Navigator.pop(context);
                               } else {}

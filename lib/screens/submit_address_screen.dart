@@ -1,4 +1,3 @@
-import 'package:mycart/controllers/user.dart';
 import 'package:mycart/models/addresses/delivery_locations.dart';
 import 'package:mycart/models/addresses/user_addresses.dart';
 import 'package:mycart/services/data_manager.dart';

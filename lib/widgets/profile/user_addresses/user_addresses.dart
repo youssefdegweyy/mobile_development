@@ -1,4 +1,3 @@
-import 'package:mycart/controllers/user.dart';
 import 'package:mycart/models/addresses/user_addresses.dart';
 import 'package:mycart/screens/submit_address_screen.dart';
 import 'package:mycart/services/data_manager.dart';
@@ -111,7 +110,8 @@ class _UserAddressesWidgetState extends State<UserAddressesWidget> {
                                             textOK: Text('Yes'),
                                             textCancel: Text('No'),
                                           )) {
-                                            User.deleteAddress(oAddress.id)
+                                            DataManager.deleteAddress(
+                                                    oAddress.id)
                                                 .then(
                                               (value) {
                                                 DataManager.iniUserAddresses(

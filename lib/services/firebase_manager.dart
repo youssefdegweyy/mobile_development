@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -50,7 +49,8 @@ class FirebaseManager {
       final dbData = json.decode(response.body) as Map<String, dynamic>;
       if (dbData != null) {
         dbData.forEach((key, data) {
-          if (data['user_id'] == DataManager.mPrefManager.id) {
+          if (data['user_id'] == DataManager.mPrefManager.id &&
+              data['is_active'] == 1) {
             items.add(
               UserAddressesClass(
                 key.toString(),
@@ -135,8 +135,6 @@ class FirebaseManager {
       print(e.toString());
       throw (e);
     }
-
-    print('SUB MENU COUNT ' + items.length.toString());
     return items;
   }
 
@@ -247,6 +245,7 @@ class FirebaseManager {
       'floor_number': floorNumber.toString(),
       'apartment_number': apartmentNumber.toString(),
       'phone_number': phoneNumber.toString(),
+      'is_active': 1
     }).then((value) {
       if (locationId == "") {
         Fluttertoast.showToast(
@@ -263,9 +262,63 @@ class FirebaseManager {
     return true;
   }
 
+  static Future<bool> deleteAddress(addressId) async {
+    await databaseRef
+        .child('data')
+        .child('addresses')
+        .child(addressId)
+        .child('is_active')
+        .set(0);
+    Fluttertoast.showToast(
+      msg: "Address is successfully deleted.",
+      toastLength: Toast.LENGTH_LONG,
+    );
+    return true;
+  }
+
   static Future<bool> placeOrder(myOrder) async {
     var dbRef2 = databaseRef.child('data').child('recent_orders');
     await dbRef2.push().set(myOrder);
+    return true;
+  }
+
+  static Future<List> getOffersItems() async {
+    var path = 'sub_menu_items.json';
+    final List<SubMenuItemClass> items = [];
+    try {
+      final response = await http.get(url + path);
+      final dbData = json.decode(response.body) as Map<String, dynamic>;
+      dbData.forEach((key, data) {
+        if (data['discount'].toString() != "0") {
+          items.add(SubMenuItemClass(
+            key.toString(),
+            data['name'].toString(),
+            data['description'].toString(),
+            data['image'].toString(),
+            double.parse(data['price'].toString()),
+            int.parse(data['discount'].toString()),
+            (int.parse(data['is_active'].toString()) == 1),
+          ));
+        }
+      });
+    } on Exception catch (e) {
+      print(e.toString());
+      throw (e);
+    }
+    return items;
+  }
+
+  static Future<bool> sendMessage(String messageDetails) async {
+    var dbRef2 = databaseRef.child('data').child('messages');
+    await dbRef2.push().set({
+      'user_id': DataManager.mPrefManager.getId().toString(),
+      'message': messageDetails,
+    }).then((value) {
+      Fluttertoast.showToast(
+        msg: "Message sent, we'll contact you as soon as possible.",
+        toastLength: Toast.LENGTH_LONG,
+      );
+    });
     return true;
   }
 }
