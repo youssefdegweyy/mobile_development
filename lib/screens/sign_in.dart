@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:mycart/screens/wishlist.dart';
 import 'package:mycart/services/auth.dart';
 
+import 'about.dart';
 import 'sign_up.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -200,7 +201,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     await _auth.signIn(_email, _password);
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      SendNotification.routeName,
+                                      AboutUs.routeName,
                                     );
                                   } catch (e) {
                                     Scaffold.of(context).showSnackBar(

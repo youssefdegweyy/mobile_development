@@ -21,6 +21,7 @@ import 'package:mycart/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:mycart/screens/wishlist.dart';
 import './screens/splash_screen.dart';
+import 'screens/about.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,7 +96,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (ctx) => SplashScreen(),
+        '/': (ctx) => AboutUs(),
         GetStartedScreen.routeName: (ctx) => GetStartedScreen(),
         SignInScreen.routeName: (ctx) => SignInScreen(),
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
@@ -114,6 +115,7 @@ class MyApp extends StatelessWidget {
         AddMainItem.routeName: (ctx) => AddMainItem(),
         SendNotification.routeName: (ctx) => SendNotification(),
         Wishlist.routeName: (ctx) => Wishlist(),
+        AboutUs.routeName: (ctx) => AboutUs(),
       },
     );
   }
