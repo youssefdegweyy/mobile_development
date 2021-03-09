@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mycart/services/data_manager.dart';
 
 class AddCategory extends StatefulWidget {
   static const routeName = '/addCat';
@@ -10,7 +11,14 @@ class AddCategory extends StatefulWidget {
 class _AddCategoryState extends State<AddCategory> {
   final _formKey = GlobalKey<FormState>();
 
-  final phoneNumberController = TextEditingController();
+  final categoryController = TextEditingController();
+
+  @override
+  void dispose() {
+    categoryController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +77,7 @@ class _AddCategoryState extends State<AddCategory> {
                     Padding(
                       padding: EdgeInsets.only(top: 15),
                       child: TextFormField(
+                        controller: categoryController,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
@@ -124,7 +133,15 @@ class _AddCategoryState extends State<AddCategory> {
                             ),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState.validate()) {}
+                            if (_formKey.currentState.validate()) {
+                              var category = categoryController.text;
+                              DataManager.addCategory(category)
+                                  .then((response) {
+                                if (response) {
+                                  Navigator.pop(context);
+                                } else {}
+                              });
+                            }
                           }),
                     ),
                   ],

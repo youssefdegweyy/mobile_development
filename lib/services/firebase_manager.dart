@@ -321,4 +321,17 @@ class FirebaseManager {
     });
     return true;
   }
+
+  static Future<bool> addCategory(String categoryName) async {
+    var dbRef2 = databaseRef.child('data').child('main_menu_categories');
+    await dbRef2.push().set({
+      'name': categoryName,
+    }).then((value) {
+      Fluttertoast.showToast(
+        msg: 'Category added successfully.',
+        toastLength: Toast.LENGTH_LONG,
+      );
+    });
+    return true;
+  }
 }

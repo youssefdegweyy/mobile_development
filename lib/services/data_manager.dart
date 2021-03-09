@@ -1,4 +1,5 @@
 import 'package:mycart/models/cart/cart_item.dart';
+import 'package:mycart/screens/admin/add_category.dart';
 import 'package:mycart/services/cart_manager.dart';
 import 'package:mycart/services/firebase_manager.dart';
 import 'dart:async';
@@ -100,5 +101,11 @@ class DataManager {
 
   static Future<bool> sendMessage(String messageDetails) async {
     return await FirebaseManager.sendMessage(messageDetails);
+  }
+
+  static Future<bool> addCategory(String categoryName) async {
+    return await FirebaseManager.addCategory(categoryName).then((value) async {
+      await DataManager.iniMainMenuCategories();
+    });
   }
 }

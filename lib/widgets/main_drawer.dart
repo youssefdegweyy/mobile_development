@@ -1,4 +1,8 @@
 import 'package:mycart/screens/about.dart';
+import 'package:mycart/screens/admin/add_category.dart';
+import 'package:mycart/screens/admin/add_location.dart';
+import 'package:mycart/screens/admin/add_main_menu_item.dart';
+import 'package:mycart/screens/admin/add_sub_menu_item.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/main_menu.dart';
 import 'package:mycart/screens/offers_screen.dart';
@@ -83,7 +87,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, OffersScreen.routeName);
+                    Navigator.pushNamed(context, AddCategory.routeName);
                   },
                 ),
                 buildListTitle(
@@ -91,7 +95,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, OffersScreen.routeName);
+                    Navigator.pushNamed(context, AddMainItem.routeName);
                   },
                 ),
                 buildListTitle(
@@ -99,7 +103,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, OffersScreen.routeName);
+                    Navigator.pushNamed(context, AddSubItem.routeName);
                   },
                 ),
                 buildListTitle(
@@ -107,7 +111,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   Icons.add_circle_outline,
                   () {
                     Navigator.of(context).pop();
-                    Navigator.pushNamed(context, OffersScreen.routeName);
+                    Navigator.pushNamed(context, AddLocation.routeName);
                   },
                 ),
               ],
