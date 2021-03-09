@@ -200,7 +200,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     await _auth.signIn(_email, _password);
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      Wishlist.routeName,
+                                      SendNotification.routeName,
                                     );
                                   } catch (e) {
                                     Scaffold.of(context).showSnackBar(

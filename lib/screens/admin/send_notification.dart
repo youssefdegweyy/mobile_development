@@ -96,7 +96,6 @@ class _SendNotificationState extends State<SendNotification> {
                       child: TextFormField(
                         minLines: 4,
                         maxLines: 5,
-                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
