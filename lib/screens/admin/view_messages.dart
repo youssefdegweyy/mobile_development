@@ -25,62 +25,73 @@ class MyMessagesScreenState extends State<MyMessagesScreen> {
       isLoading = !isLoading;
     });
   }
+
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0.0),
-    child: AppBar(
-    brightness: Brightness.dark,
-    flexibleSpace: Container(
-    decoration: new BoxDecoration(
-    gradient: LinearGradient(
-    colors: <Color>[
-    Color(0xFF00d466),
-    Color(0xFF00af87),
-    ],
-    ),
-    ),
-    ),
-    ),
-    ),
-    body: Scaffold(
-    appBar: AppBar(
-    toolbarHeight: 65,
-    automaticallyImplyLeading: false,
-    leadingWidth: 65,
-    title: Text(
-    'View Messages',
-    style: TextStyle(fontWeight: FontWeight.bold),
-    ),
-    leading: Padding(
-    padding: EdgeInsets.only(left: 15, right: 9, top: 9, bottom: 9),
-    child: IconButton(
-    icon: Image.asset('assets/images/other_icons/back_arrow.png'),
-    onPressed: () => Navigator.of(context).pop(),
-    ),
-    ),
-    ),
-      body: FutureBuilder(
-          future: DataManager.getAllMessages(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            } else {
-              return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      contentPadding: EdgeInsets.all(8.0),
-                      title: Text(snapshot.data[index].message.toString()),
-                      //Text(snapshot.data[index].data["name"]),
-                    );
-                  });
-            }
-          }
-      ),
-    ));
+          preferredSize: Size.fromHeight(0.0),
+          child: AppBar(
+            brightness: Brightness.dark,
+            flexibleSpace: Container(
+              decoration: new BoxDecoration(
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Color(0xFF00d466),
+                    Color(0xFF00af87),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        body: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 65,
+            automaticallyImplyLeading: false,
+            leadingWidth: 65,
+            title: Text(
+              'View Messages',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            leading: Padding(
+              padding: EdgeInsets.only(left: 15, right: 9, top: 9, bottom: 9),
+              child: IconButton(
+                icon: Image.asset('assets/images/other_icons/back_arrow.png'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ),
+          body: FutureBuilder(
+              future: DataManager.getAllMessages(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                } else {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            new Card(
+                              child: new Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: new EdgeInsets.all(32.0),
+                                child: new Column(
+                                  children: <Widget>[
+                                    Text(snapshot.data[index].message
+                                        .toString()),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                          //Text(snapshot.data[index].data["name"]),
+                        );
+                      });
+                }
+              }),
+        ));
   }
 }
-
