@@ -103,6 +103,10 @@ class ContactUsScreenState extends State<ContactUsScreen> {
                           if (value.isEmpty) {
                             return 'Please enter your message';
                           }
+                          else if(value.length<10)
+                          {
+                            return 'Minimum value is 10 characters';
+                          }
                           return null;
                         },
                       ),

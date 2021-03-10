@@ -144,7 +144,7 @@ class _SubmitLocationState extends State<SubmitLocation> {
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your street name';
+                            return 'Please enter a valid period of time';
                           }
                           if (int.tryParse(value) <= 0) {
                             return 'Please enter a Time bigger than Zero, In Minutes';
