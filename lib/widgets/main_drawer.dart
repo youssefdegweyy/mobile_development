@@ -2,7 +2,6 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mycart/screens/about.dart';
-import 'package:mycart/screens/admin/send_notification.dart';
 import 'package:mycart/screens/admin/submit_category.dart';
 import 'package:mycart/screens/admin/submit_location.dart';
 import 'package:mycart/screens/admin/submit_main_menu_item.dart';
@@ -122,17 +121,9 @@ class _MainDrawerState extends State<MainDrawer> {
                 buildListTitle(
                   'View Messages',
                   Icons.add_circle_outline,
-                      () {
+                  () {
                     Navigator.of(context).pop();
                     Navigator.pushNamed(context, MyMessagesScreen.routeName);
-                  },
-                ),
-                buildListTitle(
-                  'Send Notification',
-                  Icons.add_circle_outline,
-                      () {
-                    Navigator.of(context).pop();
-                    Navigator.pushNamed(context, SendNotification.routeName);
                   },
                 ),
               ],

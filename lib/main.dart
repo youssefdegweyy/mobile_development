@@ -5,7 +5,6 @@ import 'package:mycart/screens/admin/submit_category.dart';
 import 'package:mycart/screens/admin/submit_location.dart';
 import 'package:mycart/screens/admin/submit_main_menu_item.dart';
 import 'package:mycart/screens/admin/submit_sub_menu_item.dart';
-import 'package:mycart/screens/admin/send_notification.dart';
 import 'package:mycart/screens/admin/view_messages.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/offers_screen.dart';
@@ -21,7 +20,6 @@ import 'package:mycart/screens/settings.dart';
 import 'package:mycart/screens/sign_in.dart';
 import 'package:mycart/screens/sign_up.dart';
 import 'package:flutter/material.dart';
-import 'package:mycart/screens/wishlist.dart';
 import 'package:mycart/services/data_manager.dart';
 import './screens/splash_screen.dart';
 import 'screens/about.dart';
@@ -117,8 +115,6 @@ class MyApp extends StatelessWidget {
         SubmitLocation.routeName: (ctx) => SubmitLocation(),
         SubmitSubItem.routeName: (ctx) => SubmitSubItem(),
         SubmitMainItem.routeName: (ctx) => SubmitMainItem(),
-        SendNotification.routeName: (ctx) => SendNotification(),
-        Wishlist.routeName: (ctx) => Wishlist(),
         AboutUs.routeName: (ctx) => AboutUs(),
         Settings.routeName: (ctx) => Settings(),
         MyMessagesScreen.routeName: (ctx) => MyMessagesScreen(),

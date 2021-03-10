@@ -90,7 +90,6 @@ class ContactUsScreenState extends State<ContactUsScreen> {
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
-                          fillColor: Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -102,9 +101,7 @@ class ContactUsScreenState extends State<ContactUsScreen> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter your message';
-                          }
-                          else if(value.length<10)
-                          {
+                          } else if (value.length < 10) {
                             return 'Minimum value is 10 characters';
                           }
                           return null;
