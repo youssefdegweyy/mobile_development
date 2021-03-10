@@ -30,7 +30,6 @@ class _UserAddressesWidgetState extends State<UserAddressesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double mWidth = MediaQuery.of(context).size.width - 232;
     UserAddressesClass oAddress = widget.oAddress;
     return Padding(
       padding: EdgeInsets.only(bottom: 10),
