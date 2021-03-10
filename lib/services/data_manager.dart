@@ -90,6 +90,7 @@ class DataManager {
       'items': myCartItems,
     };
     await FirebaseManager.placeOrder(myOrder);
+    await DataManager.iniRecentOrders();
     CartManager.clean();
     return true;
   }

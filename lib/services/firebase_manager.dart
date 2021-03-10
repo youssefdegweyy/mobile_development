@@ -179,55 +179,57 @@ class FirebaseManager {
     try {
       final response = await http.get(url + path);
       final dbData = json.decode(response.body) as Map<String, dynamic>;
-      dbData.forEach((key, data) async {
-        if (data['user_id'].toString() == DataManager.mPrefManager.id) {
-          var addressPath =
-              'addresses/' + data['delivery_address_id'].toString() + '.json';
-          try {
-            final responseAddress = await http.get(url + addressPath);
-            final List dbAddressData =
-                (json.decode(responseAddress.body) as Map<String, dynamic>)
-                    .values
-                    .toList();
-            deliveryAddressDetails = dbAddressData[5].toString() +
-                ', ' +
-                dbAddressData[2].toString() +
-                ', ' +
-                dbAddressData[0].toString();
-            deliveryAddressPhoneNumber = dbAddressData[4].toString();
-          } on Exception catch (e) {
-            print(e.toString());
-            throw (e);
-          }
-          List items2 = new List();
-          for (var i in (data['items'])) {
-            List ix = i.values.toList();
-            items2.add(RecentOrdersItemClass(
-              ix[0].toString(),
+      if (dbData != null && dbData.length > 0) {
+        dbData.forEach((key, data) async {
+          if (data['user_id'].toString() == DataManager.mPrefManager.id) {
+            var addressPath =
+                'addresses/' + data['delivery_address_id'].toString() + '.json';
+            try {
+              final responseAddress = await http.get(url + addressPath);
+              final List dbAddressData =
+                  (json.decode(responseAddress.body) as Map<String, dynamic>)
+                      .values
+                      .toList();
+              deliveryAddressDetails = dbAddressData[5].toString() +
+                  ', ' +
+                  dbAddressData[2].toString() +
+                  ', ' +
+                  dbAddressData[0].toString();
+              deliveryAddressPhoneNumber = dbAddressData[4].toString();
+            } on Exception catch (e) {
+              print(e.toString());
+              throw (e);
+            }
+            List items2 = new List();
+            for (var i in (data['items'])) {
+              List ix = i.values.toList();
+              items2.add(RecentOrdersItemClass(
+                ix[0].toString(),
+                key.toString(),
+                ix[0].toString(),
+                ix[1].toString(),
+                int.parse(ix[3].toString()),
+                double.parse(ix[2].toString()),
+              ));
+            }
+            items.add(RecentOrdersClass(
               key.toString(),
-              ix[0].toString(),
-              ix[1].toString(),
-              int.parse(ix[3].toString()),
-              double.parse(ix[2].toString()),
+              double.parse(data['sub_total'].toString()),
+              double.parse(data['delivery_fees'].toString()),
+              data['promocode'].toString(),
+              double.parse(data['discount'].toString()),
+              double.parse(data['total_price'].toString()),
+              data['delivery_address_id'].toString(),
+              deliveryAddressDetails,
+              deliveryAddressPhoneNumber,
+              data['order_note'].toString(),
+              int.parse(data['status'].toString()),
+              int.parse(data['time'].toString()),
+              items2.toList(),
             ));
           }
-          items.add(RecentOrdersClass(
-            key.toString(),
-            double.parse(data['sub_total'].toString()),
-            double.parse(data['delivery_fees'].toString()),
-            data['promocode'].toString(),
-            double.parse(data['discount'].toString()),
-            double.parse(data['total_price'].toString()),
-            data['delivery_address_id'].toString(),
-            deliveryAddressDetails,
-            deliveryAddressPhoneNumber,
-            data['order_note'].toString(),
-            int.parse(data['status'].toString()),
-            int.parse(data['time'].toString()),
-            items2.toList(),
-          ));
-        }
-      });
+        });
+      }
     } on Exception catch (e) {
       print(e.toString());
       throw (e);
@@ -603,8 +605,7 @@ class FirebaseManager {
       var message = data['message'];
       var uid = data['user_id'];
       messages.add(Message(message, uid));
-      });
+    });
     return messages;
   }
 }
-

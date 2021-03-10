@@ -24,9 +24,10 @@ class MyOrdersScreenState extends State<MyOrdersScreen> {
   }
 
   Future<void> iniRecentOrders() async {
-    await DataManager.iniRecentOrders();
-    setState(() {
-      isLoading = false;
+    await DataManager.iniRecentOrders().then((value) {
+      setState(() {
+        isLoading = false;
+      });
     });
   }
 
