@@ -306,18 +306,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                       content: Text(e.message.toString())));
                                 }
-
-                                /*var name = nameController.text;
-                            var phone = phoneController.text;
-                            var email = emailController.text;
-                            var password = passwordController.text;
-                            User.register(name, phone, email, password)
-                                .then((response) {
-                              if (response) {
-                                Navigator.pushNamed(
-                                    context, SignInScreen.routeName);
-                              }
-                            });*/
                               }
                             })),
                   ),
