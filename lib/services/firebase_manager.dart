@@ -97,13 +97,15 @@ class FirebaseManager {
       final response = await http.get(url + path);
       final dbData = json.decode(response.body) as Map<String, dynamic>;
       dbData.forEach((key, data) {
-        items.add(MainMenuItemClass(
-          key.toString(),
-          data['category_id'].toString(),
-          data['name'].toString(),
-          data['image'].toString(),
-          (int.parse(data['is_active'].toString()) == 1),
-        ));
+        if (int.parse(data['is_active'].toString()) == 1) {
+          items.add(MainMenuItemClass(
+            key.toString(),
+            data['category_id'].toString(),
+            data['name'].toString(),
+            data['image'].toString(),
+            (int.parse(data['is_active'].toString()) == 1),
+          ));
+        }
       });
     } on Exception catch (e) {
       print(e.toString());
@@ -119,7 +121,8 @@ class FirebaseManager {
       final response = await http.get(url + path);
       final dbData = json.decode(response.body) as Map<String, dynamic>;
       dbData.forEach((key, data) {
-        if (data['menu_id'].toString() == menuId) {
+        if (int.parse(data['is_active'].toString()) == 1 &&
+            data['menu_id'].toString() == menuId) {
           items.add(SubMenuItemClass(
             key.toString(),
             data['menu_id'].toString(),
@@ -146,7 +149,8 @@ class FirebaseManager {
       final response = await http.get(url + path);
       final dbData = json.decode(response.body) as Map<String, dynamic>;
       dbData.forEach((key, data) {
-        if (data['name'].toString().contains(searchKey)) {
+        if (int.parse(data['is_active'].toString()) == 1 &&
+            data['name'].toString().contains(searchKey)) {
           items.add(SubMenuItemClass(
             key.toString(),
             data['menu_id'].toString(),
@@ -312,7 +316,8 @@ class FirebaseManager {
       final response = await http.get(url + path);
       final dbData = json.decode(response.body) as Map<String, dynamic>;
       dbData.forEach((key, data) {
-        if (data['discount'].toString() != "0") {
+        if (int.parse(data['is_active'].toString()) == 1 &&
+            data['discount'].toString() != "0") {
           items.add(SubMenuItemClass(
             key.toString(),
             data['menu_id'].toString(),
