@@ -1,5 +1,6 @@
 class SubMenuItemClass {
   String id = "";
+  String menuId = "";
   String name = "";
   String description = "";
   String imagePath = "";
@@ -9,6 +10,7 @@ class SubMenuItemClass {
 
   SubMenuItemClass(
     String iId,
+    String iMenuId,
     String iName,
     String iDescription,
     String iImagePath,
@@ -17,6 +19,7 @@ class SubMenuItemClass {
     bool iIsActive,
   ) {
     this.id = iId;
+    this.menuId = iMenuId;
     this.name = iName;
     this.description = iDescription;
     this.imagePath = iImagePath;

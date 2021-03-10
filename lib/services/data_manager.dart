@@ -103,34 +103,38 @@ class DataManager {
     return await FirebaseManager.sendMessage(messageDetails);
   }
 
-  static Future<bool> submitCategory(String categoryName) async {
-    return await FirebaseManager.submitCategory(categoryName)
+  static Future<bool> submitCategory(String categoryName,
+      [String cCategoryId = ""]) async {
+    return await FirebaseManager.submitCategory(categoryName, cCategoryId)
         .then((value) async {
       await DataManager.iniMainMenuCategories();
     });
   }
 
   static Future<bool> submitLocation(
-      String locationName, int locationTime, double locationFees) async {
+      String locationName, int locationTime, double locationFees,
+      [String cLocationId = ""]) async {
     return await FirebaseManager.submitLocation(
-            locationName, locationTime, locationFees)
+            locationName, locationTime, locationFees, cLocationId)
         .then((value) async {
       await DataManager.iniUserAddresses();
     });
   }
 
-  static Future<bool> submitMainMenuItem(String categoryId, String itemName,
-      String itemImageURL, int isActive) async {
+  static Future<bool> submitMainMenuItem(
+      String categoryId, String itemName, String itemImageURL, int isActive,
+      [String mainMenuItemId = ""]) async {
     return await FirebaseManager.submitMainMenuItem(
-            categoryId, itemName, itemImageURL, isActive)
+            categoryId, itemName, itemImageURL, isActive, mainMenuItemId)
         .then((value) async {
       await DataManager.iniMainMenuItems();
     });
   }
 
-  static Future<bool> submitSubMenuItem(mainMenuItemId, name, price, discount,
-      description, imageURL, checkBox) async {
-    return await FirebaseManager.submitSubMenuItem(
-        mainMenuItemId, name, price, discount, description, imageURL, checkBox);
+  static Future<bool> submitSubMenuItem(
+      mainMenuItemId, name, price, discount, description, imageURL, checkBox,
+      [String subMenuItemId = ""]) async {
+    return await FirebaseManager.submitSubMenuItem(mainMenuItemId, name, price,
+        discount, description, imageURL, checkBox, subMenuItemId);
   }
 }

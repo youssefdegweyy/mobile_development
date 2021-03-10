@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mycart/models/main_menu/main_menu_category.dart';
+import 'package:mycart/models/main_menu/main_menu_item.dart';
 import 'package:mycart/services/data_manager.dart';
 
 class SubmitMainItem extends StatefulWidget {
   static const routeName = '/submitMainItem';
+
+  Function callBackFunction;
+  MainMenuItemClass cMainItem;
+
+  SubmitMainItem(this.callBackFunction, [this.cMainItem]);
 
   @override
   _SubmitMainItemState createState() => _SubmitMainItemState();
@@ -27,6 +33,21 @@ class _SubmitMainItemState extends State<SubmitMainItem> {
     setState(() {
       currCateg = newCateg;
     });
+  }
+
+  @override
+  void initState() {
+    if (widget.cMainItem != null) {
+      for (var i in DataManager.mainMenuCategories) {
+        if (i.id == widget.cMainItem.categoryId) {
+          currCateg = i;
+        }
+      }
+      itemNameController.text = widget.cMainItem.name;
+      itemImageURLController.text = widget.cMainItem.imagePath;
+      checkBoxValue = widget.cMainItem.isActive;
+    }
+    super.initState();
   }
 
   @override
@@ -227,6 +248,9 @@ class _SubmitMainItemState extends State<SubmitMainItem> {
                                 itemName,
                                 itemImageURL,
                                 checkBoxValue ? 1 : 0,
+                                widget.cMainItem != null
+                                    ? widget.cMainItem.id
+                                    : "",
                               ).then((value) => Navigator.of(context).pop());
                             }
                           }),

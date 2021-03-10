@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mycart/models/addresses/delivery_locations.dart';
 import 'package:mycart/services/data_manager.dart';
 
 class SubmitLocation extends StatefulWidget {
   static const routeName = '/submitLocation';
+
+  Function callBackFunction;
+  DeliveryLocationsClass cLocation;
+
+  SubmitLocation(this.callBackFunction, [this.cLocation]);
 
   @override
   _SubmitLocationState createState() => _SubmitLocationState();
@@ -15,6 +21,16 @@ class _SubmitLocationState extends State<SubmitLocation> {
   final locationNameController = TextEditingController();
   final locationTimeController = TextEditingController();
   final locationFeesController = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.cLocation != null) {
+      locationNameController.text = widget.cLocation.name.toString();
+      locationTimeController.text = widget.cLocation.deliveryTime.toString();
+      locationFeesController.text = widget.cLocation.deliveryFees.toString();
+    }
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -207,8 +223,13 @@ class _SubmitLocationState extends State<SubmitLocation> {
                               var locFees =
                                   double.parse(locationFeesController.text);
                               DataManager.submitLocation(
-                                      locName, locTime, locFees)
-                                  .then((value) => Navigator.of(context).pop());
+                                locName,
+                                locTime,
+                                locFees,
+                                widget.cLocation != null
+                                    ? widget.cLocation.id
+                                    : "",
+                              ).then((value) => Navigator.of(context).pop());
                             }
                           }),
                     ),

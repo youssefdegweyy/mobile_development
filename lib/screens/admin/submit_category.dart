@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mycart/models/main_menu/main_menu_category.dart';
 import 'package:mycart/services/data_manager.dart';
 
 class SubmitCategory extends StatefulWidget {
   static const routeName = '/submitCategory';
+
+  Function callBackFunction;
+  MainMenuCategoryClass cCategory;
+
+  SubmitCategory(this.callBackFunction, [this.cCategory]);
 
   @override
   _SubmitCategoryState createState() => _SubmitCategoryState();
@@ -17,6 +23,14 @@ class _SubmitCategoryState extends State<SubmitCategory> {
   void dispose() {
     categoryController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (widget.cCategory != null) {
+      categoryController.text = widget.cCategory.name.toString();
+    }
+    super.initState();
   }
 
   @override
@@ -135,8 +149,12 @@ class _SubmitCategoryState extends State<SubmitCategory> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               var category = categoryController.text;
-                              DataManager.submitCategory(category)
-                                  .then((response) {
+                              DataManager.submitCategory(
+                                category,
+                                widget.cCategory != null
+                                    ? widget.cCategory.id
+                                    : "",
+                              ).then((response) {
                                 if (response) {
                                   Navigator.pop(context);
                                 } else {}

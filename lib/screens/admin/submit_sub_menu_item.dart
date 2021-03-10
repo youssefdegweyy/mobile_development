@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mycart/models/main_menu/main_menu_item.dart';
+import 'package:mycart/models/sub_menu/sub_menu_item.dart';
 import 'package:mycart/services/data_manager.dart';
 
 class SubmitSubItem extends StatefulWidget {
   static const routeName = '/submitSubItem';
+
+  Function callBackFunction;
+  SubMenuItemClass cItem;
+
+  SubmitSubItem(this.callBackFunction, [this.cItem]);
 
   @override
   _SubmitSubItemState createState() => _SubmitSubItemState();
@@ -33,6 +39,21 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
     setState(() {
       currItem = newItem;
     });
+  }
+
+  @override
+  void initState() {
+    if (widget.cItem != null) {
+      for (var i in DataManager.mainMenuItems) {
+        if (i.id == widget.cItem.menuId) {
+          currItem = i;
+        }
+      }
+      nameItemController.text = widget.cItem.name;
+      itemImageURLController.text = widget.cItem.imagePath;
+      checkBoxValue = widget.cItem.isActive;
+    }
+    super.initState();
   }
 
   @override
@@ -323,14 +344,15 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                               var itemImageURL = descItemController;
                               int checkBox = checkBoxValue ? 1 : 0;
                               DataManager.submitSubMenuItem(
-                                      currItem.id,
-                                      name,
-                                      price,
-                                      discount,
-                                      description,
-                                      itemImageURL,
-                                      checkBox)
-                                  .then((response) {
+                                currItem.id,
+                                name,
+                                price,
+                                discount,
+                                description,
+                                itemImageURL,
+                                checkBox,
+                                widget.cItem != null ? widget.cItem.id : "",
+                              ).then((response) {
                                 if (response) {
                                   Navigator.pop(context);
                                 } else {}

@@ -122,6 +122,7 @@ class FirebaseManager {
         if (data['menu_id'].toString() == menuId) {
           items.add(SubMenuItemClass(
             key.toString(),
+            data['menu_id'].toString(),
             data['name'].toString(),
             data['description'].toString(),
             data['image'].toString(),
@@ -148,6 +149,7 @@ class FirebaseManager {
         if (data['name'].toString().contains(searchKey)) {
           items.add(SubMenuItemClass(
             key.toString(),
+            data['menu_id'].toString(),
             data['name'].toString(),
             data['description'].toString(),
             data['image'].toString(),
@@ -313,6 +315,7 @@ class FirebaseManager {
         if (data['discount'].toString() != "0") {
           items.add(SubMenuItemClass(
             key.toString(),
+            data['menu_id'].toString(),
             data['name'].toString(),
             data['description'].toString(),
             data['image'].toString(),
@@ -350,16 +353,29 @@ class FirebaseManager {
     }
   }
 
-  static Future<bool> submitCategory(String categoryName) async {
+  static Future<bool> submitCategory(String categoryName,
+      [String cCategoryId = ""]) async {
     try {
       var dbRef2 = databaseRef.child('data').child('main_menu_categories');
-      await dbRef2.push().set({
+      if (cCategoryId == "") {
+        dbRef2 = dbRef2.push();
+      } else {
+        dbRef2 = dbRef2.child(cCategoryId.toString());
+      }
+      await dbRef2.set({
         'name': categoryName,
       }).then((value) {
-        Fluttertoast.showToast(
-          msg: 'Category added successfully.',
-          toastLength: Toast.LENGTH_LONG,
-        );
+        if (cCategoryId == "") {
+          Fluttertoast.showToast(
+            msg: "Category is successfully added.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Category is successfully updated.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
       });
       return true;
     } catch (e) {
@@ -371,15 +387,31 @@ class FirebaseManager {
   }
 
   static Future<bool> submitLocation(
-      String locationName, int locationTime, double locationFees) async {
+      String locationName, int locationTime, double locationFees,
+      [String cLocationId = ""]) async {
     try {
       var dbRef2 = databaseRef.child('data').child('delivery_locations');
-      await dbRef2.push().set({
+      if (cLocationId == "") {
+        dbRef2 = dbRef2.push();
+      } else {
+        dbRef2 = dbRef2.child(cLocationId.toString());
+      }
+      await dbRef2.set({
         'name': locationName,
         'time': locationTime,
         'fees': locationFees,
       }).then((value) {
-        Fluttertoast.showToast(msg: 'Location added successfully.');
+        if (cLocationId == "") {
+          Fluttertoast.showToast(
+            msg: "Location is successfully added.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Location is successfully updated.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
       });
     } catch (e) {
       Fluttertoast.showToast(
@@ -389,20 +421,33 @@ class FirebaseManager {
     }
   }
 
-  static Future<bool> submitMainMenuItem(String categoryId, String itemName,
-      String itemImageURL, int isActive) async {
+  static Future<bool> submitMainMenuItem(
+      String categoryId, String itemName, String itemImageURL, int isActive,
+      [String mainMenuItemId = ""]) async {
     try {
       var dbRef2 = databaseRef.child('data').child('main_menu_items');
-      await dbRef2.push().set({
+      if (mainMenuItemId == "") {
+        dbRef2 = dbRef2.push();
+      } else {
+        dbRef2 = dbRef2.child(mainMenuItemId.toString());
+      }
+      await dbRef2.set({
         'category_id': categoryId,
         'name': itemName,
         'image': itemImageURL,
         'is_active': isActive
       }).then((value) {
-        Fluttertoast.showToast(
-          msg: 'Item added successfully.',
-          toastLength: Toast.LENGTH_LONG,
-        );
+        if (mainMenuItemId == "") {
+          Fluttertoast.showToast(
+            msg: "Main Menu Item is successfully added.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Main Menu Item is successfully updated.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
       });
       return true;
     } catch (e) {
@@ -413,11 +458,17 @@ class FirebaseManager {
     }
   }
 
-  static Future<bool> submitSubMenuItem(mainMenuItemId, name, price, discount,
-      description, imageURL, checkbox) async {
+  static Future<bool> submitSubMenuItem(
+      mainMenuItemId, name, price, discount, description, imageURL, checkbox,
+      [String cSubMenuItemId = ""]) async {
     try {
-      var dbRef3 = databaseRef.child('data').child('main_menu_categories');
-      await dbRef3.push().set({
+      var dbRef2 = databaseRef.child('data').child('main_menu_categories');
+      if (cSubMenuItemId == "") {
+        dbRef2 = dbRef2.push();
+      } else {
+        dbRef2 = dbRef2.child(cSubMenuItemId.toString());
+      }
+      await dbRef2.set({
         'menu_id': mainMenuItemId,
         'name': name,
         'price': price,
@@ -426,10 +477,17 @@ class FirebaseManager {
         'image': imageURL,
         'is_active': checkbox,
       }).then((value) {
-        Fluttertoast.showToast(
-          msg: 'Item added successfully.',
-          toastLength: Toast.LENGTH_LONG,
-        );
+        if (cSubMenuItemId == "") {
+          Fluttertoast.showToast(
+            msg: "Item is successfully added.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Item is successfully updated.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
       });
       return true;
     } catch (e) {
