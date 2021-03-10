@@ -8,7 +8,6 @@ class GetStartedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.0),
         child: AppBar(
@@ -46,7 +45,9 @@ class GetStartedScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                     left: 30.0, right: 30.0, top: 30, bottom: 10),
                 child: Image.asset(
-                  "assets/images/main/logo_c.png",
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? "assets/images/main/logo.png"
+                      : "assets/images/main/logo_c.png",
                 ),
               ),
               Container(
@@ -57,7 +58,7 @@ class GetStartedScreen extends StatelessWidget {
                   child: Text(
                     "Go on, discover and order NOW.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
               ),
@@ -88,9 +89,7 @@ class GetStartedScreen extends StatelessWidget {
                         'Select your language',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
