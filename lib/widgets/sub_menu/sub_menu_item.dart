@@ -1,4 +1,6 @@
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:mycart/models/sub_menu/sub_menu_item.dart';
+import 'package:mycart/screens/admin/submit_sub_menu_item.dart';
 import 'package:mycart/screens/item.dart';
 import 'package:mycart/services/data_manager.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -35,6 +37,62 @@ Widget subMenuItem(BuildContext mContext, SubMenuItemClass mItem) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      DataManager.mPrefManager.getType() == 'admin'
+                          ? Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: 12,
+                                  left: ((MediaQuery.of(mContext).size.width -
+                                              70) /
+                                          2) -
+                                      80),
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        mContext,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SubmitSubItem(null, mItem);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.edit_outlined,
+                                      color: Color(0xFF00af87),
+                                      size: 16,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      if (await confirm(
+                                        mContext,
+                                        title: Text(
+                                          'Delete Address',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                        content: Text(
+                                            'Are you sure that you want to delete this item?'),
+                                        textOK: Text('Yes'),
+                                        textCancel: Text('No'),
+                                      )) {
+                                        DataManager.deleteSubMenuItem(mItem.id);
+                                      }
+                                    },
+                                    child: Icon(
+                                      Icons.delete_outline,
+                                      color: Color(0xFFd86464),
+                                      size: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : SizedBox(),
                       FadeInImage(
                         image: NetworkImage(mItem.getImagePath()),
                         placeholder: AssetImage(

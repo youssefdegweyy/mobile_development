@@ -50,6 +50,9 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
         }
       }
       nameItemController.text = widget.cItem.name;
+      discountItemController.text = widget.cItem.discount.toString();
+      descItemController.text = widget.cItem.description;
+      priceItemController.text = widget.cItem.price.toString();
       itemImageURLController.text = widget.cItem.imagePath;
       checkBoxValue = widget.cItem.isActive;
     }
@@ -228,8 +231,7 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                           if (value.isEmpty) {
                             return 'Please enter a valid price';
                           }
-
-                          if (int.tryParse(value) <= 0) {
+                          if (double.parse(value) <= 0) {
                             return 'Please enter a price bigger than zero';
                           }
                           return null;
