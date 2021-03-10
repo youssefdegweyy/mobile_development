@@ -42,6 +42,7 @@ dependencies:
   firebase_database: ^4.4.0
   google_maps_flutter: ^1.0.3
   json_serializable: ^3.3.0
+  provider: ^5.0.0
 
 
 

@@ -167,4 +167,8 @@ class DataManager {
   static Future<bool> deleteSubMenuItem(String subMenuItemId) async {
     return await FirebaseManager.deleteSubMenuItem(subMenuItemId);
   }
+
+  static Future<dynamic> getAllMessages() async {
+    return await FirebaseManager.getAllMessages();
+  }
 }

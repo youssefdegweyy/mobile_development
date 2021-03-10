@@ -6,6 +6,7 @@ import 'package:mycart/screens/admin/submit_location.dart';
 import 'package:mycart/screens/admin/submit_main_menu_item.dart';
 import 'package:mycart/screens/admin/submit_sub_menu_item.dart';
 import 'package:mycart/screens/admin/send_notification.dart';
+import 'package:mycart/screens/admin/view_messages.dart';
 import 'package:mycart/screens/contactus_screen.dart';
 import 'package:mycart/screens/offers_screen.dart';
 import 'package:mycart/screens/checkout.dart';
@@ -120,6 +121,7 @@ class MyApp extends StatelessWidget {
         Wishlist.routeName: (ctx) => Wishlist(),
         AboutUs.routeName: (ctx) => AboutUs(),
         Settings.routeName: (ctx) => Settings(),
+        MyMessagesScreen.routeName: (ctx) => MyMessagesScreen(),
       },
     );
   }

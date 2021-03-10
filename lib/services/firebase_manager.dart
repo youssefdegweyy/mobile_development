@@ -8,6 +8,7 @@ import 'package:mycart/models/addresses/delivery_locations.dart';
 import 'package:mycart/models/addresses/user_addresses.dart';
 import 'package:mycart/models/main_menu/main_menu_category.dart';
 import 'package:mycart/models/main_menu/main_menu_item.dart';
+import 'package:mycart/models/messages/message.dart';
 import 'package:mycart/models/recent_orders/recent_orders.dart';
 import 'package:mycart/models/recent_orders/recent_orders_item.dart';
 import 'package:mycart/models/sub_menu/sub_menu_item.dart';
@@ -592,4 +593,18 @@ class FirebaseManager {
       );
     }
   }
+
+  static Future<List> getAllMessages() async {
+    var path = '/messages.json';
+    final List<Message> messages = [];
+    final response = await http.get(url + path);
+    final dbData = json.decode(response.body) as Map<String, dynamic>;
+    dbData.forEach((key, data) async {
+      var message = data['message'];
+      var uid = data['user_id'];
+      messages.add(Message(message, uid));
+      });
+    return messages;
+  }
 }
+

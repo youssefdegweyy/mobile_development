@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class SendNotification extends StatefulWidget {
@@ -9,7 +10,10 @@ class SendNotification extends StatefulWidget {
 
 class _SendNotificationState extends State<SendNotification> {
   final _formKey = GlobalKey<FormState>();
+  String messageTitle = "";
+  String messageBody = "";
 
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +46,7 @@ class _SendNotificationState extends State<SendNotification> {
           leading: Padding(
             padding: EdgeInsets.only(left: 15, right: 9, top: 9, bottom: 9),
             child: IconButton(
-              icon: Icon(Icons.add_circle_outline),
+                icon: Image.asset('assets/images/other_icons/back_arrow.png'),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
