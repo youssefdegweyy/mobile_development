@@ -269,6 +269,8 @@ class SubmitAddressScreenState extends State<SubmitAddressScreen> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter your phone number';
+                          } else if (value.length < 11) {
+                            return 'Phone number must be 11 number';
                           }
                           return null;
                         },

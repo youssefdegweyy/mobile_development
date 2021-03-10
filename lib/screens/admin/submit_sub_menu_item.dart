@@ -161,7 +161,7 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                         decoration: new InputDecoration(
                           contentPadding: EdgeInsets.all(20),
                           isDense: true,
-                          hintText: 'Descreption',
+                          hintText: 'Description',
                           hintStyle: new TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           filled: true,
@@ -176,6 +176,8 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter a valid description';
+                          } else if (value.length<10){
+                            return 'Minimum number of description is 10 characters';
                           }
                           return null;
                         },
