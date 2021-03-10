@@ -66,7 +66,7 @@ class _SubmitLocationState extends State<SubmitLocation> {
           automaticallyImplyLeading: false,
           leadingWidth: 65,
           title: Text(
-            "Add Location",
+            widget.cLocation == null ? 'Add Location' : 'Update Location',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: Padding(
@@ -206,7 +206,9 @@ class _SubmitLocationState extends State<SubmitLocation> {
                                   minWidth: 88.0, minHeight: 55),
                               alignment: Alignment.center,
                               child: Text(
-                                'Add Location',
+                                widget.cLocation == null
+                                    ? 'Add Location'
+                                    : 'Update Location',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,

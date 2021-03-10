@@ -76,7 +76,9 @@ class _SubmitMainItemState extends State<SubmitMainItem> {
           automaticallyImplyLeading: false,
           leadingWidth: 65,
           title: Text(
-            "Add Main Item",
+            widget.cMainItem == null
+                ? 'Add Main Menu Item'
+                : 'Update Main Menu Item',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: Padding(
@@ -230,7 +232,9 @@ class _SubmitMainItemState extends State<SubmitMainItem> {
                                   minWidth: 88.0, minHeight: 55),
                               alignment: Alignment.center,
                               child: Text(
-                                'Add Item',
+                                widget.cMainItem == null
+                                    ? 'Add Item'
+                                    : 'Update Item',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,

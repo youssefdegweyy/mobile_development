@@ -59,7 +59,7 @@ class _SubmitCategoryState extends State<SubmitCategory> {
           automaticallyImplyLeading: false,
           leadingWidth: 65,
           title: Text(
-            "Add Category",
+            widget.cCategory == null ? 'Add Category' : 'Update Category',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: Padding(
@@ -137,7 +137,9 @@ class _SubmitCategoryState extends State<SubmitCategory> {
                                   minWidth: 88.0, minHeight: 55),
                               alignment: Alignment.center,
                               child: Text(
-                                'Add Category',
+                                widget.cCategory == null
+                                    ? 'Add Category'
+                                    : 'Update Category',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,

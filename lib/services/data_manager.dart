@@ -118,6 +118,7 @@ class DataManager {
     return await FirebaseManager.submitCategory(categoryName, cCategoryId)
         .then((value) async {
       await DataManager.iniMainMenuCategories();
+      return true;
     });
   }
 
@@ -132,10 +133,16 @@ class DataManager {
   }
 
   static Future<bool> submitSubMenuItem(
-      mainMenuItemId, name, price, discount, description, imageURL, checkBox,
+      String mainMenuItemId,
+      String name,
+      double price,
+      int discount,
+      String description,
+      String imageURL,
+      int isActive,
       [String subMenuItemId = ""]) async {
     return await FirebaseManager.submitSubMenuItem(mainMenuItemId, name, price,
-        discount, description, imageURL, checkBox, subMenuItemId);
+        discount, description, imageURL, isActive, subMenuItemId);
   }
 
   static Future<bool> deleteLocation(String locationId) async {

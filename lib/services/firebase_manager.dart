@@ -464,10 +464,16 @@ class FirebaseManager {
   }
 
   static Future<bool> submitSubMenuItem(
-      mainMenuItemId, name, price, discount, description, imageURL, checkbox,
+      String mainMenuItemId,
+      String name,
+      double price,
+      int discount,
+      String description,
+      String imageURL,
+      int isActive,
       [String cSubMenuItemId = ""]) async {
     try {
-      var dbRef2 = databaseRef.child('data').child('main_menu_categories');
+      var dbRef2 = databaseRef.child('data').child('sub_menu_items');
       if (cSubMenuItemId == "") {
         dbRef2 = dbRef2.push();
       } else {
@@ -480,7 +486,7 @@ class FirebaseManager {
         'discount': discount,
         'description': description,
         'image': imageURL,
-        'is_active': checkbox,
+        'is_active': isActive,
       }).then((value) {
         if (cSubMenuItemId == "") {
           Fluttertoast.showToast(

@@ -85,7 +85,7 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
           automaticallyImplyLeading: false,
           leadingWidth: 65,
           title: Text(
-            "Add Item",
+            widget.cItem == null ? 'Add Item' : 'Update Item',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: Padding(
@@ -328,7 +328,9 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                                   minWidth: 88.0, minHeight: 55),
                               alignment: Alignment.center,
                               child: Text(
-                                'Add Item',
+                                widget.cItem == null
+                                    ? 'Add Item'
+                                    : 'Update Item',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
@@ -341,18 +343,18 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                             if (_formKey.currentState.validate()) {
                               var name = nameItemController.text;
                               var price = priceItemController.text;
-                              var discount = discountItemController;
-                              var description = descItemController;
-                              var itemImageURL = descItemController;
-                              int checkBox = checkBoxValue ? 1 : 0;
+                              var discount = discountItemController.text;
+                              var description = descItemController.text;
+                              var itemImageURL = itemImageURLController.text;
+                              int isActive = checkBoxValue ? 1 : 0;
                               DataManager.submitSubMenuItem(
                                 currItem.id,
                                 name,
-                                price,
-                                discount,
+                                double.parse(price),
+                                int.parse(discount),
                                 description,
                                 itemImageURL,
-                                checkBox,
+                                isActive,
                                 widget.cItem != null ? widget.cItem.id : "",
                               ).then((value) {
                                 Navigator.of(context).pop();
