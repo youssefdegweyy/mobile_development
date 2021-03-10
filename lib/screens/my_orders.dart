@@ -82,9 +82,12 @@ class MyOrdersScreenState extends State<MyOrdersScreen> {
                       EdgeInsets.only(top: 22, left: 30, right: 30, bottom: 22),
                   child: Column(
                     children: [
-                      for (RecentOrdersClass oItem in DataManager.recentOrders)
-                        RecentOrdersItemsWidget(
-                            context, oItem, toggleIsLoading),
+                      if (DataManager.recentOrders != null &&
+                          DataManager.recentOrders.length > 0)
+                        for (RecentOrdersClass oItem
+                            in DataManager.recentOrders)
+                          RecentOrdersItemsWidget(
+                              context, oItem, toggleIsLoading),
                     ],
                   ),
                 ),
