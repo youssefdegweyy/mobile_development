@@ -9,8 +9,7 @@ class DataManager {
   static PrefManager mPrefManager = new PrefManager();
   static List deliveryLocations = new List();
   static List userAddresses = new List();
-  static String mainMenuBanner =
-      "http://freshnfit.lxdev.net/api/assets/images/banners/main_banner.png";
+  static String mainMenuBanner = "https://miumun.org/mobileimages/banner.png";
   static List mainMenuCategories = new List();
   static List mainMenuItems = new List();
   static List subMenuItems = new List();
