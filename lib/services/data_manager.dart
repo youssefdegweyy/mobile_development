@@ -103,14 +103,6 @@ class DataManager {
     return await FirebaseManager.sendMessage(messageDetails);
   }
 
-  static Future<bool> submitCategory(String categoryName,
-      [String cCategoryId = ""]) async {
-    return await FirebaseManager.submitCategory(categoryName, cCategoryId)
-        .then((value) async {
-      await DataManager.iniMainMenuCategories();
-    });
-  }
-
   static Future<bool> submitLocation(
       String locationName, int locationTime, double locationFees,
       [String cLocationId = ""]) async {
@@ -118,6 +110,14 @@ class DataManager {
             locationName, locationTime, locationFees, cLocationId)
         .then((value) async {
       await DataManager.iniUserAddresses();
+    });
+  }
+
+  static Future<bool> submitCategory(String categoryName,
+      [String cCategoryId = ""]) async {
+    return await FirebaseManager.submitCategory(categoryName, cCategoryId)
+        .then((value) async {
+      await DataManager.iniMainMenuCategories();
     });
   }
 
@@ -136,5 +136,28 @@ class DataManager {
       [String subMenuItemId = ""]) async {
     return await FirebaseManager.submitSubMenuItem(mainMenuItemId, name, price,
         discount, description, imageURL, checkBox, subMenuItemId);
+  }
+
+  static Future<bool> deleteLocation(String locationId) async {
+    return await FirebaseManager.deleteLocation(locationId).then((value) async {
+      await DataManager.iniUserAddresses();
+    });
+  }
+
+  static Future<bool> deleteCategory(String categoryId) async {
+    return await FirebaseManager.deleteCategory(categoryId).then((value) async {
+      await DataManager.iniMainMenuCategories();
+    });
+  }
+
+  static Future<bool> deleteMainMenuItem(String mainMenuItemId) async {
+    return await FirebaseManager.deleteMainMenuItem(mainMenuItemId)
+        .then((value) async {
+      await DataManager.iniMainMenuItems();
+    });
+  }
+
+  static Future<bool> deleteSubMenuItem(String subMenuItemId) async {
+    return await FirebaseManager.deleteSubMenuItem(subMenuItemId);
   }
 }

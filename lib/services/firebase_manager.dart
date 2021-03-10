@@ -358,39 +358,6 @@ class FirebaseManager {
     }
   }
 
-  static Future<bool> submitCategory(String categoryName,
-      [String cCategoryId = ""]) async {
-    try {
-      var dbRef2 = databaseRef.child('data').child('main_menu_categories');
-      if (cCategoryId == "") {
-        dbRef2 = dbRef2.push();
-      } else {
-        dbRef2 = dbRef2.child(cCategoryId.toString());
-      }
-      await dbRef2.set({
-        'name': categoryName,
-      }).then((value) {
-        if (cCategoryId == "") {
-          Fluttertoast.showToast(
-            msg: "Category is successfully added.",
-            toastLength: Toast.LENGTH_LONG,
-          );
-        } else {
-          Fluttertoast.showToast(
-            msg: "Category is successfully updated.",
-            toastLength: Toast.LENGTH_LONG,
-          );
-        }
-      });
-      return true;
-    } catch (e) {
-      Fluttertoast.showToast(
-        msg: e.message.toString(),
-        toastLength: Toast.LENGTH_LONG,
-      );
-    }
-  }
-
   static Future<bool> submitLocation(
       String locationName, int locationTime, double locationFees,
       [String cLocationId = ""]) async {
@@ -421,6 +388,39 @@ class FirebaseManager {
     } catch (e) {
       Fluttertoast.showToast(
         msg: e.messaage.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
+  }
+
+  static Future<bool> submitCategory(String categoryName,
+      [String cCategoryId = ""]) async {
+    try {
+      var dbRef2 = databaseRef.child('data').child('main_menu_categories');
+      if (cCategoryId == "") {
+        dbRef2 = dbRef2.push();
+      } else {
+        dbRef2 = dbRef2.child(cCategoryId.toString());
+      }
+      await dbRef2.set({
+        'name': categoryName,
+      }).then((value) {
+        if (cCategoryId == "") {
+          Fluttertoast.showToast(
+            msg: "Category is successfully added.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Category is successfully updated.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
+      });
+      return true;
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.message.toString(),
         toastLength: Toast.LENGTH_LONG,
       );
     }
@@ -494,6 +494,90 @@ class FirebaseManager {
           );
         }
       });
+      return true;
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.message.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
+  }
+
+  static Future<bool> deleteLocation(String locationId) async {
+    try {
+      databaseRef
+          .child('data')
+          .child('delivery_locations')
+          .child(locationId)
+          .remove()
+          .then((value) {
+        Fluttertoast.showToast(
+          msg: "Location is successfully deleted.",
+          toastLength: Toast.LENGTH_LONG,
+        );
+      });
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.messaage.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
+  }
+
+  static Future<bool> deleteCategory(String categoryId) async {
+    try {
+      databaseRef
+          .child('data')
+          .child('main_menu_categories')
+          .child(categoryId)
+          .remove()
+          .then((value) {
+        Fluttertoast.showToast(
+          msg: "Category is successfully deleted.",
+          toastLength: Toast.LENGTH_LONG,
+        );
+      });
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.messaage.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
+  }
+
+  static Future<bool> deleteMainMenuItem(String mainMenuItemId) async {
+    try {
+      await databaseRef
+          .child('data')
+          .child('main_menu_items')
+          .child(mainMenuItemId)
+          .child('is_active')
+          .set(0);
+      Fluttertoast.showToast(
+        msg: "Main Menu Item is successfully deleted.",
+        toastLength: Toast.LENGTH_LONG,
+      );
+      return true;
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.message.toString(),
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
+  }
+
+  static Future<bool> deleteSubMenuItem(String subMenuItemId) async {
+    try {
+      await databaseRef
+          .child('data')
+          .child('sub_menu_items')
+          .child(subMenuItemId)
+          .child('is_active')
+          .set(0);
+      Fluttertoast.showToast(
+        msg: "Item is successfully deleted.",
+        toastLength: Toast.LENGTH_LONG,
+      );
       return true;
     } catch (e) {
       Fluttertoast.showToast(
