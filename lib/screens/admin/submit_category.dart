@@ -8,7 +8,7 @@ class SubmitCategory extends StatefulWidget {
   Function callBackFunction;
   MainMenuCategoryClass cCategory;
 
-  SubmitCategory(this.callBackFunction, [this.cCategory]);
+  SubmitCategory([this.callBackFunction, this.cCategory]);
 
   @override
   _SubmitCategoryState createState() => _SubmitCategoryState();
@@ -157,6 +157,9 @@ class _SubmitCategoryState extends State<SubmitCategory> {
                               ).then((response) {
                                 if (response) {
                                   Navigator.pop(context);
+                                  if (widget.callBackFunction != null) {
+                                    widget.callBackFunction();
+                                  }
                                 } else {}
                               });
                             }

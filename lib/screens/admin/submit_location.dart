@@ -9,7 +9,7 @@ class SubmitLocation extends StatefulWidget {
   Function callBackFunction;
   DeliveryLocationsClass cLocation;
 
-  SubmitLocation(this.callBackFunction, [this.cLocation]);
+  SubmitLocation([this.callBackFunction, this.cLocation]);
 
   @override
   _SubmitLocationState createState() => _SubmitLocationState();
@@ -229,7 +229,12 @@ class _SubmitLocationState extends State<SubmitLocation> {
                                 widget.cLocation != null
                                     ? widget.cLocation.id
                                     : "",
-                              ).then((value) => Navigator.of(context).pop());
+                              ).then((value) {
+                                Navigator.of(context).pop();
+                                if (widget.callBackFunction != null) {
+                                  widget.callBackFunction();
+                                }
+                              });
                             }
                           }),
                     ),

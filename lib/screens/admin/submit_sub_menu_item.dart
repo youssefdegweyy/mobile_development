@@ -9,7 +9,7 @@ class SubmitSubItem extends StatefulWidget {
   Function callBackFunction;
   SubMenuItemClass cItem;
 
-  SubmitSubItem(this.callBackFunction, [this.cItem]);
+  SubmitSubItem([this.callBackFunction, this.cItem]);
 
   @override
   _SubmitSubItemState createState() => _SubmitSubItemState();
@@ -197,7 +197,7 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter a valid description';
-                          } else if (value.length<10){
+                          } else if (value.length < 10) {
                             return 'Minimum number of description is 10 characters';
                           }
                           return null;
@@ -352,10 +352,11 @@ class _SubmitSubItemState extends State<SubmitSubItem> {
                                 itemImageURL,
                                 checkBox,
                                 widget.cItem != null ? widget.cItem.id : "",
-                              ).then((response) {
-                                if (response) {
-                                  Navigator.pop(context);
-                                } else {}
+                              ).then((value) {
+                                Navigator.of(context).pop();
+                                if (widget.callBackFunction != null) {
+                                  widget.callBackFunction();
+                                }
                               });
                             }
                           }),

@@ -9,7 +9,7 @@ class SubmitMainItem extends StatefulWidget {
   Function callBackFunction;
   MainMenuItemClass cMainItem;
 
-  SubmitMainItem(this.callBackFunction, [this.cMainItem]);
+  SubmitMainItem([this.callBackFunction, this.cMainItem]);
 
   @override
   _SubmitMainItemState createState() => _SubmitMainItemState();
@@ -251,7 +251,12 @@ class _SubmitMainItemState extends State<SubmitMainItem> {
                                 widget.cMainItem != null
                                     ? widget.cMainItem.id
                                     : "",
-                              ).then((value) => Navigator.of(context).pop());
+                              ).then((value) {
+                                Navigator.of(context).pop();
+                                if (widget.callBackFunction != null) {
+                                  widget.callBackFunction();
+                                }
+                              });
                             }
                           }),
                     ),
